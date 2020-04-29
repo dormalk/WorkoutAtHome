@@ -1,0 +1,51 @@
+#workouts::after{
+    content: "";
+    display: table;
+    clear: both;
+}
+
+
+@media (max-width: 445px){
+    #workouts{
+        padding: 15px;
+    }
+}
+.sidebar [data-scrollable]{
+    overflow-y: hidden !important;
+}
+
+#workouts .title, #create-challenge .title{
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 1; /* number of lines to show */
+    -webkit-box-orient: vertical;
+}
+
+#workouts .panel {
+    float: left;
+    width: 24%;
+    height: 42%;
+    margin: 0.5%;
+}
+
+@media (max-width: 985px){
+    #workouts .panel{
+        width: 32%;
+    }
+}
+
+
+@media (max-width: 865px){
+    #workouts .panel{
+        width: 49%;
+    }
+}
+
+
+@media (max-width: 455px){
+    #workouts .panel{
+        width: 100%;
+    }
+}
+

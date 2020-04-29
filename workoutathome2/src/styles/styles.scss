@@ -1,0 +1,36 @@
+@import './base/base';
+@import './workouts_list.scss';
+@import './workout_session.scss';
+@import './challenges_list.scss';
+
+
+
+
+#global-alert{
+    position: fixed;
+    top: 0px;
+    z-index: 9999;
+    width: 50%;
+    text-align: center;
+    left: 50%;
+    transform: translate(-50%,0);
+    animation: 1s ease-out 0s 1 slideInFromLeft;
+}
+
+
+#global-alert.alert-danger{
+    color: #721c24;
+    background-color: #f8d7da;
+    border-color:  #f5c6cb;      
+}
+
+@keyframes slideInFromLeft {
+    0% {
+        transform: translate(-50%,-100%);
+        opacity: 0;
+    }
+    100% {
+        transform: translate(-50%,0);
+        opacity: 1;
+    }
+}
