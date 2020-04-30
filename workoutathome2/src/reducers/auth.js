@@ -2,6 +2,12 @@ const INITIAL_STATE = {
     uid: null,
     loading: false,
     challengesInProgress: [],
+    frineds: [],
+    friendsCount: 0,
+    workoutsCount: 0,
+    challengeCount: 0,
+    addVideosCount: 0,
+    addChallengesCount: 0,
     preference: {
         calcTypes: {
             first: '',

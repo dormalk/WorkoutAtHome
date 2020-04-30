@@ -7,6 +7,7 @@ export class Video {
     title;
     videoId;
     videoUrl;
+    createBy;
 }
 
 export const convertDurationToString = (duration) => {

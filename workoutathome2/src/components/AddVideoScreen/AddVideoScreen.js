@@ -25,9 +25,6 @@ const AddVideoScreenFoo = (props) => {
         setLoading(true);
         isVideoExist(video.videoId)
         .then(() => {
-            setError(`Oops, a video with ID: ${video.videoId} is allready exist `)
-        })
-        .catch(() => {
             getVideoDetails(video.videoId)
             .then(({data}) => {
                 if(data.items.length > 0){
@@ -50,6 +47,7 @@ const AddVideoScreenFoo = (props) => {
 
     const convertDetails = (data) => {
         let { title, thumbnails } = data.items[0].snippet;
+        console.log(data.items[0].snippet)
         let duration = data.items[0].contentDetails.duration;
         let length = "L";
         const { hours, minutes, seconds } = moment.duration(

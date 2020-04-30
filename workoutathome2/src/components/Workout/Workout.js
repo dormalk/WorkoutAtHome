@@ -10,7 +10,7 @@ import {    isSessionExist,
             sendEvent,
             listenToSession } from '../../actions/workout_session';
 import {activeGlobalAlert} from '../../actions/system';
-import {updateUser} from '../../actions/auth';
+import {updateUser,increaseCounter} from '../../actions/auth';
 import {Session} from '../../utils/session';
 import YouTubeVideo from './YoutubeVideo';
 import ControlPannel from './ControlPannel';
@@ -71,9 +71,12 @@ export class WorkoutFoo extends React.Component {
                 const precetage = this.calcPrecetage(Math.floor(player.getDuration() - globalSession.currentDuration))
                 if(!friendsCountsFlag && precetage < 50 && precetage > 0){
                     var {userdata} = this.props;
-                    if(!userdata.frinedsCount) userdata.frinedsCount = 0;
-                    userdata.frinedsCount += (globalSession.participents.length - 1);
+                    increaseCounter('friendsCount',(globalSession.participents.length - 1))
                     friendsCountsFlag = true;
+                    if(!userdata.frineds) userdata.frineds = [];
+                    globalSession.participents.forEach((participent) => {
+                        if(participent !== uid && !userdata.frineds.includes(participent)) userdata.frineds.push(participent);
+                    }) 
                     this.props.startUpdateUser(userdata)
 
                 }
@@ -101,18 +104,13 @@ export class WorkoutFoo extends React.Component {
                 const precetage = this.calcPrecetage(secondLeft)
                 
                 if(uid && precetage < 50 && precetage > 0) {
-                    var {userdata} = this.props;
                     if(!workoutsCountFlag) {
-                        if(!userdata.workoutsCount) userdata.workoutsCount = 0;
-                        userdata.workoutsCount ++;
+                        increaseCounter('workoutsCount',1)
                         workoutsCountFlag = true;
-                        this.props.startUpdateUser(userdata)
                     }
                     if(!challengeCountFlag && !!globalSession.challangeId && globalSession.reletedVideos.length === 0) {
                         challengeCountFlag = true;
-                        if(!userdata.challengeCount) userdata.challengeCount = 0;
-                        userdata.challengeCount ++;
-                        this.props.startUpdateUser(userdata)
+                        increaseCounter('challengeCount',1)
                     }
                 }
             }
@@ -125,8 +123,9 @@ export class WorkoutFoo extends React.Component {
 
     constructConnection(){
         this.connection = new RTCMultiConnection();
-        // this.connection.socketURL = 'https://fast-lake-42209.herokuapp.com:443/';
-        this.connection.socketURL = 'https://rtcmulticonnection.herokuapp.com:443/';
+        this.connection.socketURL = 'https://mighty-stream-12956.herokuapp.com:443/';
+        // this.connection.socketURL = 'https://rtcmulticonnection.herokuapp.com:443/';
+        // this.connection.socketURL = 'https://localhost:8080';
         this.connection.socketMessageEvent = 'video-conference-demo';
         this.connection.session = {
             audio: true,

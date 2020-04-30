@@ -1,5 +1,5 @@
 import * as firebase from 'firebase';
-import { hendleUndefiendJSON, generateUniqKey } from '../helpers/fucntions';
+import { hendleUndefiendJSON, generateUniqKey, convertToArr } from '../helpers/fucntions';
 import { getTagTypes } from '../utils/challenge';
 
 
@@ -11,7 +11,6 @@ export const login = (uid) => {
         .once('value',snapshot => {
             const user = snapshot.val()
             if(user){
-                console.log(user)
                 user.emailVerified = firebase.auth().currentUser.emailVerified;
                 dispatch({type:'LOGIN', user })
             }
@@ -57,6 +56,9 @@ export const sendVarificationMail = () => {
 }
 
 
+
+
+
 export const clickVideo = (videoId) => {
     firebase.database().ref('videos/'+videoId).once('value',snapshot => {
         var {type,videoId,clicks} = snapshot.val();
@@ -79,12 +81,34 @@ export const clickChallenge = (challengeId) => {
 }
 
 
-const analytics = (event,body) => {
+export const analytics = (event,body) => {
     const userId = firebase.auth().currentUser.uid;
     const key = generateUniqKey(8);
     if(userId){
         body.datetime = new Date().getTime();
-        
         firebase.database().ref(`analytics/${userId}/${event}/${key}`).set(body);
     }
+}
+
+
+export const fetchAnalytics = (userId,event) => {
+    return(dispatch) => {
+        return firebase.database().ref(`analytics/${userId}/${event}`)
+        .once('value',snapshot => {
+            var analytics = snapshot.val();
+            console.log(analytics)
+            if(analytics) {
+                dispatch({type: `${event}_COUNT`, count: convertToArr(analytics).length})
+            }
+        })
+    }
+}
+
+
+export const increaseCounter = (counterName, countUp) => {
+    const userId = firebase.auth().currentUser.uid
+    firebase.database().ref('users').child(userId).child(counterName).transaction(count => {
+        return (count || 0) + countUp
+    })    
+
 }

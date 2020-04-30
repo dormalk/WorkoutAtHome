@@ -1,9 +1,14 @@
 import firebase from 'firebase';
-
+import { analytics,increaseCounter } from './auth';
 export const insertNewChallenge = (newChallenge) => {
+    const userId = firebase.auth().currentUser.uid;
     return(disptach) => {
         return firebase.database().ref('challenges/'+newChallenge.id).set(newChallenge)
-        .then(() => disptach({type: 'INSERT_NEW_CHALLENGE', newChallenge}))
+        .then(() => {
+            disptach({type: 'INSERT_NEW_CHALLENGE', newChallenge})
+            analytics('createChallenges', {chellengeId: newChallenge.id})
+            increaseCounter('addChallengesCount', 1);
+        })
     }
 }
 
@@ -44,14 +49,3 @@ export const updateChallengesFilters = (picked,param) => {
     }
 }
 
-
-// export const userCompleteChallenge = () => {
-//     const currentUser = firebase.auth().currentUser;
-//     if(currentUser){
-//         return(disptach) => {
-//             return firebase.database().ref(`users/${currentUser.uid}/challengesInProgress`)
-//         }
-//     } else {
-//         return null;
-//     }
-// }

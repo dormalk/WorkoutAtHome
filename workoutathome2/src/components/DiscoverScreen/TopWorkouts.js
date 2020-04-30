@@ -27,9 +27,6 @@ export default ({videos,userTypesPreference,onOpenSession}) => {
     
     },[userTypesPreference])
 
-
-
-
     return (
         <div className="tabbable tabs-vertical tabs-right-lg">
 
@@ -38,7 +35,7 @@ export default ({videos,userTypesPreference,onOpenSession}) => {
             topThree.map((video,index) => {
                 return (
                     index < 3 &&
-                    <li className={pickedWorkout === index? 'active' : '' } 
+                    <li className={pickedWorkout.videoId === video.videoId? 'active' : '' } 
                         key={index}
                         onClick={() => setPickedWorkout(video)}>
                         <a data-toggle="tab">
@@ -69,7 +66,7 @@ export default ({videos,userTypesPreference,onOpenSession}) => {
 
                     <p className="text-subhead text-overlay">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus consectetur cumque distinctio doloremque error est fugiat perferendis quisquam tempore vel.</p>
                 </div>            
-                <img src={pickedWorkout.thumbnailsMax || pickedWorkout.thumbnails} alt="cover" />
+                <img src={`https://i.ytimg.com/vi/${pickedWorkout.videoId}/maxresdefault.jpg`} alt="cover"  onError={(e)=>{e.target.onerror = null; e.target.src="image_path_here"}}/>
                 </div>
                 }
           </div>

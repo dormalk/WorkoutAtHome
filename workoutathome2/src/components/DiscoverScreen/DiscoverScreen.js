@@ -6,9 +6,12 @@ import { generateUniqKey } from '../../helpers/fucntions';
 import {Session} from '../../utils/session';
 import {activeGlobalAlert} from '../../actions/system';
 import {createNewSession} from '../../actions/workout_session';
+import { startSignInWithGoogle } from '../../actions/auth';
 
-const mapDispatchToProps = (disptach) => ({
-  activeGlobalAlert: (alert) => disptach(activeGlobalAlert(alert))
+const mapDispatchToProps = (dispatch) => ({
+  activeGlobalAlert: (alert) => dispatch(activeGlobalAlert(alert)),
+  startSignInWithGoogle: () => dispatch(startSignInWithGoogle()),
+
 })
 const mapStateToProps = (state) => ({
   userdata: state.userdata,
@@ -17,7 +20,7 @@ const mapStateToProps = (state) => ({
 
 })
 export const DiscoverScreen = connect(mapStateToProps,mapDispatchToProps)
-    (({userdata,videos,userTypesPreference,activeGlobalAlert}) => {
+    (({userdata,videos,userTypesPreference,activeGlobalAlert,startSignInWithGoogle}) => {
   const onOpenSession = (videoId) => {
     if(!!userdata.uid){
         var session = new Session(generateUniqKey(10),userdata.uid);
@@ -47,7 +50,7 @@ export const DiscoverScreen = connect(mapStateToProps,mapDispatchToProps)
                   }  
                   </div>
                   <div className="col-lg-4 col-md-5">
-                    <RewordsList userdata={userdata}/>
+                    <RewordsList userdata={userdata} onSignIn={startSignInWithGoogle.bind(this)}/>
                   </div>
                 </div>
 

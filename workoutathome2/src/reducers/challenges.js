@@ -16,9 +16,10 @@ export default (state=INITIAL_STATE, action) => {
         case 'INSERT_NEW_CHALLENGE':
             var updatedList = state.list;
             var {newChallenge} = action;
+            console.log(newChallenge)
             newChallenge.tagTypes = getTagTypes(newChallenge);
             newChallenge.avgDuration = getDurationAvg(newChallenge)
-            newChallenge.thumbnails = newChallenge.days[0][0].thumbnailsMax || newChallenge.days[0][0].thumbnails;
+            newChallenge.thumbnails = `https://i.ytimg.com/vi/${newChallenge.days[0][0].id}/maxresdefault.jpg`;
             updatedList.push(action.newChallenge)
             return {
                 ...state,
@@ -29,7 +30,7 @@ export default (state=INITIAL_STATE, action) => {
             convertedList = convertedList.map(challenge => {
                 challenge.tagTypes = getTagTypes(challenge);
                 challenge.avgDuration = getDurationAvg(challenge)
-                challenge.thumbnails = challenge.days[0][0].thumbnailsMax || challenge.days[0][0].thumbnails;
+                challenge.thumbnails = `https://i.ytimg.com/vi/${challenge.days[0][0].id}/maxresdefault.jpg`;
                 return challenge;
             })
             return {

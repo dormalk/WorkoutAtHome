@@ -1,7 +1,8 @@
 import React from 'react'
 import {Rewords} from '../../configs/rewords';
+import {Link} from 'react-router-dom';
 
-export default({userdata}) => {
+export default({userdata,onSignIn}) => {
     return(
     <div className="panel panel-default">
         <div className="panel-heading">
@@ -10,7 +11,7 @@ export default({userdata}) => {
         <ul className="list-group">
         {
             Rewords.filter((reword) => reword(userdata).isAchived === false).map((reword, index) => {
-                const {name,medal, desc} = reword(userdata);
+                const {name,medal, desc,link,func} = reword(userdata);
                 return (
                 index<4 &&
                 <li className="list-group-item" key = {index}>
@@ -21,7 +22,12 @@ export default({userdata}) => {
         
                       <div className="media-body">
                         <div className="pull-right">
-                          <a className="btn btn-pink-500 btn-circle btn-stroke btn-sm" href="http://google.com"><i className="fa fa-play"></i></a>
+                        {
+                          link? <Link className="btn btn-pink-500 btn-circle btn-stroke btn-sm" to={link}><i className="fa fa-play"></i></Link>:
+                          <a className="btn btn-pink-500 btn-circle btn-stroke btn-sm" onClick={() => func(() => onSignIn())}><i className="fa fa-play"></i></a>
+
+                        }
+                          
                         </div>
                         <h4 className="media-heading margin-v-4">{name}</h4>
                         <p className="text-grey-500 margin-none">{desc}</p>

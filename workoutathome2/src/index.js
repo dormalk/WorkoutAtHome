@@ -28,6 +28,7 @@ store.dispatch(fetchAllChallenges())
 
 const unsubscribe = store.subscribe(()=> {
     if(!store.getState().userdata.loading){
+        console.log(store.getState().userdata)
         ReactDOM.render(jsx, document.getElementById('root'));
         unsubscribe();
     }
