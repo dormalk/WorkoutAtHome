@@ -2,6 +2,7 @@ const INITIAL_STATE = {
     uid: null,
     loading: false,
     challengesInProgress: [],
+    signedChallenges: [],
     frineds: [],
     friendsCount: 0,
     workoutsCount: 0,
@@ -21,9 +22,12 @@ export default (state = INITIAL_STATE, action) => {
     switch(action.type){
         case 'LOGIN': 
         case 'UPDATE_USER':
+            const { challengesInProgress } = action.user;
+            var signedChallenges =  challengesInProgress? challengesInProgress.map((ch) => ch.challengeId) : [];
             return {
                 ...state,
                 ...action.user,
+                signedChallenges,
                 loading: false
             }
         case 'LOGOUT':
@@ -34,13 +38,6 @@ export default (state = INITIAL_STATE, action) => {
             return{
                 ...state,
                 loading: true
-            }
-        case 'START_CHALLENGE':
-            var {challengesInProgress} = state;
-            challengesInProgress.push(action.challengeId)
-            return{
-                ...state,
-                challengesInProgress
             }
         default:
             return state;

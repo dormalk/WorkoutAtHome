@@ -23,6 +23,6 @@ export const activeGlobalAlert = ({type,message}) => {
     dispatch({type: 'SHOW_GLOBAL_ALERT',globalAlert:{type,message}})
     setTimeout(() => {
       dispatch({type: 'HIDE_GLOBAL_ALERT'})
-    },3000)
+    },5000)
   }
 }

@@ -34,7 +34,7 @@ export default ({videos,userTypesPreference,onOpenSession}) => {
         {
             topThree.map((video,index) => {
                 return (
-                    index < 3 &&
+                    index < 5 &&
                     <li className={pickedWorkout.videoId === video.videoId? 'active' : '' } 
                         key={index}
                         onClick={() => setPickedWorkout(video)}>
@@ -56,15 +56,12 @@ export default ({videos,userTypesPreference,onOpenSession}) => {
                     <h3 className="text-h3 text-overlay margin-top-none">
                     {pickedWorkout.title}
                     <span className="text-h5">
-                                <span className="fa fa-fw fa-star text-primary"></span>
                     <span className="fa fa-fw fa-star text-primary"></span>
                     <span className="fa fa-fw fa-star text-primary"></span>
-                    <span className="fa fa-fw fa-star-o text-white"></span>
-                    <span className="fa fa-fw fa-star-o text-white"></span>
+                    <span className="fa fa-fw fa-star text-primary"></span>
                     </span>
                     </h3>
 
-                    <p className="text-subhead text-overlay">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus consectetur cumque distinctio doloremque error est fugiat perferendis quisquam tempore vel.</p>
                 </div>            
                 <img src={`https://i.ytimg.com/vi/${pickedWorkout.videoId}/maxresdefault.jpg`} alt="cover"  onError={(e)=>{e.target.onerror = null; e.target.src="image_path_here"}}/>
                 </div>

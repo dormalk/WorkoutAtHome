@@ -24,7 +24,8 @@ const AddVideoScreenFoo = (props) => {
         }
         setLoading(true);
         isVideoExist(video.videoId)
-        .then(() => {
+        .then(() => setError(`It's look like we already have this video on our platform`))
+        .catch(() => {
             getVideoDetails(video.videoId)
             .then(({data}) => {
                 if(data.items.length > 0){

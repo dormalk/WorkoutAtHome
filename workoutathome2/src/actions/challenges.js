@@ -24,28 +24,11 @@ export const fetchAllChallenges = () => {
 }
 
 
-export const userStartChallenge = (challengeId) => {
-    const currentUser = firebase.auth().currentUser;
-    if(currentUser){
-        return(disptach) => {
-            return firebase.database().ref(`users/${currentUser.uid}/challengesInProgress`)
-            .transaction(challengesInProgress => {
-                challengesInProgress.push(challengeId);
-                return challengesInProgress;
-            })
-            .then(() => {
-                disptach({type: 'START_CHALLENGE', challengeId})
-            })
-        }
-    } else {
-        return null;
-    }
-}
-
 
 export const updateChallengesFilters = (picked,param) => {
     return(dispatch) => {
         dispatch({type: 'UPDATE_CHALLENGES_FILTER', picked,param})
     }
 }
+
 

@@ -44,7 +44,6 @@ const HeaderFoo = (props) => {
                             userdata={props.userdata}
                             logout={() => props.logout()}
                             signIn={() => {SignInWithGoogle()}}/>
-          <Search/>
         </div>
 
         </div>

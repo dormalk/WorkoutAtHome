@@ -14,7 +14,6 @@ export class Challenge {
 
 export const getTagTypes = (challenge) => {
     var tags = [];
-    console.log(challenge)
     challenge.days.forEach(day => {
         day.forEach(({type}) => {
             if(!tags.includes(type)) tags.push(type)

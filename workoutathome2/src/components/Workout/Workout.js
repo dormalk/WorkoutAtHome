@@ -10,7 +10,10 @@ import {    isSessionExist,
             sendEvent,
             listenToSession } from '../../actions/workout_session';
 import {activeGlobalAlert} from '../../actions/system';
-import {updateUser,increaseCounter} from '../../actions/auth';
+import {    updateUser,
+            increaseCounter,
+            takeChallenge,
+            addCompleteVideoToChallengeInProgress} from '../../actions/auth';
 import {Session} from '../../utils/session';
 import YouTubeVideo from './YoutubeVideo';
 import ControlPannel from './ControlPannel';
@@ -28,6 +31,7 @@ var randomParise = ['Good Job!', 'Well Done!!', 'You are GREAT!', 'GO GO GO', 'A
 var randomPraiseClass = ['random1','random2','random3','random4','random5','random6','random7'];
 var workoutsCountFlag = false;
 var challengeCountFlag = false;
+var completeVideoFlag = false;
 var friendsCountsFlag = false;
 function showPraise(word,duration){
     var praise = document.getElementById('prais-message');
@@ -112,6 +116,10 @@ export class WorkoutFoo extends React.Component {
                         challengeCountFlag = true;
                         increaseCounter('challengeCount',1)
                     }
+                    if(!completeVideoFlag){
+                        completeVideoFlag = true;
+                        this.props.addCompleteVideo(this.props.userdata, globalSession.challangeId, globalSession.currentVideoId);
+                    }
                 }
             }
         },1000)
@@ -172,17 +180,14 @@ export class WorkoutFoo extends React.Component {
 
     addToExistSession(session){
         var {userId,sessionId} = this.state;
-        var {signedChallenges} = this.props.userdata;
+        var {challengesInProgress} = this.props.userdata;
         globalSession = new Session().fromJson(session);
         globalSession.addParticipent(userId)
         if(!!globalSession.challangeId && !!userId){
-            if(signedChallenges && signedChallenges.includes(globalSession.challangeId)) {
-
-                this.updateAndListen(sessionId);
-            } else {
-                this.props.activeGlobalAlert('danger',"First you have to take this challenge")
-                this.props.history.push(`challenge?id=${globalSession.challangeId}`)
-            }
+            if(!challengesInProgress || !challengesInProgress.find(c=> c.challengeId === globalSession.challangeId)) {
+                this.props.takeChallenge(this.props.userdata, globalSession.challangeId)
+            } 
+            this.updateAndListen(sessionId);
         } else {
             if(!!globalSession.challangeId){                
                 this.props.activeGlobalAlert('danger',"First you have to sign-in")
@@ -266,7 +271,7 @@ export class WorkoutFoo extends React.Component {
                 this.redirect();
             }
         } else if (code === 'change') {
-            if(this.isAdmin()){
+            if(!this.isAdmin()){
                 globalSession.setCurrentVideoId(body.message);
                 globalSession.setCurrentDuration(0);
                 player.seekTo(0);
@@ -420,7 +425,9 @@ export class WorkoutFoo extends React.Component {
 
 const mapDisptachToProps = (dispatch) => ({
     activeGlobalAlert: (type,message) => dispatch(activeGlobalAlert({type,message})),
-    startUpdateUser: (user) => dispatch(updateUser(user))
+    startUpdateUser: (user) => dispatch(updateUser(user)),
+    takeChallenge: (userdata,challenge) => dispatch(takeChallenge(userdata,challenge)),
+    addCompleteVideo: (userdata,challengeId, videoId) => dispatch(addCompleteVideoToChallengeInProgress(userdata,challengeId, videoId))
 })
 const mapStateToProps = (state) => ({
     uid: state.userdata.uid,

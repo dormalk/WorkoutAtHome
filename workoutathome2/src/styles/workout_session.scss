@@ -106,6 +106,14 @@ nav .participent-card{
   /* margin: 25px; */
 }
 
+#btns{
+  .dropdown-toggle{
+    font-weight: bolder;
+    background-color: grey;
+    color: white !important;
+  }
+}
+
 
 #progress-bar{
   position: relative;

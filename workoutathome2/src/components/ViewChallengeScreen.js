@@ -7,11 +7,12 @@ import {Session} from '../utils/session';
 import { generateUniqKey } from '../helpers/fucntions'
 import {createNewSession} from '../actions/workout_session';
 import { activeGlobalAlert } from '../actions/system';
-import {updateUser} from '../actions/auth';
+import {SingleWorkoutCard} from './Commons/SingleWorkoutCard'
+import {takeChallenge} from '../actions/auth';
 
 const mapDispatchToProp = (disptach) => ({
     activeGlobalAlert: (alert) => disptach(activeGlobalAlert(alert)),
-    updateUser: (update) => disptach(updateUser(update))
+    takeChallenge: (userdata, challenge) => disptach(takeChallenge(userdata, challenge))
 })
 
 const mapStateToProps = (state) => ({
@@ -20,11 +21,18 @@ const mapStateToProps = (state) => ({
     userdata: state.userdata,
 })
 
-export const ViewChallengeScreen = connect(mapStateToProps,mapDispatchToProp)(({challenges,uid,activeGlobalAlert,userdata,updateUser}) => {
+export const ViewChallengeScreen = connect(mapStateToProps,mapDispatchToProp)
+(({challenges,uid,activeGlobalAlert,userdata,takeChallenge}) => {
     const [challenge,setChallenge] = React.useState(null)
     const [isLogin,setIsLogin] = React.useState(!!uid);
     const [pickedDay,setPickedDay] = React.useState(1);
     const [isSignChallenge, setIsSignChallenge]  = React.useState(false);
+    const [challengeProgress, setChallengeProgress] = React.useState(null);
+    const [completedDays, setCompletedDays] = React.useState([]);
+
+    const [, updateState] = React.useState();
+    const forceUpdate = React.useCallback(() => updateState({}), []);
+
 
     React.useEffect(() => {
         const {id} = deparam(window.location.search)
@@ -32,53 +40,69 @@ export const ViewChallengeScreen = connect(mapStateToProps,mapDispatchToProp)(({
         setChallenge(challenge)
         if(isLogin !== !!uid) setIsLogin(!!uid)
 
-        if(!userdata.signedChallenges)setIsSignChallenge(false)
+        if(!userdata.signedChallenges) setIsSignChallenge(false)
         else if(userdata.signedChallenges.includes(challenge.id)) setIsSignChallenge(true)
+        
+        if(userdata.challengesInProgress) {
+            const currentChallengeProgress = userdata.challengesInProgress.find(ch=>ch.challengeId === id); 
+            if(currentChallengeProgress){
+                setChallengeProgress(currentChallengeProgress)
+                setPickedDay(currentChallengeProgress.progressDay+1)
+            }
+            checkCompleteDays();
+        }
+
     },[challenges,uid,isLogin,userdata])
     
-    function renderPane(){
-        return challenge.days[pickedDay-1].map(v => renderCard(v))            
-    }
 
-    function renderCard(video){
-        return(
-            <div className="panel panel-default" key={video.id} style={{display: 'flex', width: "100%"}}>
-                <div className="cover overlay hover cover-image-full" style={{flex: 1, margin: "0px"}}>
-                    <img src={video.thumbnails} alt="music" />
-                    <div className="overlay overlay-full overlay-hover overlay-bg-black">
-                        <div className="v-center">
-                            <a className="btn btn-lg btn-circle btn-white" onClick={() => onOpenSession(video.id)}><i className="fa fa-play"></i></a>
-                        </div>
-                    </div>
+    function checkCompleteDays() {
+        var completedDaysArr = [];
+        if(challenge === null) return;
+        if(!challenge.days) return;
 
-                </div>
-                <div className="panel-body" style={{flex: 2}}>
-                    <h4 className="margin-none title">{}</h4>
-                    <span className="text-grey-500">{video.type}</span><br/>
-                    <span className="text-grey-500">{convertDurationToString(video.duration)}</span>
-                </div>
-            </div>
-        )
-    }
+        for(let day in challenge.days){
+            let completed = true;
+            challenge.days[day].forEach(video => {
+                let i = findInArr(challengeProgress.completedVideos, video.id)
+                if(i) challengeProgress.completedVideos.splice(i,1);
+                else completed = false;
+            })
 
-    function takeChallenge(){
-        if(!userdata.signedChallenges){
-            userdata.signedChallenges = [];
+            if(completed) {
+                completedDaysArr.push(parseInt(day))
+            }
         }
-        userdata.signedChallenges.push(challenge.id);
-        updateUser(userdata)
-        .then(() => {
-
-        })
+        console.log(completedDaysArr)
+        if(completedDaysArr.length > 0) setCompletedDays(completedDaysArr)
     }
+
+    function findInArr(arr,elemnt){
+        let i = 0;
+        let flag = false;
+        for(; i < arr.length; i++){
+            if(arr[i] === elemnt) {
+                flag = true;
+                break;
+            };
+        }
+        return flag;
+    }
+
+    function renderPane(){
+        return challenge.days[pickedDay-1].map((v,index) => <SingleWorkoutCard video={v} onClick={(videoId) => onOpenSession(videoId)} key={index}/>)            
+    }
+
 
     function renderTabs(){
         var tabs = [];
         const days = challenge.days.length;
-        for(let i = 1; i <= days; i++)
-            tabs.push(  <li key={i} className={`${pickedDay === i? 'active': ''}`} onClick={() => setPickedDay(i)}>
+        console.log(completedDays)
+        for(let i = 1; i <= days; i++){
+            console.log(completedDays.includes(i-1))
+            tabs.push(  <li key={i} className={`${pickedDay === i? 'active': ''} ${completedDays.includes(i-1)? 'done': ''}`} onClick={() => setPickedDay(i)}>
                             <a href={`day${i}`} data-toggle="tab"><i className="fa fa-fw fa-star"></i> Day {i}</a>
                         </li>)
+        }
         return tabs;
 
     }
@@ -86,14 +110,20 @@ export const ViewChallengeScreen = connect(mapStateToProps,mapDispatchToProp)(({
 
     const onOpenSession = (videoId) => {
         if(isLogin){
-            var session = new Session(generateUniqKey(10),uid);
-            session.setCurrentVideoId(videoId)
-            session.setChallangeId(challenge.id)
-            session.setReletedVideos(challenge.days[pickedDay-1]);
-            createNewSession(session)
-            .then(() => {
-                window.open(window.location.origin+'/workout?sessionid='+session.sessionid)
-            })
+            if(userdata.challengesInProgress && userdata.challengesInProgress.find(c => c.challengeId === challenge.id)){
+                var session = new Session(generateUniqKey(10),uid);
+                session.setCurrentVideoId(videoId)
+                session.setChallangeId(challenge.id)
+                session.setReletedVideos(challenge.days[pickedDay-1]);
+                createNewSession(session)
+                .then(() => {
+                    window.open(window.location.origin+'/workout?sessionid='+session.sessionid)
+                })
+            }
+            else {
+                activeGlobalAlert({type: 'danger', message:'You must take the challenge first'})
+            }
+
         } else {
             activeGlobalAlert({type: 'danger', message:'You have to sign-in first'})
         }
@@ -118,7 +148,7 @@ export const ViewChallengeScreen = connect(mapStateToProps,mapDispatchToProp)(({
                                         <span className="text-grey-500">{convertDurationToString(challenge.avgDuration)}</span><br/>
                                         <hr/>
                                         <center>
-                                            <button className={`btn ${isLogin?'btn-indigo-500':'btn-danger'}`} disabled={!isLogin || isSignChallenge} onClick={() => takeChallenge()}>{isLogin? isSignChallenge? 'You are taked this challenge' : 'Take this challnege now!': 'You have to sign-in for taking this challenge'}</button>
+                                            <button className={`btn ${isLogin?'btn-indigo-500':'btn-danger'}`} disabled={!isLogin || isSignChallenge} onClick={() => takeChallenge(userdata, challenge)}>{isLogin? isSignChallenge? 'You are taked this challenge' : 'Take this challnege now!': 'You have to sign-in for taking this challenge'}</button>
                                         </center>
                                     </div>
                                 </div>   

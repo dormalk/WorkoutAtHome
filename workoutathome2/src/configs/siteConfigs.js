@@ -14,7 +14,7 @@ export const leftSideNav = [
         icone: 'fa fa-home'
     },
     {
-        label: 'Singles',
+        label: 'Single Workouts',
         redirectTo: '/singles',
         icone: 'fa fa-music'
     },

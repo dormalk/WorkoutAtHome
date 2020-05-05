@@ -2,8 +2,6 @@ import * as firebase from 'firebase';
 import { hendleUndefiendJSON, generateUniqKey, convertToArr } from '../helpers/fucntions';
 import { getTagTypes } from '../utils/challenge';
 
-
-
 export const login = (uid) => {
     return(dispatch) => {
         dispatch({type: 'IN_LOAD'})
@@ -11,8 +9,20 @@ export const login = (uid) => {
         .once('value',snapshot => {
             const user = snapshot.val()
             if(user){
-                user.emailVerified = firebase.auth().currentUser.emailVerified;
-                dispatch({type:'LOGIN', user })
+                    user.emailVerified = firebase.auth().currentUser.emailVerified;
+                    Promise.all([
+                        getLastActivities(uid, 'AddVideos'),
+                        getLastActivities(uid, 'clickVideo'),
+                        getLastActivities(uid, 'createChallenges')
+                    ])
+                    .then(results => {
+                        user.activities = {
+                            addVideos: results[0],
+                            clickVideos: results[1],
+                            createChallenges: results[2],
+                        }
+                        dispatch({type:'LOGIN', user })
+                    })
             }
             else {
                 dispatch(logout());
@@ -20,6 +30,7 @@ export const login = (uid) => {
         },(err) => {
             console.error(err)
         })
+
     }
 }
 
@@ -57,8 +68,6 @@ export const sendVarificationMail = () => {
 
 
 
-
-
 export const clickVideo = (videoId) => {
     firebase.database().ref('videos/'+videoId).once('value',snapshot => {
         var {type,videoId,clicks} = snapshot.val();
@@ -82,27 +91,17 @@ export const clickChallenge = (challengeId) => {
 
 
 export const analytics = (event,body) => {
-    const userId = firebase.auth().currentUser.uid;
-    const key = generateUniqKey(8);
-    if(userId){
-        body.datetime = new Date().getTime();
-        firebase.database().ref(`analytics/${userId}/${event}/${key}`).set(body);
+    if(firebase.auth().currentUser){
+        const userId = firebase.auth().currentUser.uid;
+        const key = generateUniqKey(8);
+        if(userId){
+            body.datetime = new Date().getTime();
+            firebase.database().ref(`analytics/${userId}/${event}/${key}`).set(body);
+        }
     }
 }
 
 
-export const fetchAnalytics = (userId,event) => {
-    return(dispatch) => {
-        return firebase.database().ref(`analytics/${userId}/${event}`)
-        .once('value',snapshot => {
-            var analytics = snapshot.val();
-            console.log(analytics)
-            if(analytics) {
-                dispatch({type: `${event}_COUNT`, count: convertToArr(analytics).length})
-            }
-        })
-    }
-}
 
 
 export const increaseCounter = (counterName, countUp) => {
@@ -112,3 +111,44 @@ export const increaseCounter = (counterName, countUp) => {
     })    
 
 }
+
+
+
+
+export const takeChallenge = (userdata, challenge) => {
+    return (dispatch) => {
+        if(!userdata.challengesInProgress){
+            userdata.challengesInProgress = [];
+        }
+        const challengeProgress = {
+            challengeId: challenge.id || challenge,
+            completedVideos: [],
+        }
+        console.log(userdata.challengesInProgress.find(c => c.challengeId === challengeProgress.challengeId))
+        if(!userdata.challengesInProgress.find(c => c.challengeId === challengeProgress.challengeId)){
+            userdata.challengesInProgress.push(challengeProgress);
+            dispatch(updateUser(userdata))
+        }
+    }
+}
+
+export const addCompleteVideoToChallengeInProgress = (userdata,challengeId, videoId) => {
+    return (dispatch) => {
+        const updatedUserdata = userdata.challengesInProgress.map(ch => {
+            if(ch.challengeId === challengeId){
+                if(!ch.completedVideos) ch.completedVideos = [];
+                ch.completedVideos.push(videoId);
+            }
+            return ch;
+        })
+        dispatch(updateUser(updatedUserdata));
+    }
+}
+
+export const getLastActivities = (userId, activityName) => new Promise((resolve,reject) => {
+    return firebase.database().ref('analytics/'+userId)
+    .child(activityName)
+    .orderByChild('datetime')
+    .limitToFirst(2)
+    .once('value', snapshot => resolve(snapshot.val()))
+})

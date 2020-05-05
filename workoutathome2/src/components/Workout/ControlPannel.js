@@ -2,25 +2,13 @@
 import React from 'react';
 
 export default (props) => {
-    const [audio] = React.useState(new Audio('./assets/music/WorkoutMix2019FitnessGymMotivation.mp3'))
-    const [isMute, setIsMute] = React.useState(true);
     const [micMuted, setMicMuted] = React.useState(false);
     const [vidMuted, setVidMuted] = React.useState(false);
     
     React.useEffect(() => {
-        toggelAudio();
       }, []);
 
-    const toggelAudio = () =>{
-        if(!audio.paused){
-            setIsMute(true);
-            audio.pause();
-        } else {
-            setIsMute(false);
-            audio.play()
-        }
 
-    }
 
     function toggelMic(){
         setMicMuted(!micMuted);
@@ -59,32 +47,26 @@ export default (props) => {
 
     return(
         <div id="btns">
-            <div id="audiobutton"  className={`${isMute? 'mute': 'audio1'}`}>
-                <button onClick={() => toggelAudio()} className={`innerbutton ${isMute? '': 'audio2'}`}>
-                    <i className={`fa fa-volume-${isMute? 'off':'up'}`}></i>
-                    
-                </button>
-            </div>
-            <div style={{width: "50%"}}>
+                <ul className="nav navbar-nav navbar-right" style={{marginRight: "0px", cursor: 'pointer'}}>
+                    <li className="dropdown user">
+                        <a className="dropdown-toggle" data-toggle="dropdown" style={{lineHeight: "unset"}}>
+                            Invite friends <span className="caret"></span>
+                        </a>
+                        <ul className="dropdown-menu" role="menu">
+                            <li  onClick={() => copyUrl()}><a><i className="fa fa-copy"></i>Copy Link</a></li>
+                            <li onClick={() => shareFacebook()}><a><i className="fa fa-facebook-f"></i>Facebook</a></li>
+                            <li><a href={`whatsapp://send?text=Join to my workout now! Link: ${window.location.href}`} target="_blank" rel="noopener noreferrer"><i className="fa fa-whatsapp"></i>Whatsapp</a></li>
+                        </ul>
+                    </li>
+
+                </ul>
+                <div style={{width: "50%"}}>
                 <button id="audio-button" className={`stream-control ${micMuted? 'muted' : ''}`} onClick={() => toggelMic()}>
                     <i className="fa fa-microphone"></i>
                 </button>
                 <button id="video-button" className={`stream-control ${vidMuted? 'muted' : ''}`} onClick={() => toggelVideo()}>
                     <i className="fa  fa-video-camera"></i>
                 </button>
-                <ul className="nav navbar-nav navbar-right" style={{marginRight: "0px", cursor: 'pointer'}}>
-                    <li className="dropdown user">
-                        <a className="dropdown-toggle" data-toggle="dropdown" style={{color: "black", lineHeight: "unset"}}>
-                            Share with friend <span className="caret"></span>
-                        </a>
-                        <ul className="dropdown-menu" role="menu">
-                            <li  onClick={() => copyUrl()}><a><i className="fa fa-copy"></i>Copy Link</a></li>
-                            <li onClick={() => shareFacebook()}><a><i className="fa fa-facebook-f"></i>Facebook</a></li>
-                        </ul>
-                    </li>
-
-                </ul>
-
             </div>
         </div>
     )

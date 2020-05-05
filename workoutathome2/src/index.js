@@ -23,14 +23,16 @@ const jsx = (
     </Provider>
 )
 store.dispatch({type:'IN_LOAD'});
-store.dispatch(fetchAllVideos())
-store.dispatch(fetchAllChallenges())
 
 const unsubscribe = store.subscribe(()=> {
     if(!store.getState().userdata.loading){
-        console.log(store.getState().userdata)
-        ReactDOM.render(jsx, document.getElementById('root'));
-        unsubscribe();
+        Promise.all([
+            store.dispatch(fetchAllVideos()),
+            store.dispatch(fetchAllChallenges())
+        ]).then(() => {
+            ReactDOM.render(jsx, document.getElementById('root'));
+            unsubscribe();
+        })
     }
 })
 

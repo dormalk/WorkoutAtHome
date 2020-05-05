@@ -16,7 +16,6 @@ export default (state=INITIAL_STATE, action) => {
         case 'INSERT_NEW_CHALLENGE':
             var updatedList = state.list;
             var {newChallenge} = action;
-            console.log(newChallenge)
             newChallenge.tagTypes = getTagTypes(newChallenge);
             newChallenge.avgDuration = getDurationAvg(newChallenge)
             newChallenge.thumbnails = `https://i.ytimg.com/vi/${newChallenge.days[0][0].id}/maxresdefault.jpg`;
