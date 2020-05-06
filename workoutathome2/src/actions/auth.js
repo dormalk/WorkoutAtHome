@@ -16,11 +16,12 @@ export const login = (uid) => {
                         getLastActivities(uid, 'createChallenges')
                     ])
                     .then(results => {
-                        user.activities = {
-                            addVideos: results[0],
-                            clickVideos: results[1],
-                            createChallenges: results[2],
-                        }
+                        if(!user.activities) user.activities = [];
+                        convertToArr(results[0]).map(res =>  { return {...res, type: 'addVideo'}}).forEach(res => user.activities.push(res));
+                        convertToArr(results[1]).map(res =>  { return {...res, type: 'clickVideo'}}).forEach(res => user.activities.push(res));
+                        convertToArr(results[2]).map(res =>  { return {...res, type: 'createChallenges'}}).forEach(res => user.activities.push(res));
+                        user.activities = user.activities.sort((v1,v2) => v2.datetime-v1.datetime)
+                        console.log(user.activities)
                         dispatch({type:'LOGIN', user })
                     })
             }
@@ -149,6 +150,6 @@ export const getLastActivities = (userId, activityName) => new Promise((resolve,
     return firebase.database().ref('analytics/'+userId)
     .child(activityName)
     .orderByChild('datetime')
-    .limitToFirst(2)
+    .limitToLast(2)
     .once('value', snapshot => resolve(snapshot.val()))
 })

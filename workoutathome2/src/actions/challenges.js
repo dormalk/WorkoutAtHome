@@ -1,12 +1,11 @@
 import firebase from 'firebase';
 import { analytics,increaseCounter } from './auth';
 export const insertNewChallenge = (newChallenge) => {
-    const userId = firebase.auth().currentUser.uid;
     return(disptach) => {
         return firebase.database().ref('challenges/'+newChallenge.id).set(newChallenge)
         .then(() => {
             disptach({type: 'INSERT_NEW_CHALLENGE', newChallenge})
-            analytics('createChallenges', {chellengeId: newChallenge.id})
+            analytics('createChallenges', {chellengeId: newChallenge.id, title:  newChallenge.title})
             increaseCounter('addChallengesCount', 1);
         })
     }

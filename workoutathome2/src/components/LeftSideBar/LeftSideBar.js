@@ -1,8 +1,9 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
 import {connect} from 'react-redux';
-import { closeLeftNav } from '../actions/system';
-import {leftSideNav} from '../configs/siteConfigs'
+import { closeLeftNav } from '../../actions/system';
+import {leftSideNav} from '../../configs/siteConfigs'
+import Activities from './Activities';
 
 export const LeftSideBarFoo = (props) => {
     const [, updateState] = React.useState();
@@ -27,15 +28,9 @@ export const LeftSideBarFoo = (props) => {
             )
           }
         </ul>
-        <h4 className="category">Activity</h4>
-        <div className="sidebar-block">
-          <p><i className="fa fa-fw icon-paper-document text-pink-500"></i>
-            <a href="#none" className="sidebar-link">
-              <strong>Caspian</strong> Announcing New Album Release Date</a>
-          </p>
-          <p><i className="fa fa-fw icon-music-note-2 text-pink-500"></i> <a href="#none" className="sidebar-link">Listen <strong>Bloom</strong>, the New single from Voyager</a></p>
-          <a className="btn btn-xs btn-pink-500" href="#none">more</a>
-        </div>
+          <Activities activities={props.activities}
+                      videos={props.videos}
+                      userId={props.userId}/>
         <h4 className="category">Top Plays</h4>
         <div className="sidebar-block list-group list-group-menu list-group-striped">
           <div className="list-group-item">
@@ -93,7 +88,10 @@ const mapDistpachToProps = (dispatch) => ({
 })
 
 const mapStateToProps = (state) => ({
-  showBar: state.system.leftNav
+  showBar: state.system.leftNav,
+  activities: state.userdata.activities,
+  videos: state.videodata.list,
+  userId: state.userdata.uid
 })
 
 

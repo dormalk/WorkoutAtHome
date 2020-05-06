@@ -1,4 +1,4 @@
-export * from './LeftSideBar';
+export * from './LeftSideBar/LeftSideBar';
 export * from './Footer';
 export * from './Header/Header';
 export * from './DiscoverScreen/DiscoverScreen';

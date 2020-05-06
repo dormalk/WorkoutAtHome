@@ -20,7 +20,7 @@ export const insertNewVideo = (newVideo) => {
         return firebase.database().ref('videos/'+newVideo.videoId).set(newVideo)
         .then(() => {
             dispatch({type: 'INSERT_VIDEO', newVideo})
-            analytics('AddVideos',{videoId: newVideo.videoId})
+            analytics('AddVideos',{videoId: newVideo.videoId, title: newVideo.title})
             increaseCounter('addVideosCount',1);
         })
         .catch((err) => console.error(err))

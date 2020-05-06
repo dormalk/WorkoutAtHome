@@ -36,12 +36,13 @@ export const ViewChallengeScreen = connect(mapStateToProps,mapDispatchToProp)
 
     React.useEffect(() => {
         const {id} = deparam(window.location.search)
-        var challenge = challenges.find((c => c.id === id))
-        setChallenge(challenge)
+        if(challenge && id !== challenge.id) forceUpdate();
+        var challenge2 = challenges.find((c => c.id === id))
+        setChallenge(challenge2)
         if(isLogin !== !!uid) setIsLogin(!!uid)
 
         if(!userdata.signedChallenges) setIsSignChallenge(false)
-        else if(userdata.signedChallenges.includes(challenge.id)) setIsSignChallenge(true)
+        else if(userdata.signedChallenges.includes(challenge2.id)) setIsSignChallenge(true)
         
         if(userdata.challengesInProgress) {
             const currentChallengeProgress = userdata.challengesInProgress.find(ch=>ch.challengeId === id); 
@@ -52,14 +53,14 @@ export const ViewChallengeScreen = connect(mapStateToProps,mapDispatchToProp)
             checkCompleteDays();
         }
 
-    },[challenges,uid,isLogin,userdata])
+    },[challenges,uid,isLogin,userdata,window.location.search])
     
 
     function checkCompleteDays() {
         var completedDaysArr = [];
         if(challenge === null) return;
         if(!challenge.days) return;
-
+        if(!challengeProgress || !challengeProgress.completedVideos) return;
         for(let day in challenge.days){
             let completed = true;
             challenge.days[day].forEach(video => {
@@ -96,7 +97,6 @@ export const ViewChallengeScreen = connect(mapStateToProps,mapDispatchToProp)
     function renderTabs(){
         var tabs = [];
         const days = challenge.days.length;
-        console.log(completedDays)
         for(let i = 1; i <= days; i++){
             console.log(completedDays.includes(i-1))
             tabs.push(  <li key={i} className={`${pickedDay === i? 'active': ''} ${completedDays.includes(i-1)? 'done': ''}`} onClick={() => setPickedDay(i)}>
