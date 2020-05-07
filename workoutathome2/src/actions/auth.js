@@ -13,7 +13,8 @@ export const login = (uid) => {
                     Promise.all([
                         getLastActivities(uid, 'AddVideos'),
                         getLastActivities(uid, 'clickVideo'),
-                        getLastActivities(uid, 'createChallenges')
+                        getLastActivities(uid, 'createChallenges'),
+                        getLastActivities(uid, 'clickChallenge')
                     ])
                     .then(results => {
                         if(!user.activities) user.activities = [];
@@ -71,22 +72,22 @@ export const sendVarificationMail = () => {
 
 export const clickVideo = (videoId) => {
     firebase.database().ref('videos/'+videoId).once('value',snapshot => {
-        var {type,videoId,clicks} = snapshot.val();
+        var {type,videoId,clicks,title} = snapshot.val();
         if(!clicks) clicks = 0;
         clicks++;
         firebase.database().ref('videos/'+videoId+'/clicks').set(clicks);
-        analytics('clickVideo',{type,videoId})
+        analytics('clickVideo',{type,videoId,title})
     })
 }
 
 export const clickChallenge = (challengeId) => {
     firebase.database().ref('challenges/'+challengeId).once('value',snapshot => {
-        var {id,clicks} = snapshot.val();   
+        var {id,clicks,title} = snapshot.val();   
         if(!clicks) clicks = 0;
         clicks++;
         var tagTypes = getTagTypes(snapshot.val())
         firebase.database().ref('challenges/'+id+'/clicks').set(clicks);
-        analytics('clickChallenge',{tagTypes,id})
+        analytics('clickChallenge',{tagTypes,id,title})
     })
 }
 
@@ -146,10 +147,11 @@ export const addCompleteVideoToChallengeInProgress = (userdata,challengeId, vide
     }
 }
 
-export const getLastActivities = (userId, activityName) => new Promise((resolve,reject) => {
+export const getLastActivities = (userId, activityName , limit) => new Promise((resolve,reject) => {
+    if(!limit) limit = 2;
     return firebase.database().ref('analytics/'+userId)
     .child(activityName)
     .orderByChild('datetime')
-    .limitToLast(2)
+    .limitToLast(limit)
     .once('value', snapshot => resolve(snapshot.val()))
 })

@@ -1,0 +1,65 @@
+#navigation_site .route{
+    display: flex !important; 
+    height: 70px;
+    cursor: pointer;
+    .panel-headline{
+        flex: 2 ;
+    }
+    .cover{
+        flex: 1;
+    }
+
+
+}
+#categories{
+    .panel {
+        float: left;
+        width: 24%;
+        height: 35%;
+        margin: 0.5%;
+        cursor: pointer;
+    }
+
+    .panel:hover{
+        background-color: #26a69a;
+        color: white;
+    }
+}
+@media (max-width: 985px){
+    #categories .panel{
+        width: 32%;
+    }
+}
+
+
+@media (max-width: 865px){
+    #categories .panel{
+        width: 49%;
+    }
+}
+
+#navigation_site .route:hover{
+    background-color: gainsboro;
+}
+
+#navigation_site .route.active{
+    background-color: #26a69a;
+    color: white;
+}
+
+
+
+@media only screen and (max-width: 600px){
+    #navigation_site .route{
+        flex-direction: column;
+        height: 180px;
+
+        .panel-headline{
+            flex: 1;
+        }
+        .cover{
+            flex: 2;
+        }
+    }
+    
+}
