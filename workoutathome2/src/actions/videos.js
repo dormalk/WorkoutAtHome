@@ -57,7 +57,7 @@ export const updateVideoThumbnails =  (videoId) => {
             if(data.items.length > 0){
                 video = {
                     ...video,
-                    allThumbnails: data.items[0].thumbnails || [],
+                    allThumbnails: data.items[0].snippet.thumbnails || [],
                 }
                 firebase.database().ref('videos/'+videoId).update(video)
             }
@@ -72,7 +72,6 @@ const BASE_URL = "https://www.googleapis.com/youtube/v3";
 const part = "snippet,statistics,contentDetails";
 
 const getVideoDetails = (videoId) => {
-    console.log(videoId)
     return axios.get(`${BASE_URL}/videos?key=${KEY}&part=${part}&id=${videoId}`)
 }
 

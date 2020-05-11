@@ -52,9 +52,9 @@ export const LeftSideBarFoo = (props) => {
                           clickVideoActivities = clickVideoActivities.sort((v1,v2) => v2.clicks - v1.clicks);
                           return clickVideoActivities.filter((elem,index) => index < 5)
                                                       .map((a) => props.videos.find(v => v.videoId === a.id));
-                        }}
-                        videos={props.videos}
-                        userId={props.userId}
+                          }}
+                          videos={props.videos}
+                          userId={props.userId}
                         />
               </React.Fragment>
           )

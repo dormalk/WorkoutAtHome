@@ -68,8 +68,6 @@ const AddVideoScreenFoo = (props) => {
         }
         return {
             title,
-            thumbnails: thumbnails.medium.url,
-            thumbnailsMax: thumbnails.maxres.url,
             allThumbnails: thumbnails,
             duration: {
                 hours, minutes, seconds

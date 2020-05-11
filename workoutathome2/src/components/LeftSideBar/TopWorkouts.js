@@ -4,7 +4,7 @@ import {createNewSession} from '../../actions/workout_session';
 import { generateUniqKey } from '../../helpers/fucntions';
 
 export default ({workouts,videos,userId}) => {
-
+    console.log(workouts())
     function openSession(videoId) {
         var session = new Session(generateUniqKey(10),userId);
         session.setCurrentVideoId(videoId)
@@ -22,7 +22,7 @@ export default ({workouts,videos,userId}) => {
             <div className="sidebar-block list-group list-group-menu list-group-striped">
                 {
                     workouts().map(workout => (
-                        <div className="list-group-item" key={`${workout.id}_2`} onClick={() => openSession(workout.id)}>
+                        <div className="list-group-item" key={`${workout.videoId}_2`} onClick={() => openSession(workout.videoId)}>
                             <div className="media">
                                 <div className="media-left">
                                     <img src={workout.thumbnails} width="35" alt="cover" className="media-object"/>

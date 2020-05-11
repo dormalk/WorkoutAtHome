@@ -1,30 +1,26 @@
 import React from 'react';
 
-export default ({onSendPraise,handleMouseMove}) => {
+export default ({onSendPraise}) => {
 
-
-
-    function startDrag(){
-        console.log("drag");
-        document.getElementById('cover').css('display','block')
-        document.addEventListener('mousemove',handleMove)
+    function toggleNav(){
+        var nav = document.querySelector('nav');
+        if(nav.style.width === '50vw'){
+          nav.style.width = '250px';
+          nav.classList.remove('open');
+          nav.classList.add('close_2');
+        } else {
+          nav.style.width = '50vw'
+          nav.classList.add('open');
+          nav.classList.remove('close_2');
+        }
     }
 
-    function onDrop(){
-        document.removeEventListener('mousemove',handleMove)
-        document.getElementById('cover').css('display','none')
-        console.log("drop");
-    }
 
-
-    function handleMove(){
-        const {pageX,pageY} = handleMouseMove()
-        console.log(pageX,pageY)
-    }
     return(
-    <nav    onMouseDown={() => startDrag()}
-            onMouseUp={() => onDrop()}>
-
+    <nav className="open">
+        <button id="toggle-nav" onClick={() => toggleNav()}>
+            <i className="fa fa-arrow-left"></i>
+        </button>
         <div id="participents-list">
 
         </div>

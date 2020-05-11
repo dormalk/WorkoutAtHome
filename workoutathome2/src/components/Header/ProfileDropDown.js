@@ -1,8 +1,8 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React from 'react';
+import {withRouter} from 'react-router-dom';
 
-
-export default ({isLogin,signIn,userdata,logout}) => {
+export default withRouter(({isLogin,signIn,userdata,logout,history}) => {
     return (
     <ul className="nav navbar-nav navbar-right ">
         <li className="dropdown user">
@@ -13,9 +13,11 @@ export default ({isLogin,signIn,userdata,logout}) => {
                             <img src={userdata.photoURL} alt="" className="img-circle" /> {userdata.displayName}<span className="caret"></span>
                         </a>
                         <ul className="dropdown-menu" role="menu">
-                        <li><a href="#none"><i className="fa fa-user"></i>Profile</a></li>
-                        <li><a href="#none"><i className="fa fa-wrench"></i>Settings</a></li>
-                        <li  onClick={() => {logout()}}><a href="#none"><i className="fa fa-sign-out"></i>Logout</a></li>
+                        <li><a><i className="fa fa-user"></i>Profile</a></li>
+                        <li><a><i className="fa fa-wrench"></i>Settings</a></li>
+                        <li onClick={() => history.push('/addVideo')}><a><i className="fa fa-film"></i>Add Video</a></li>
+                        <li onClick={() => history.push('/addChallenge')}><a><i className="fa fa-star"></i>Create Challenge</a></li>
+                        <li onClick={() => {logout()}}><a><i className="fa fa-sign-out"></i>Logout</a></li>
                         </ul>
                     </React.Fragment>    
                 ):
@@ -25,4 +27,4 @@ export default ({isLogin,signIn,userdata,logout}) => {
     </ul>
 
     )
-}
+})

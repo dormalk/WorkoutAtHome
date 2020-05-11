@@ -27,6 +27,12 @@ export default ({videos,userTypesPreference,onOpenSession}) => {
     
     },[userTypesPreference])
 
+    function getThumbnail(video){
+        if(video.allThumbnails && video.allThumbnails.maxres) return video.allThumbnails.maxres.url
+        if(video.allThumbnails && video.allThumbnails.high) return video.allThumbnails.high.url
+        if(video.allThumbnails && video.allThumbnails.default) return video.allThumbnails.default.url
+        return `https://i.ytimg.com/vi/${video.videoId}/0.jpg`
+    }
     return (
         <div className="tabbable tabs-vertical tabs-right-lg">
 
@@ -63,7 +69,7 @@ export default ({videos,userTypesPreference,onOpenSession}) => {
                     </h3>
 
                 </div>            
-                <img src={`https://i.ytimg.com/vi/${pickedWorkout.videoId}/maxresdefault.jpg`} alt="cover"  onError={(e)=>{e.target.onerror = null; e.target.src="image_path_here"}}/>
+                <img src={getThumbnail(pickedWorkout)} alt="cover"  onError={(e)=>{e.target.onerror = null; e.target.src="image_path_here"}}/>
                 </div>
                 }
           </div>
