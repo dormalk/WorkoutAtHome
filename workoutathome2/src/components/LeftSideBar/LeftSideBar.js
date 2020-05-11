@@ -4,6 +4,8 @@ import {connect} from 'react-redux';
 import { closeLeftNav } from '../../actions/system';
 import {leftSideNav} from '../../configs/siteConfigs'
 import Activities from './Activities';
+import TopWorkouts from './TopWorkouts';
+import { convertToArr } from '../../helpers/fucntions';
 
 export const LeftSideBarFoo = (props) => {
     const [, updateState] = React.useState();
@@ -27,60 +29,43 @@ export const LeftSideBarFoo = (props) => {
               <li key={link.label} onClick={closeNav.bind(this)} className={isActive(link.redirectTo)}><Link to={link.redirectTo}><i className={link.icone}></i><span>{link.label}</span></Link></li>
             )
           }
-        </ul>
-          <Activities activities={props.activities}
-                      videos={props.videos}
-                      userId={props.userId}/>
-        <h4 className="category">Top Plays</h4>
-        <div className="sidebar-block list-group list-group-menu list-group-striped">
-          <div className="list-group-item">
-            <div className="media">
-              <div className="media-left">
-                <a href="album.html">
-                  <img src="images/50/main-playing-guitar.jpg" width="35" alt="cover" className="media-object"/>
-                </a>
-              </div>
-              <div className="media-body">
-                <h4 className="text-h5 media-heading margin-v-1-2"><a href="album.html">Bloom</a></h4>
-                <p className="text-grey-500">Woodland (2011)</p>
-              </div>
-            </div>
-          </div>
-          <div className="list-group-item">
-            <div className="media">
-              <div className="media-left">
-                <a href="album.html">
-                  <img src="images/50/portrait-trendy-hair-style.jpg" width="35" alt="cover" className="media-object"/>
-                </a>
-              </div>
-              <div className="media-body">
-                <h4 className="text-h5 media-heading margin-v-1-2"><a href="album.html">Dreams</a></h4>
-                <p className="text-grey-500">Shinning (2014)</p>
-              </div>
-            </div>
-          </div>
-          <div className="list-group-item">
-            <div className="media">
-              <div className="media-left">
-                <a href="album.html">
-                  <img src="images/50/singing-woman.jpg" width="35" alt="cover" className="media-object"/>
-                </a>
-              </div>
-              <div className="media-body">
-                <h4 className="text-h5 media-heading margin-v-1-2"><a href="album.html">Something</a></h4>
-                <p className="text-grey-500">Different (2014)</p>
-              </div>
-            </div>
-          </div>
+        </ul> 
+        
+        {
+          props.userId && (
+
+            <React.Fragment>
+            <Activities activities={props.activities || []}
+                        videos={props.videos}
+                        userId={props.userId}/>
+            <TopWorkouts workouts={() => {
+                          let clickVideoActivities = {};
+                          if(!props.activities) return [];
+                          props.activities.forEach((activity) => {
+                            if(activity.type === 'clickVideo'){
+                              if(!clickVideoActivities[activity.videoId]) clickVideoActivities[activity.videoId] =  {clicks: 0};
+                              clickVideoActivities[activity.videoId].clicks++;
+                            }
+                          })
+                          clickVideoActivities = convertToArr(clickVideoActivities);
+                          console.log(clickVideoActivities)
+                          clickVideoActivities = clickVideoActivities.sort((v1,v2) => v2.clicks - v1.clicks);
+                          return clickVideoActivities.filter((elem,index) => index < 5)
+                                                      .map((a) => props.videos.find(v => v.videoId === a.id));
+                        }}
+                        videos={props.videos}
+                        userId={props.userId}
+                        />
+              </React.Fragment>
+          )
+        }
         </div>
-      </div>
         <div id="ascrail2002" className="nicescroll-rails" style={{width: "5px", Zindex: "2", cursor: "default", position: "absolute", top: "0px", left: "194px", height: "562px", opacity: "0"}}>
             <div style={{
                 position: "relative", top: "0px", float: "right", width: "5px", height: "469px", backgroundColor: "rgb(52, 152, 219)", border: "0px", backgroundClip: "padding-box", borderRadius: "5px"
             }}></div></div></div>
 
     )
-
 }
 
 const mapDistpachToProps = (dispatch) => ({

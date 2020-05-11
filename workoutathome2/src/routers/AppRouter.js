@@ -7,6 +7,7 @@ import {    DiscoverScreen,
             ViewChallengeScreen} from '../components';
 import { Switch, Route } from 'react-router-dom';
 import PrivateRoute from './PrivateRoute';
+import { FixVideos } from '../components/Admin/FixVideos';
 
 
 export default () => (
@@ -17,7 +18,7 @@ export default () => (
         <Route exact  path="/singles"><SinglesScreen/></Route>
         <Route exact path="/challenges"><ChallengesScreen/></Route>
         <Route exact  path="/challenge" component={ViewChallengeScreen}/>
-
+        <PrivateRoute exact path="/admin_fixVideos" component={FixVideos}/>
         <Route component={NotFound}></Route>
     </Switch>
 );

@@ -148,7 +148,7 @@ export const addCompleteVideoToChallengeInProgress = (userdata,challengeId, vide
 }
 
 export const getLastActivities = (userId, activityName , limit) => new Promise((resolve,reject) => {
-    if(!limit) limit = 2;
+    if(!limit) limit = 100;
     return firebase.database().ref('analytics/'+userId)
     .child(activityName)
     .orderByChild('datetime')

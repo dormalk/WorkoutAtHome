@@ -16,6 +16,8 @@ const AddVideoScreenFoo = (props) => {
     const [error, setError] = useState(null);
     const [success, setSuccess] = useState(null);
     const [pickedVideo, setPickedVideo] = useState(null);
+
+
     const isExistOnFirebase = (video) => {
         setError(null);
         if(video.videoId === '' || video.videoId == null){
@@ -29,11 +31,13 @@ const AddVideoScreenFoo = (props) => {
             getVideoDetails(video.videoId)
             .then(({data}) => {
                 if(data.items.length > 0){
+                    console.log(video)
                     video = {
                         ...video,
                         ...convertDetails(data),
                         videoUrl: `https://www.youtube.com/watch?v=${video.videoId}`
                     };
+                    console.log(video)
                     setPickedVideo(video)
                     setPhase(phase+1);
                 } else {
@@ -66,6 +70,7 @@ const AddVideoScreenFoo = (props) => {
             title,
             thumbnails: thumbnails.medium.url,
             thumbnailsMax: thumbnails.maxres.url,
+            allThumbnails: thumbnails,
             duration: {
                 hours, minutes, seconds
             },

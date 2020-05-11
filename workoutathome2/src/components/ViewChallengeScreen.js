@@ -46,7 +46,7 @@ export const ViewChallengeScreen = connect(mapStateToProps,mapDispatchToProp)
         
         if(userdata.challengesInProgress) {
             const currentChallengeProgress = userdata.challengesInProgress.find(ch=>ch.challengeId === id); 
-            if(currentChallengeProgress){
+            if(currentChallengeProgress && currentChallengeProgress.progressDay){
                 setChallengeProgress(currentChallengeProgress)
                 setPickedDay(currentChallengeProgress.progressDay+1)
             }
@@ -90,7 +90,10 @@ export const ViewChallengeScreen = connect(mapStateToProps,mapDispatchToProp)
     }
 
     function renderPane(){
-        return challenge.days[pickedDay-1].map((v,index) => <SingleWorkoutCard video={v} onClick={(videoId) => onOpenSession(videoId)} key={index}/>)            
+        console.log(pickedDay-1)
+        return pickedDay ?
+         challenge.days[pickedDay-1].map((v,index) => <SingleWorkoutCard video={v} onClick={(videoId) => onOpenSession(videoId)} key={index}/>):
+         null;
     }
 
 

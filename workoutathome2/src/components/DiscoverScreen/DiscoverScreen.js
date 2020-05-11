@@ -37,6 +37,7 @@ export const DiscoverScreen = connect(mapStateToProps,mapDispatchToProps)
         })
     } else activeGlobalAlert({type: 'danger', message:'You have to sign-in to create a session'});
 }
+
   return(
         <div className="st-pusher">
           <div className="st-content">

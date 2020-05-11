@@ -19,7 +19,7 @@ export default withRouter(({activities,videos,userId,history}) => {
 
     function handleAddVideo(activity){
         return(
-            <p key={activity.videoId}>
+            <p  key={`${generateUniqKey(6)}`}>
                 <i className="fa fa-fw icon-paper-document text-pink-500"></i>
                 <a className="sidebar-link" onClick={() => openSession(activity.videoId)} style={{cursor: 'pointer'}}>
                     You are created new workout {(activity.title || activity.videoId).substring(0,10)}...
@@ -30,7 +30,7 @@ export default withRouter(({activities,videos,userId,history}) => {
 
     function handleAddChallenge(activity) {
         return(
-            <p key={activity.chellengeId}>
+            <p  key={`${generateUniqKey(6)}`}>
                 <i className="fa fa-fw icon-paper-document text-pink-500"></i>
 
                 <a className="sidebar-link" onClick={() => history.push('/challenge?id='+activity.chellengeId)} style={{cursor: 'pointer'}}>
@@ -42,7 +42,7 @@ export default withRouter(({activities,videos,userId,history}) => {
 
     function handleClickChallenge(activity) {
         return(
-            <p key={activity.chellengeId}>
+            <p  key={`${generateUniqKey(6)}`}>
                 <i className="fa fa-fw icon-paper-document text-pink-500"></i>
 
                 <a className="sidebar-link" onClick={() => history.push('/challenge?id='+activity.id)} style={{cursor: 'pointer'}}>
@@ -55,7 +55,7 @@ export default withRouter(({activities,videos,userId,history}) => {
 
     function handleClickVideo(activity){
         return(
-            <p key={activity.videoId}>
+            <p  key={`${generateUniqKey(6)}`}>
                 <i className="fa fa-fw icon-paper-document text-pink-500"></i>
 
                 <a className="sidebar-link" onClick={() => openSession(activity.videoId)}style={{cursor: 'pointer'}}>
@@ -70,7 +70,7 @@ export default withRouter(({activities,videos,userId,history}) => {
         <h4 className="category">Activity</h4>
         <div className="sidebar-block">
             {
-                activities.filter((item,index) => index < limit).map(activity=> {
+                activities && activities.filter((item,index) => index < limit).map(activity=> {
                     if(activity.type === 'addVideo') return handleAddVideo(activity);
                     if(activity.type === 'createChallenges') return handleAddChallenge(activity);
                     if(activity.type === 'clickVideo') return handleClickVideo(activity);

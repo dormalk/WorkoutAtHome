@@ -1,7 +1,7 @@
 import * as firebase from 'firebase';
 import {analytics,increaseCounter} from './auth';
 import {convertToArr} from '../helpers/fucntions';
-
+import axios from 'axios';
 
 export const isVideoExist = (videoId) => new Promise((resolve,reject) => {
     firebase.database().ref('videos/'+videoId)
@@ -43,5 +43,36 @@ export const updateSinglesFilters = (picked,param) => {
     return(dispatch) => {
         dispatch({type: 'UPDATE_FILTER', picked,param})
     }
+}
+
+
+
+
+export const updateVideoThumbnails =  (videoId) => {
+    firebase.database().ref('videos_backup/'+videoId)
+    .once('value', (snapshot) => {
+        let video = snapshot.val();
+        getVideoDetails(videoId)
+        .then(({data}) => {
+            if(data.items.length > 0){
+                video = {
+                    ...video,
+                    allThumbnails: data.items[0].thumbnails || [],
+                }
+                firebase.database().ref('videos/'+videoId).update(video)
+            }
+        });
+    })
+
+} 
+
+
+const KEY = "AIzaSyBVGMQU9KNm311Z-5b8jZJo8bnfQo_3i8U";
+const BASE_URL = "https://www.googleapis.com/youtube/v3";
+const part = "snippet,statistics,contentDetails";
+
+const getVideoDetails = (videoId) => {
+    console.log(videoId)
+    return axios.get(`${BASE_URL}/videos?key=${KEY}&part=${part}&id=${videoId}`)
 }
 

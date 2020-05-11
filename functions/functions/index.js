@@ -1,5 +1,6 @@
 const functions = require('firebase-functions');
 const admin = require('firebase-admin');
+const axios = require('axios');
 admin.initializeApp(functions.config().firebase);
 
 
@@ -18,6 +19,77 @@ exports.updateAnalitics = functions.https.onRequest((request, response) => {
     response.status(200).send('OK');
 
 })
+exports.backupvideos = functions.https.onRequest((request,response) => {
+    admin.database().ref('videos')
+    .once('value', snapshot => {
+        admin.database().ref('videos_backup').set(snapshot.val())
+        response.status(200).send('Ok')
+
+    })
+})
+
+exports.updateVideoDetails = functions.https.onRequest((request,response) => {
+    admin.database().ref('videos_backup')
+    .once('value', async(snapshot) => {
+        let videos = snapshot.val();
+        for(let videoId in videos) {
+            let {data} = await getVideoDetails(videoId);
+            response.status(200).send(data)
+        }
+        // for(let videoId in videos) {
+            
+        //     .then(({data}) => {
+        //         videos[videoId] = {
+        //             ...videos[videoId],
+        //             ...convertDetails(data),
+        //             videoUrl: `https://www.youtube.com/watch?v=${videoId}`
+        //         };
+
+        //         admin.database().ref('videos/'+videoId)
+        //         .update(videos[videoId])
+        
+        //     })
+        // }
+
+
+    })
+})
+
+const convertDetails = (data) => {
+    let { title, thumbnails } = data.items[0].snippet;
+    let duration = data.items[0].contentDetails.duration;
+    let length = "L";
+    const { hours, minutes, seconds } = moment.duration(
+      duration,
+      "m"
+    )._data;
+    if (hours === 0) {
+      if (minutes <= 30) {
+        length = "S";
+      } else {
+        length = "M";
+      }
+    }
+    return {
+        title,
+        allThumbnails: thumbnails,
+        duration: {
+            hours, minutes, seconds
+        },
+        length
+    }
+}
+
+
+const KEY = "AIzaSyBVGMQU9KNm311Z-5b8jZJo8bnfQo_3i8U";
+const BASE_URL = "https://www.googleapis.com/youtube/v3";
+const part = "snippet,statistics,contentDetails";
+
+const getVideoDetails = (videoId) => {
+    console.log(videoId)
+    return axios.get(`${BASE_URL}/videos?key=${KEY}&part=${part}&id=${videoId}`)
+}
+
 
 
 function updateAnalitics() {
