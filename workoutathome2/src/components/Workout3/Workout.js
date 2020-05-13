@@ -101,7 +101,7 @@ export class WorkoutFoo extends React.Component {
                 updateExistSession(globalSession.toJson())
             }
             if(player) {
-                // this.updateLoadBar();
+                this.updateLoadBar();
                 var secondLeft = Math.floor(player.getDuration() - globalSession.currentDuration);
                 if(this.isAdmin() && secondLeft >= 0 && secondLeft < 15) this.setState({endOfVideo: true})
                 else if(this.state.endOfVideo) this.setState({endOfVideo: false})
@@ -387,36 +387,13 @@ export class WorkoutFoo extends React.Component {
         sendEvent(this.state.sessionId, 'change', videoId);
     }
 
-    handleMouseMove(event) {
-        var eventDoc, doc, body;
-
-        event = event || window.event; // IE-ism
-        // If pageX/Y aren't available and clientX/Y are,
-        // calculate pageX/Y - logic taken from jQuery.
-        // (This is to support old IE)
-        if (event.pageX == null && event.clientX != null) {
-            eventDoc = (event.target && event.target.ownerDocument) || document;
-            doc = eventDoc.documentElement;
-            body = eventDoc.body;
-
-            event.pageX = event.clientX +
-              (doc && doc.scrollLeft || body && body.scrollLeft || 0) -
-              (doc && doc.clientLeft || body && body.clientLeft || 0);
-            event.pageY = event.clientY +
-              (doc && doc.scrollTop  || body && body.scrollTop  || 0) -
-              (doc && doc.clientTop  || body && body.clientTop  || 0 );
-        }
-        return event;
-        // Use event.pageX / event.pageY here
-    }
-
-
     render(){
         var {session} = this.state;
         return(
             <React.Fragment>
                 {this.state.endOfVideo && session.reletedVideos && <SuggestOtherVideos videos={session.reletedVideos} onPick={(videoId) => this.onPickVideo(videoId)}/>}
                 <div style={{display: 'flex', height: "100%", width: "100vw"}}>
+                    <ParticipentList onSendPraise={() => this.sendPraise()}/>
                     <div id="main-page">
                         <ControlPannel toggelStreamConnection={(isOn,what) => this.toggelStreamConnection(isOn,what)}/>
                         <section>
@@ -427,9 +404,10 @@ export class WorkoutFoo extends React.Component {
                                                                 onPlayerReady={(event) => this.onPlayerReady(event)}
                                                                 stateChange={(event) => this.onYoutubeStatusChange(event)}/>}
                         </section>
-                        <ParticipentList    onSendPraise={() => this.sendPraise()}
-                                            handleMouseMove={() => this.handleMouseMove()}/>
-
+                        <div id="progress-bar">
+                            <h2 id="timeleft"></h2>
+                            <div id="load"></div>
+                        </div>
                     </div>
                 </div>
 

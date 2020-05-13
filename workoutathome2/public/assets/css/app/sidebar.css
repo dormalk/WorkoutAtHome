@@ -7017,7 +7017,7 @@ html.app-mobile #content .container-fluid .sidebar {
 .sidebar > #dropdown-temp .dropdown-menu > li.active > a,
 .sidebar > #dropdown-temp .dropdown-menu > li a:hover {
   background: #f5f7f7;
-  color: #26a69a;
+  color: #FF7C2E;
 }
 .sidebar > #dropdown-temp .submenu-show {
   display: block;
@@ -8045,7 +8045,7 @@ html.st-layout .st-content {
 }
 .sidebar .emails .sidebar-block .media .text-h5 {
   margin: 5px 0 0;
-  color: #26a69a;
+  color: #FF7C2E;
 }
 .sidebar .emails .sidebar-block .email-subject {
   display: block;
@@ -8108,7 +8108,7 @@ html.st-layout .st-content {
   overflow: scroll;
 }
 .sidebar .datepicker table thead tr {
-  background: #26a69a !important;
+  background: #FF7C2E !important;
 }
 .sidebar .datepicker table thead tr th {
   color: #fff;
@@ -8168,7 +8168,7 @@ html.st-layout .st-content {
   margin-bottom: 0;
 }
 .sidebar .slider .slider-handle {
-  color: #26a69a;
+  color: #FF7C2E;
 }
 .sidebar .slider .tooltip-inner {
   font-weight: bold;

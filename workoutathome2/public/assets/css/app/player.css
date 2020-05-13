@@ -320,7 +320,7 @@
   display: inline-block;
   vertical-align: middle;
   padding: 2px 10px;
-  background-color: #26a69a;
+  background-color: #FF7C2E;
   color: #ffffff;
   border-radius: 4px;
   font-size: 12px;
@@ -337,7 +337,7 @@
 .player.playlist .jp-playlist ul li.jp-playlist-current a,
 .player.playlist .jp-playlist ul li.jp-playlist-current:hover a,
 .player.playlist .jp-playlist ul li.jp-playlist-current:focus a {
-  color: #26a69a;
+  color: #FF7C2E;
 }
 .panel .player.playlist .jp-playlist ul li {
   border-left: none;
@@ -357,7 +357,7 @@
   bottom: 0;
 }
 .player-control-primary .control {
-  background-color: #26a69a;
+  background-color: #FF7C2E;
   color: #ffffff;
 }
 .player-control-overlay .control {

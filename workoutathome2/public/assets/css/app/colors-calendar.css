@@ -3857,7 +3857,7 @@
   background: #3c948b;
 }
 .datepicker.calendar-teal-400 table thead tr {
-  background: #26a69a !important;
+  background: #FF7C2E !important;
 }
 .datepicker.calendar-teal-400 table thead tr th.datepicker-switch:hover,
 .datepicker.calendar-teal-400 table thead tr th.next:hover,
@@ -3867,7 +3867,7 @@
 .datepicker.calendar-teal-400 table tr td.day.active,
 .datepicker.calendar-teal-400 table tr td .month.active,
 .datepicker.calendar-teal-400 table tr td .year.active {
-  background-color: #26a69a !important;
+  background-color: #FF7C2E !important;
 }
 .datepicker.calendar-teal-400 table tr td.day:hover,
 .datepicker.calendar-teal-400 table tr td .month:hover,

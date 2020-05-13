@@ -68,12 +68,12 @@ nav #participents-list{
 
 /* Handle */
 #participents-list::-webkit-scrollbar-thumb {
-  background: #26a69a;
+  background: #FF7C2E;
 }
 
 /* Handle on hover */
 #participents-list::-webkit-scrollbar-thumb:hover {
-  background: #26a69a;
+  background: #FF7C2E;
 }
 
 nav .participent-card{
@@ -152,7 +152,7 @@ nav.close #toggle-nav{
 }
 #toggle-nav{
   background-color: transparent;
-  color:#26a69a;
+  color:#FF7C2E;
   font-size: 1.2rem;
   position: absolute;
   right: 0px;
@@ -260,7 +260,7 @@ nav.close #toggle-nav{
 
 
 .sharebutton:hover{
-  background-color: #26a69a;
+  background-color: #FF7C2E;
   max-width: 20rem;
   transition: all 1s;
 
@@ -276,7 +276,7 @@ nav.close #toggle-nav{
 }
 
 #audiobutton {
-  background-color: #26a69a;
+  background-color: #FF7C2E;
   border: 0px;
   background-color: #f1f3f4;
   border-top-right-radius: 5rem;
@@ -296,7 +296,7 @@ nav.close #toggle-nav{
 }
 #audiobutton .innerbutton {
 
-  background-color: #26a69a;
+  background-color: #FF7C2E;
   border: 0px;
   background-color: #f1f3f4;
   overflow: hidden;

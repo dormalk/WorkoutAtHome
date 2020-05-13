@@ -19,6 +19,7 @@ import YouTubeVideo from './YoutubeVideo';
 import ControlPannel from './ControlPannel';
 import { withRouter } from 'react-router-dom';
 import SuggestOtherVideos from './SuggestOtherVideos';
+import Dragable from '../Commons/Dragable';
 
 
 var globalSession = new Session();
@@ -374,8 +375,6 @@ export class WorkoutFoo extends React.Component {
           gamification = ' Left'
           timeleft.innerText = `${timeString} ${gamification}`;
         }
-        var load = document.getElementById('load');
-        load.style.width = `${precetage}%`
     }
 
     onPickVideo(videoId){
@@ -393,7 +392,6 @@ export class WorkoutFoo extends React.Component {
             <React.Fragment>
                 {this.state.endOfVideo && session.reletedVideos && <SuggestOtherVideos videos={session.reletedVideos} onPick={(videoId) => this.onPickVideo(videoId)}/>}
                 <div style={{display: 'flex', height: "100%", width: "100vw"}}>
-                    <ParticipentList onSendPraise={() => this.sendPraise()}/>
                     <div id="main-page">
                         <ControlPannel toggelStreamConnection={(isOn,what) => this.toggelStreamConnection(isOn,what)}/>
                         <section>
@@ -404,10 +402,19 @@ export class WorkoutFoo extends React.Component {
                                                                 onPlayerReady={(event) => this.onPlayerReady(event)}
                                                                 stateChange={(event) => this.onYoutubeStatusChange(event)}/>}
                         </section>
-                        <div id="progress-bar">
-                            <h2 id="timeleft"></h2>
-                            <div id="load"></div>
-                        </div>
+                        <Dragable   id='ParticipentList'
+                                    initialPos={{pageX: 50, pageY: 50}}>
+                            <ParticipentList    onSendPraise={() => this.sendPraise()}/>
+                        </Dragable>
+
+                        <Dragable   id='progress-bar'
+                                    initialPos={{pageX: 250, pageY: 250}}>
+                            <div id="progress-bar">
+                                <h2 id="timeleft"></h2>
+                            </div>
+                        </Dragable>
+
+
                     </div>
                 </div>
 

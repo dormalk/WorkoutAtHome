@@ -103,7 +103,7 @@
   margin-right: 10px;
 }
 .post-place a:hover {
-  color: #26a69a;
+  color: #FF7C2E;
   text-decoration: none;
 }
 .timeline-experience {
@@ -158,7 +158,7 @@
   margin-right: 10px;
 }
 .timeline-experience .item-media a:hover {
-  color: #26a69a;
+  color: #FF7C2E;
   text-decoration: none;
 }
 .timeline-attachment {
@@ -179,7 +179,7 @@
 }
 .timeline-block .panel-heading {
   padding: 0;
-  background: #26a69a;
+  background: #FF7C2E;
   color: #fff;
   border-bottom: 0;
 }
@@ -322,11 +322,11 @@ ul.timeline-list .media-body.fixed {
 }
 .timeline-months li.active a,
 .timeline-months li.active:hover a {
-  color: #26a69a;
+  color: #FF7C2E;
 }
 .timeline-months li.active a i,
 .timeline-months li.active:hover a i {
-  color: #26a69a;
+  color: #FF7C2E;
 }
 .timeline-months li a {
   color: #cfcfcf;
@@ -351,7 +351,7 @@ ul.timeline-list .media-body.fixed {
 }
 .view-all-comments a:hover {
   text-decoration: none;
-  color: #26a69a;
+  color: #FF7C2E;
 }
 .panel.panel-default ul.comments {
   list-style: none;
@@ -405,12 +405,12 @@ ul.timeline-list .media-body.fixed {
   padding: 0;
 }
 .panel.panel-default ul.comments li .pull-right.dropdown .dropdown-menu li a:hover {
-  color: #26a69a;
+  color: #FF7C2E;
 }
 .panel.panel-default ul.comments a.comment-author {
   font-weight: 500;
   font-size: 14px;
-  color: #26a69a;
+  color: #FF7C2E;
   padding-right: 5px;
 }
 .panel.panel-default ul.comments .comment-date {
@@ -444,7 +444,7 @@ ul.timeline-list .media-body.fixed {
   margin-top: -110px;
   margin-bottom: 20px;
   display: block;
-  background: #26a69a;
+  background: #FF7C2E;
   border: 1px solid #239a8e;
   text-align: center;
   line-height: 120px;
@@ -515,7 +515,7 @@ ul.timeline-list .media-body.fixed {
   border-right: 1px solid #e2e9e6;
 }
 .panel .share-buttons a:hover i {
-  color: #26a69a;
+  color: #FF7C2E;
 }
 .panel .share-buttons button {
   margin: 0px;

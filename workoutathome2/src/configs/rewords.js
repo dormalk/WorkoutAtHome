@@ -21,7 +21,7 @@ function workoutReword(count, {workoutsCount}){
         isAchived: !!workoutsCount && workoutsCount >= count,
         code: `workout${count}`,
         desc: "Complete lease 50% from workout's duraion",
-        medal: medal('./assets/medals/workout.svg', count, '#26a69a'),
+        medal: medal('./assets/medals/workout.svg', count, '#FF7C2E'),
         link: '/singles'
     }
 

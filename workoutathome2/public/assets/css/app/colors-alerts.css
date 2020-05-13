@@ -4663,8 +4663,8 @@
   color: #3c948b;
 }
 .alert-teal-400 {
-  background-color: #26a69a;
-  border-color: #26a69a;
+  background-color: #FF7C2E;
+  border-color: #FF7C2E;
   color: #ffffff;
 }
 .alert-teal-400 hr {
@@ -4676,7 +4676,7 @@
 .alert-teal-400.alert-stroke {
   background-color: rgba(38, 166, 154, 0.15);
   border-color: rgba(38, 166, 154, 0.4);
-  color: #26a69a;
+  color: #FF7C2E;
 }
 .alert-teal-400.alert-stroke hr {
   border-top-color: rgba(33, 145, 135, 0.4);

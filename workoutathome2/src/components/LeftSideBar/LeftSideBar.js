@@ -39,19 +39,20 @@ export const LeftSideBarFoo = (props) => {
                         videos={props.videos}
                         userId={props.userId}/>
             <TopWorkouts workouts={() => {
-                          let clickVideoActivities = {};
-                          if(!props.activities) return [];
-                          props.activities.forEach((activity) => {
-                            if(activity.type === 'clickVideo'){
-                              if(!clickVideoActivities[activity.videoId]) clickVideoActivities[activity.videoId] =  {clicks: 0};
-                              clickVideoActivities[activity.videoId].clicks++;
-                            }
-                          })
-                          clickVideoActivities = convertToArr(clickVideoActivities);
-                          console.log(clickVideoActivities)
-                          clickVideoActivities = clickVideoActivities.sort((v1,v2) => v2.clicks - v1.clicks);
-                          return clickVideoActivities.filter((elem,index) => index < 5)
-                                                      .map((a) => props.videos.find(v => v.videoId === a.id));
+                            let clickVideoActivities = {};
+                            if(!props.activities) return [];
+                            props.activities.forEach((activity) => {
+                              if(activity.type === 'clickVideo'){
+                                if(!clickVideoActivities[activity.videoId]) clickVideoActivities[activity.videoId] =  {clicks: 0};
+                                clickVideoActivities[activity.videoId].clicks++;
+                              }
+                            })
+                            clickVideoActivities = convertToArr(clickVideoActivities);
+                            clickVideoActivities = clickVideoActivities.sort((v1,v2) => v2.clicks - v1.clicks);
+                            var test = clickVideoActivities.filter((elem,index) => index < 5)
+                                                            .map((a) => props.videos.find(v => v.videoId === a.id))
+                                                            .filter((elem) => elem !== undefined)
+                            return test;
                           }}
                           videos={props.videos}
                           userId={props.userId}

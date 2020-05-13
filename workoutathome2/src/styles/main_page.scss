@@ -37,7 +37,7 @@
     }
 
     .panel:hover{
-        background-color: #26a69a;
+        background-color: #FF7C2E;
         color: white;
     }
 }
@@ -59,7 +59,7 @@
 }
 
 #navigation_site .route.active{
-    background-color: #26a69a;
+    background-color: #FF7C2E;
     color: white;
 }
 
@@ -106,12 +106,12 @@
   
   /* Handle */
   .nav-tabs::-webkit-scrollbar-thumb {
-    background: #26a69a;
+    background: #FF7C2E;
     border-radius: 10px;
   }
   
   /* Handle on hover */
   .nav-tabs::-webkit-scrollbar-thumb:hover {
-    background: #26a69a;
+    background: #FF7C2E;
   }
   

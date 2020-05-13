@@ -368,7 +368,7 @@
 }
 .navbar-brand.navbar-brand-primary,
 .navbar-brand.navbar-brand-primary:hover {
-  background: #26a69a;
+  background: #FF7C2E;
   color: #fff;
 }
 .navbar-brand.navbar-brand-primary a,
@@ -432,7 +432,7 @@
   color: #fff;
 }
 .navbar-primary .toggle.active {
-  color: #26a69a;
+  color: #FF7C2E;
   background: #ffffff;
 }
 @media (min-width: 768px) {
@@ -496,7 +496,7 @@
 .navbar-nav .dropdown-menu > li.active > a,
 .navbar-nav .dropdown-menu > li a:hover {
   background: #f5f7f7;
-  color: #26a69a;
+  color: #FF7C2E;
 }
 .navbar-nav > li.notifications.files img {
   width: 35px !important;
@@ -803,16 +803,16 @@
 }
 .navbar-default .navbar-nav > li.active > a i,
 .navbar-default .navbar-nav > li.open > a i {
-  color: #26a69a;
+  color: #FF7C2E;
 }
 .navbar-default .navbar-nav > li > a i {
   color: #212121;
 }
 .navbar-default .navbar-nav > li > a:hover i {
-  color: #26a69a;
+  color: #FF7C2E;
 }
 .navbar-default .navbar-nav > .nav-item-primary > a {
-  background-color: #26a69a;
+  background-color: #FF7C2E;
   color: #fff;
 }
 .navbar-default .navbar-nav > .nav-item-primary > a:hover,
@@ -827,7 +827,7 @@
   background: #3c4340;
 }
 .navbar-default .navbar-nav > li.notifications a.dropdown-toggle .badge.badge-primary {
-  background: #26a69a;
+  background: #FF7C2E;
 }
 .navbar-default .navbar-nav > li.notifications a.dropdown-toggle .badge.badge-danger {
   background: #bd362f;
@@ -847,8 +847,8 @@
   background-color: #f7f7f7;
 }
 .navbar-primary {
-  background-color: #26a69a;
-  border-color: #26a69a;
+  background-color: #FF7C2E;
+  border-color: #FF7C2E;
 }
 @media (min-width: 768px) {
   .navbar-primary .navbar-brand {
@@ -959,7 +959,7 @@
 }
 .navbar-primary .btn-default {
   color: #ffffff;
-  background-color: #26a69a;
+  background-color: #FF7C2E;
   border-color: #1e857b;
 }
 .navbar-primary .btn-default:hover,
@@ -995,11 +995,11 @@ fieldset[disabled] .navbar-primary .btn-default:active,
 .navbar-primary .btn-default.disabled.active,
 .navbar-primary .btn-default[disabled].active,
 fieldset[disabled] .navbar-primary .btn-default.active {
-  background-color: #26a69a;
+  background-color: #FF7C2E;
   border-color: #1e857b;
 }
 .navbar-primary .btn-default .badge {
-  color: #26a69a;
+  color: #FF7C2E;
   background-color: #ffffff;
 }
 .navbar-primary .btn-primary {
@@ -1083,7 +1083,7 @@ fieldset[disabled] .navbar-primary .btn-primary.active {
     color: #212121;
   }
   .navbar-skin-cover .navbar-nav > li > a:hover i {
-    color: #26a69a;
+    color: #FF7C2E;
   }
 }
 @media (min-width: 768px) {

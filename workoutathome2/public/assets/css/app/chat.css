@@ -91,7 +91,7 @@
   bottom: 0;
 }
 .chat-window-container .panel .panel-heading {
-  background: #26a69a;
+  background: #FF7C2E;
   padding: 0;
   line-height: 39px;
 }
@@ -262,7 +262,7 @@
 }
 .sidebar-chat.chat-skin-white .chat-filter li.active a,
 .sidebar-chat.chat-skin-white .chat-filter li.active a:hover {
-  background: #26a69a;
+  background: #FF7C2E;
   color: #fff;
 }
 .sidebar-chat.chat-skin-white .chat-contacts li {
@@ -326,7 +326,7 @@
 }
 .sidebar-chat.chat-skin-dark .chat-filter li.active a,
 .sidebar-chat.chat-skin-dark .chat-filter li.active a:hover {
-  background: #26a69a;
+  background: #FF7C2E;
   color: #fff;
 }
 .sidebar-chat.chat-skin-dark .chat-contacts li {

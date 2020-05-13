@@ -10,13 +10,13 @@
   color: white;
   font-size: 14px;
   padding: 4px 7px;
-  background: #26a69a;
+  background: #FF7C2E;
   display: inline-block;
   cursor: pointer;
   border-radius: 3px;
 }
 .owl-controls .owl-nav [class*='owl-']:hover {
-  background: #26a69a;
+  background: #FF7C2E;
   color: white;
   text-decoration: none;
 }
@@ -41,7 +41,7 @@
 }
 .owl-dots .owl-dot.active span,
 .owl-dots .owl-dot:hover span {
-  background: #26a69a;
+  background: #FF7C2E;
 }
 [class*="owl-"] .item > * {
   margin-bottom: 0;
@@ -112,7 +112,7 @@
   text-align: center;
   height: 140px;
   line-height: 140px;
-  background: #26a69a;
+  background: #FF7C2E;
   color: #fff;
   border-top-left-radius: 0;
   border-bottom-left-radius: 0;
@@ -124,7 +124,7 @@
   text-align: center;
   height: 140px;
   line-height: 140px;
-  background: #26a69a;
+  background: #FF7C2E;
   color: #fff;
   border-top-right-radius: 0;
   border-bottom-right-radius: 0;
@@ -299,7 +299,7 @@ fieldset[disabled] .owl-preview .owl-controls .owl-nav > div {
 }
 .owl-theme .owl-controls .owl-page.active span,
 .owl-theme .owl-controls.clickable .owl-page:hover span {
-  background: #26a69a;
+  background: #FF7C2E;
 }
 .slick-slider {
   padding-bottom: 35px;
@@ -329,7 +329,7 @@ fieldset[disabled] .owl-preview .owl-controls .owl-nav > div {
   opacity: 1;
 }
 .slick-dots li.slick-active button:before {
-  color: #26a69a;
+  color: #FF7C2E;
 }
 .gallery-image {
   margin: 0;
