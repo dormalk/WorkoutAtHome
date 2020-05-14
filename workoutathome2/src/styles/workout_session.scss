@@ -102,25 +102,30 @@ section{
 
 #participent-list-container{
   width: 250px;
-  height: 100%;
   position: absolute;
   background-color: #2e2e2e;
   transition: all 0.8s;
   z-index: 9999;
   top:0px;
   opacity: 0.8;
-  border-radius: 15px;
-  box-shadow: 1 1 1 grey;
+  border-radius: 5px;
+  box-shadow: 1px 1px 10px grey;
+  padding: 2px;
 
   #participents-list{
     justify-content: center;
     flex-direction: column;
-    margin: 20px;
-    margin-left: 0px;
-    margin-top: 40px;
-    padding-left: 10px;
-    overflow-y: scroll;
-    direction: rtl;
+    margin: auto;
+    padding-left: 0;
+
+    .participent-card{
+      border-radius: 3px;
+      margin: 0 auto;
+
+      .media-box{
+        line-height: 0rem;
+      }
+    }
   }
 }
 
@@ -150,20 +155,7 @@ section{
   background: #FF7C2E;
 }
 
-nav .participent-card{
-  width: 100%;
-  margin: 5px auto;
-  display: inline-block;
-  position: relative;
-  overflow: hidden;
-  border-radius: 10px;
-}
 
-.participent-card img{
-  height: 30%;
-  position: absolute;
-  bottom: 0px;
-}
 .participent-card video{
   width: 100%;
 }

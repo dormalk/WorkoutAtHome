@@ -28,13 +28,22 @@ function handleMouseMove(event) {
 export default ({children,id, initialPos}) => {
     const [isDrag, setIsDrag] = React.useState(false); 
     const [pos,setPos] = React.useState(JSON.parse(localStorage.getItem(id)) || {pageX:initialPos.pageX,pageY:initialPos.pageY})
+    const [prevPage,setPrevPage] = React.useState({prevPageX:null,prevPageY:null})
+
 
     const handleMove = (event) => {
+        var elem = document.getElementById(id);
         if(isDrag){
             const {pageX,pageY} = handleMouseMove(event)
-            setPos({pageX:pageX-90,pageY:pageY-50})
+            var {prevPageX,prevPageY} = prevPage;
+            console.log('prevPageY=>'+prevPageY)
+            console.log('pageY=>'+pageY)
+
+            if(prevPageX == null)  prevPageX = pageX
+            if(prevPageY == null)  prevPageY = pageY
+            setPos({pageX:elem.offsetLeft + pageX - prevPageX ,pageY: elem.offsetTop + pageY - prevPageY})
             localStorage.setItem(id,JSON.stringify(pos))
-            console.log(pageX,pageY)
+            setPrevPage({prevPageX: pageX,prevPageY: pageY})
         }
     }
 
@@ -44,6 +53,8 @@ export default ({children,id, initialPos}) => {
         <div    onMouseDown={() => setIsDrag(true)}
                 onMouseUp={() => setIsDrag(false)}
                 onMouseMove={(event) => handleMove(event)}
+                onMouseLeave={() => setIsDrag(false)}
+                id={id || ''}
                 style={{position: "absolute", top: pos.pageY, left: pos.pageX, cursor: isDrag? 'grab':'context-menu'}}>
                     {children}            
         </div>

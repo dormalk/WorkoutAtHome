@@ -20,7 +20,7 @@ import ControlPannel from './ControlPannel';
 import { withRouter } from 'react-router-dom';
 import SuggestOtherVideos from './SuggestOtherVideos';
 import Dragable from '../Commons/Dragable';
-
+import parse  from 'html-react-parser';
 
 var globalSession = new Session();
 var globalUserId;
@@ -64,7 +64,8 @@ export class WorkoutFoo extends React.Component {
             userId: uid || '',
             session: null,
             showCover: false,
-            endOfVideo: false
+            endOfVideo: false,
+            rtcParticipents: []
         }
 
         this.updateDatabase(sessionid);
@@ -149,33 +150,43 @@ export class WorkoutFoo extends React.Component {
     buildElement(sessionid) {
         this.connection.openOrJoin(sessionid, function() {})
 
-        this.connection.onstream = function (event) {
-            var width = '100%';
-            var  videosContainer = document.getElementById('participents-list');
-            var mediaElement = getMediaElement(event.mediaElement, {
-                title: event.userid,
-                buttons: ['mute-video', 'mute-audio'],
-                width: width,
-                showOnMouseEnter: true
-            });
-            mediaElement.className = 'participent-card';
-            videosContainer.appendChild(mediaElement);
-            // mediaElement.appendChild(generateRandomImage());
+        this.connection.onstream = (event) => {
+            var {rtcParticipents} = this.state;
+            rtcParticipents.push(event.streamid);
+            this.setState({rtcParticipents})
 
+            setTimeout(() => {
+                var width = '100%';
+                var  videosContainer = document.getElementById('participents-list_'+event.streamid);
+                var mediaElement = getMediaElement(event.mediaElement, {
+                    title: event.userid,
+                    buttons: ['mute-video', 'mute-audio'],
+                    width: width,
+                    showOnMouseEnter: true
+                });
+                mediaElement.className = 'participent-card';
+                videosContainer.appendChild(mediaElement);
 
-            setTimeout(function () {
-                mediaElement.media.play();
-            }, 5000);
+                setTimeout( () => {
+                    mediaElement.media.play();
+                }, 5000);    
+                mediaElement.id = event.streamid;
+            },1500)
+            
+            
+            
 
-            mediaElement.id = event.streamid;
         };
 
 
-        this.connection.onstreamended = function (event) {
-            var mediaElement = document.getElementById(event.streamid);
-            if (mediaElement) {
-                mediaElement.parentNode.removeChild(mediaElement);
-            }
+        this.connection.onstreamended = (event) => {
+            var {rtcParticipents} = this.state;
+            rtcParticipents = rtcParticipents.filter((mediaElement) => mediaElement !== event.streamid);
+            this.setState({rtcParticipents})
+            // var mediaElement = document.getElementById(event.streamid);
+            // if (mediaElement) {
+            //     mediaElement.parentNode.removeChild(mediaElement);
+            // }
         };
     }
 
@@ -402,12 +413,20 @@ export class WorkoutFoo extends React.Component {
                                                                 onPlayerReady={(event) => this.onPlayerReady(event)}
                                                                 stateChange={(event) => this.onYoutubeStatusChange(event)}/>}
                         </section>
-                        <Dragable   id='ParticipentList'
-                                    initialPos={{pageX: 50, pageY: 50}}>
-                            <ParticipentList    onSendPraise={() => this.sendPraise()}/>
-                        </Dragable>
+                        {
+                            this.state.rtcParticipents.map((elem,index) => {
+                                return (
+                                    <Dragable   id={`ParticipentList${index}`}
+                                                key={index}
+                                                initialPos={{pageX: 50, pageY: 50}}>
+                                        <ParticipentList id={elem}/>
+                                    </Dragable>
+                                    )
+                                })    
+                            }
 
-                        <Dragable   id='progress-bar'
+
+                        <Dragable   id='progressbar'
                                     initialPos={{pageX: 250, pageY: 250}}>
                             <div id="progress-bar">
                                 <h2 id="timeleft"></h2>
