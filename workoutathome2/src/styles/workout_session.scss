@@ -107,10 +107,24 @@ section{
   transition: all 0.8s;
   z-index: 9999;
   top:0px;
-  opacity: 0.8;
+  opacity: 0.6;
   border-radius: 5px;
   box-shadow: 1px 1px 10px grey;
   padding: 2px;
+
+  button{
+    background-color: #FF7C2E;
+    color:white;
+    border: 0px;
+    border-radius: 5px;
+    position: absolute;
+    transform: scale(0.7);
+    z-index: 1000;
+  }
+
+  button:active{
+    background-color: #eb4034;
+  }
 
   #participents-list{
     justify-content: center;

@@ -25,16 +25,14 @@ const categories = [
     {
         label: 'Toning',
         image: './assets/images/6.png'
-    }
+    },
+
 ]
 export default withRouter(({history,pickFilterVideo,pickFilterChallenge}) => {
-    const [pickRoute, setPickRoute] = React.useState('');
 
     function redirect(type){
-        if(pickRoute=='singles') pickFilterVideo(type,'type');
-        if(pickRoute=='challenges') pickFilterChallenge(type,'type');
-
-        history.push(`/${pickRoute}`)
+        pickFilterVideo(type,'type');
+        history.push(`/singles`)
         
     }
 
@@ -42,24 +40,7 @@ export default withRouter(({history,pickFilterVideo,pickFilterChallenge}) => {
         <div id="navigation_site">
             <hr/>
             <br/>
-            <div className="row" style={{marginLeft: 0,marginRight: 0}}>
-                <div className="col-lg-5 col-xs-6" key="singles">
-                    <div className={`panel panel-default route ${pickRoute === 'singles'? 'active': ''}`} onClick={() => setPickRoute('singles')}>
-                        <div className="cover"><img src="./assets/images/5.png"/></div>
-                        <div className="panel-headline"><h3><center> Workouts</center></h3></div>
-                    </div>
-                </div>
-                <div className="col-lg-2 col-xs-0"></div>
-                <div className="col-lg-5 col-xs-6" key="challenges">
-                    <div className={`panel panel-default route ${pickRoute === 'challenges'? 'active': ''}`} onClick={() => setPickRoute('challenges')}>
-                        <div className="panel-headline" ><h3><center>Challenges</center></h3></div>
-                        <div className="cover"><img className="cha" src="./assets/images/6.png"/></div>
-                    </div>
-                </div>
-            </div>
-
             <div className="panel panel-default">
-                <div className="panel-heading"><h3><center>Categories</center></h3></div>
                 <div className="panel-body" id="categories">
                     {
                         categories.map((category,index) => 
