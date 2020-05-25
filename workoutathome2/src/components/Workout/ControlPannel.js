@@ -55,7 +55,7 @@ export default (props) => {
                         <ul className="dropdown-menu" role="menu">
                             <li  onClick={() => copyUrl()}><a><i className="fa fa-copy"></i>Copy Link</a></li>
                             <li onClick={() => shareFacebook()}><a><i className="fa fa-facebook-f"></i>Facebook</a></li>
-                            <li><a href={`whatsapp://send?text=Join to my workout now! Link: ${window.location.href}`} target="_blank" rel="noopener noreferrer"><i className="fa fa-whatsapp"></i>Whatsapp</a></li>
+                            {/* <li><a href={`whatsapp://send?text=Join to my workout now! Link: ${window.location.href}`} target="_blank" rel="noopener noreferrer"><i className="fa fa-whatsapp"></i>Whatsapp</a></li> */}
                         </ul>
                     </li>
 

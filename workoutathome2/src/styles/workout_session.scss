@@ -46,7 +46,6 @@ section{
   flex-direction: row;
   display: flex;
   z-index: 9999;
-  opacity: 0;
   height: 7%;
   transition: all 0.2s;
   .dropdown-toggle{
@@ -93,15 +92,11 @@ section{
 }
 
 
-#btns:hover{
-  opacity: 1 !important;
-  height: 7%!important;
-}
 
 
 
 #participent-list-container{
-  width: 250px;
+  width: 25vw;
   position: absolute;
   background-color: #2e2e2e;
   transition: all 0.8s;
@@ -171,7 +166,11 @@ section{
   width: 100%;
   /* margin: 25px; */
 }
-
+#ParticipentList0{
+  #participent-list-container{
+    opacity: 1 !important;
+  }
+}
 
 
 #progress-bar{
@@ -180,9 +179,12 @@ section{
   padding: 10px;
   border: 1px solid white;
   z-index: 1000;
+  box-shadow: 1px 1px 5px grey;
+  background-color: rgba($color: #fff, $alpha: 0.2);
   #timeleft{
     text-align: center;
     color: white;
+
   }
   
   

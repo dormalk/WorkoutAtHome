@@ -18,7 +18,7 @@ export default ({videoDetails,insertVideo,success}) => {
         <form className="form-horizontal">
             <div className="mx-auto col-6 border m-2 py-2 px-4 shadow rounded animated slideInLeft" id="form-wrapper">
                 <div className="alert alert-dark" role="alert">
-                    Hey, we got some details about your video from youtube, you can add them if you want to.
+                    Hey, we got some details about your video from YouTube, you can add to the Title if you want to.
                 </div>
                 <div className="form-group">
                     <label className="col-sm-2 control-label" htmlFor="video-url">Video Title</label>

@@ -4,10 +4,10 @@ import React from 'react';
 
 function friendsReword(count, {friendsCount}){
     return {
-        name: `Invite ${count} frineds to workout`,
+        name: `Invite ${count} friend${count > 1? 's':''} to workout`,
         isAchived: !!friendsCount && friendsCount >= count,
         code: `friends${count}`,
-        desc: "Complete lease 50% from workout's duraion with more then one frined",
+        desc: "Complete lease 50% from workout's duraion with more then one friend",
         medal: medal('./assets/medals/friends.svg', count, '#000000'),
         link: '/singles'
     }
@@ -17,10 +17,10 @@ function friendsReword(count, {friendsCount}){
 
 function workoutReword(count, {workoutsCount}){
     return {
-        name: `Do ${count} workouts`,
+        name: `Do ${count} workout${count > 1? 's':''}`,
         isAchived: !!workoutsCount && workoutsCount >= count,
         code: `workout${count}`,
-        desc: "Complete lease 50% from workout's duraion",
+        desc: "Complete at least ½ of the workout with two or more friends",
         medal: medal('./assets/medals/workout.svg', count, '#FF7C2E'),
         link: '/singles'
     }
@@ -29,10 +29,10 @@ function workoutReword(count, {workoutsCount}){
 
 function takeChallenge(count, {challengeCount}) {
     return {
-        name: `Take ${count} challenges`,
+        name: `Take ${count} challenge${count > 1? 's':''}`,
         isAchived: !!challengeCount && challengeCount >= count,
         code: `challenge${count}`,
-        desc: "Take a  challenge and complete lease one day",
+        desc: "Take a challenge and complete at least 1 per day",
         medal: medal('./assets/medals/challenge.svg', count, '#293D7C'),
         link: '/challenges'
     }
@@ -40,7 +40,7 @@ function takeChallenge(count, {challengeCount}) {
 
 function addVideos(count, {addVideosCount}) {
     return {
-        name: `Add ${count} video`,
+        name: `Add ${count} video${count > 1? 's':''}`,
         isAchived: !!addVideosCount && addVideosCount >= count,
         code: `addVideos${count}`,
         desc: "Help us add a new Youtube workout's video to our platform",
@@ -51,10 +51,10 @@ function addVideos(count, {addVideosCount}) {
 
 function addChallenges(count, {addChallengesCount}) {
     return {
-        name: `Create ${count} challenge`,
+        name: `Create ${count} challenge${count > 1? 's':''}`,
         isAchived: !!addChallengesCount && addChallengesCount >= count,
         code: `addVideos${count}`,
-        desc: "Create new challenge on our platform and help others to be better",
+        desc: "Create a new challenge and share the challenge with two friends",
         medal: medal('./assets/medals/plan.svg', count, '#FF6187'),
         link: '/addChallenge'
     }

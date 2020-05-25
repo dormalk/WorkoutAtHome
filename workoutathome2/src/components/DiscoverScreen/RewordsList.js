@@ -6,7 +6,7 @@ export default({userdata,onSignIn}) => {
     return(
     <div className="panel panel-default">
         <div className="panel-heading">
-          <h4 className="panel-title">Rewords</h4>
+          <h4 className="panel-title">Rewards</h4>
         </div>
         <ul className="list-group">
         {
