@@ -2,10 +2,16 @@ import React from 'react';
 import {convertDurationToString} from '../../utils/video';
 
 export const SingleWorkoutCard = ({video, onClick}) => {
+    const getVideoImage = () => {
+        if(video.allThumbnails.standard) return video.allThumbnails.standard.url;
+        else if(video.allThumbnails.default) return video.allThumbnails.default.url;
+        return video.thumbnails;
+    }
+
     return(
         <div className="panel panel-default" key={video.id}  onClick={() => onClick(video.id)} style={{cursor: 'pointer'}}>
             <div className="cover overlay hover cover-image-full" style={{height: 'unset'}}>
-                <img src={video.thumbnails} alt="music" />
+                <img src={getVideoImage()} alt="music" />
                 <div className="overlay overlay-full overlay-hover overlay-bg-black">
                     <div className="v-center">
                         <a className="btn btn-lg btn-circle btn-white"><i className="fa fa-play"></i></a>
