@@ -50,7 +50,7 @@ section{
   transition: all 0.2s;
   .dropdown-toggle{
     font-weight: bolder;
-    background-color: grey;
+    background-color: #2e2e2e;
     color: white !important;
     height: 100%;
   }
@@ -86,7 +86,6 @@ section{
     background-color: #eaeaea;
   }
   .navbar-right .dropdown-menu{
-    right: unset;
   }
 
 }

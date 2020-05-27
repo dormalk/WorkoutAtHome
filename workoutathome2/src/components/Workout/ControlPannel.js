@@ -1,6 +1,5 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React from 'react';
-
 export default (props) => {
     const [micMuted, setMicMuted] = React.useState(false);
     const [vidMuted, setVidMuted] = React.useState(false);
@@ -46,11 +45,21 @@ export default (props) => {
         
 
     return(
-        <div id="btns">
+        <nav id="btns">
+                <ul className="nav navbar-nav" style={{marginRight: "0px", cursor: 'pointer'}}>
+                    <a className="navbar-brand" style={{padding: '5px 10px'}} href="/"><img style={{height: "100%"}} src="./assets/images/logo.png"/></a>
+                </ul>
+                <div style={{width: "50%"}}>
+                <button id="audio-button" className={`stream-control ${micMuted? 'muted' : ''}`} onClick={() => toggelMic()}>
+                    <i className="fa fa-microphone"></i>
+                </button>
+                <button id="video-button" className={`stream-control ${vidMuted? 'muted' : ''}`} onClick={() => toggelVideo()}>
+                    <i className="fa  fa-video-camera"></i>
+                </button>
                 <ul className="nav navbar-nav navbar-right" style={{marginRight: "0px", cursor: 'pointer'}}>
                     <li className="dropdown user">
                         <a className="dropdown-toggle" data-toggle="dropdown" style={{lineHeight: "unset"}}>
-                            Invite friends <span className="caret"></span>
+                        <span className="caret"></span> Invite friends 
                         </a>
                         <ul className="dropdown-menu" role="menu">
                             <li  onClick={() => copyUrl()}><a><i className="fa fa-copy"></i>Copy Link</a></li>
@@ -60,15 +69,9 @@ export default (props) => {
                     </li>
 
                 </ul>
-                <div style={{width: "50%"}}>
-                <button id="audio-button" className={`stream-control ${micMuted? 'muted' : ''}`} onClick={() => toggelMic()}>
-                    <i className="fa fa-microphone"></i>
-                </button>
-                <button id="video-button" className={`stream-control ${vidMuted? 'muted' : ''}`} onClick={() => toggelVideo()}>
-                    <i className="fa  fa-video-camera"></i>
-                </button>
+
             </div>
-        </div>
+        </nav>
     )
 }
 

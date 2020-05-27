@@ -3,6 +3,7 @@ import {convertDurationToString} from '../../utils/video';
 
 export const SingleWorkoutCard = ({video, onClick}) => {
     const getVideoImage = () => {
+        if(!video.allThumbnails) return video.thumbnails; 
         if(video.allThumbnails.standard) return video.allThumbnails.standard.url;
         else if(video.allThumbnails.default) return video.allThumbnails.default.url;
         return video.thumbnails;

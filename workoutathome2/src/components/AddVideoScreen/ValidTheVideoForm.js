@@ -14,6 +14,13 @@ export default ({videoDetails,insertVideo,success}) => {
         event.preventDefault();
         insertVideo(videoDetails);
     }
+    const getVideoImage = (video) => {
+        if(!video.allThumbnails) return video.thumbnails; 
+        if(video.allThumbnails.standard) return video.allThumbnails.standard.url;
+        else if(video.allThumbnails.default) return video.allThumbnails.default.url;
+        return video.thumbnails;
+    }
+
     return (
         <form className="form-horizontal">
             <div className="mx-auto col-6 border m-2 py-2 px-4 shadow rounded animated slideInLeft" id="form-wrapper">
@@ -39,7 +46,7 @@ export default ({videoDetails,insertVideo,success}) => {
                     </div>
                 </div>
                 <div className='text-center mt-3'> 
-                    <img src={videoDetails.thumbnails} className='rounded shadow' alt='video'/>
+                    <img src={getVideoImage(videoDetails)} className='rounded shadow' alt='video'/>
                     <br/>
                     {!success&&
                         <button className='btn btn-indigo-500' style={{marginTop: "10px"}} onClick={onPressUpload.bind()}>Upload Video </button>
