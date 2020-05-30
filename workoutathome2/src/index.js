@@ -37,7 +37,7 @@ const unsubscribe = store.subscribe(()=> {
 })
 
 
-ReactDOM.render(<div id="loader">Loading...</div>, document.getElementById('root'));
+ReactDOM.render(<div id="loader" style={{backgroundImage: 'url("./assets/images/logo2.png")'}}></div>, document.getElementById('root'));
 
 
 initializedFirebaseApp.auth().onAuthStateChanged(user => {

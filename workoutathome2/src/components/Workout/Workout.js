@@ -418,7 +418,7 @@ export class WorkoutFoo extends React.Component {
                                 return (
                                     <Dragable   id={`ParticipentList${index}`}
                                                 key={index}
-                                                initialPos={{pageX: 50, pageY: 50}}>
+                                                initialPos={{pageX: (50*(index+1)), pageY: (50*(index+1))}}>
                                         <ParticipentList id={elem}/>
                                     </Dragable>
                                     )
