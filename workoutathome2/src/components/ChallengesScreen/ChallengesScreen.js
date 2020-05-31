@@ -20,7 +20,6 @@ const ChallengesScreenFoo = ({challengedata,showBar,userId}) => {
         if(duration.length > 0) list = list.filter(item => {
             var flag = false;
             duration.forEach(d => {
-                console.log(item.avgDuration)
                 if(d.label === 'Short' && item.avgDuration.hour === 0 && item.avgDuration.minutes <= 30) flag = true;
                 else if(d.label === 'Medium' && (item.avgDuration.hour >= 1 || item.avgDuration.minutes >= 30)) flag = true;
                 else if(d.label === 'Long' && item.avgDuration.hour >= 1) flag = true;

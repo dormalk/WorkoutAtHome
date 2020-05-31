@@ -52,7 +52,6 @@ export default ({days,videos,onUpdate}) => {
     const onSelect = (selectedList, selectedItem) => {
         selectedValues[pickedDay-1] = selectedList;
         selectedValues[pickedDay-1] = updateData();
-        console.log(selectedValues[pickedDay-1])
         setSelectedValues(selectedValues)
         onUpdate(selectedValues)
         forceUpdate();

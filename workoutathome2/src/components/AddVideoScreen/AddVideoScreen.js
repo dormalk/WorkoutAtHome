@@ -31,13 +31,11 @@ const AddVideoScreenFoo = (props) => {
             getVideoDetails(video.videoId)
             .then(({data}) => {
                 if(data.items.length > 0){
-                    console.log(video)
                     video = {
                         ...video,
                         ...convertDetails(data),
                         videoUrl: `https://www.youtube.com/watch?v=${video.videoId}`
                     };
-                    console.log(video)
                     setPickedVideo(video)
                     setPhase(phase+1);
                 } else {
@@ -52,7 +50,6 @@ const AddVideoScreenFoo = (props) => {
 
     const convertDetails = (data) => {
         let { title, thumbnails } = data.items[0].snippet;
-        console.log(data.items[0].snippet)
         let duration = data.items[0].contentDetails.duration;
         let length = "L";
         const { hours, minutes, seconds } = moment.duration(

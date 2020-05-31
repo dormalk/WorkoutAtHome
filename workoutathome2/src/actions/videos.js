@@ -33,6 +33,8 @@ export const fetchAllVideos = () => {
         return firebase.database().ref('videos')
         .once('value',snapshot => {
             const data = snapshot.val();
+
+            // firebase.firestore().collection('videos').add(data);
             dispatch({type: 'FETCH_ALL', videos:convertToArr(data)})
         })
     }

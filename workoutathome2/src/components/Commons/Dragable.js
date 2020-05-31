@@ -36,9 +36,6 @@ export default ({children,id, initialPos}) => {
         if(isDrag){
             const {pageX,pageY} = handleMouseMove(event)
             var {prevPageX,prevPageY} = prevPage;
-            console.log('prevPageY=>'+prevPageY)
-            console.log('pageY=>'+pageY)
-
             if(prevPageX == null)  prevPageX = pageX
             if(prevPageY == null)  prevPageY = pageY
             setPos({pageX:elem.offsetLeft + pageX - prevPageX ,pageY: elem.offsetTop + pageY - prevPageY})

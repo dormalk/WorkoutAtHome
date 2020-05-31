@@ -4,7 +4,6 @@ import {createNewSession} from '../../actions/workout_session';
 import { generateUniqKey } from '../../helpers/fucntions';
 
 export default ({workouts,videos,userId}) => {
-    console.log(workouts())
     function openSession(videoId) {
         var session = new Session(generateUniqKey(10),userId);
         session.setCurrentVideoId(videoId)

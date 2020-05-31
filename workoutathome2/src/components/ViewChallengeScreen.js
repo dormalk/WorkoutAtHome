@@ -73,7 +73,6 @@ export const ViewChallengeScreen = connect(mapStateToProps,mapDispatchToProp)
                 completedDaysArr.push(parseInt(day))
             }
         }
-        console.log(completedDaysArr)
         if(completedDaysArr.length > 0) setCompletedDays(completedDaysArr)
     }
 
@@ -90,7 +89,6 @@ export const ViewChallengeScreen = connect(mapStateToProps,mapDispatchToProp)
     }
 
     function renderPane(){
-        console.log(pickedDay-1)
         return pickedDay ?
          challenge.days[pickedDay-1].map((v,index) => <SingleWorkoutCard video={v} onClick={(videoId) => onOpenSession(videoId)} key={index}/>):
          null;
@@ -101,7 +99,6 @@ export const ViewChallengeScreen = connect(mapStateToProps,mapDispatchToProp)
         var tabs = [];
         const days = challenge.days.length;
         for(let i = 1; i <= days; i++){
-            console.log(completedDays.includes(i-1))
             tabs.push(  <li key={i} className={`${pickedDay === i? 'active': ''} ${completedDays.includes(i-1)? 'done': ''}`} onClick={() => setPickedDay(i)}>
                             <a href={`day${i}`} data-toggle="tab"><i className="fa fa-fw fa-star"></i> Day {i}</a>
                         </li>)
@@ -143,7 +140,7 @@ export const ViewChallengeScreen = connect(mapStateToProps,mapDispatchToProp)
                                 <section>
                                 <div className="panel panel-default" style={{marginBottom: "35x"}}>
                                     <div className="cover overlay hover cover-image-full" style={{height: 'unset'}}>
-                                        <img src={ challenge.thumbnails} alt="music" />
+                                        <img src={ challenge.thumbnails} alt="music" className="pull-left" style={{height: '200px', width:'auto'}}/>
                                     </div>
                                     <div className="panel-body">
                                         <h4 className="margin-none title">{challenge.title}</h4>

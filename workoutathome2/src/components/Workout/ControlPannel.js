@@ -20,7 +20,6 @@ export default (props) => {
 
     function copyUrl() {
         /* Get the text field */
-        console.log('hhhh');
         var dummy = document.createElement('input'),
         text = window.location.href;
         var general_pop = document.getElementById('global-message');

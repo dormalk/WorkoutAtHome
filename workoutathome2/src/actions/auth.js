@@ -22,7 +22,6 @@ export const login = (uid) => {
                         convertToArr(results[1]).map(res =>  { return {...res, type: 'clickVideo'}}).forEach(res => user.activities.push(res));
                         convertToArr(results[2]).map(res =>  { return {...res, type: 'createChallenges'}}).forEach(res => user.activities.push(res));
                         user.activities = user.activities.sort((v1,v2) => v2.datetime-v1.datetime)
-                        console.log(user.activities)
                         dispatch({type:'LOGIN', user })
                     })
             }
@@ -37,7 +36,6 @@ export const login = (uid) => {
 }
 
 export const logout = () => {
-    console.log('logout')
     return(dispatch) => {
         return firebase.auth().signOut()
         .then(() =>dispatch({type: 'LOGOUT'}))
@@ -126,7 +124,6 @@ export const takeChallenge = (userdata, challenge) => {
             challengeId: challenge.id || challenge,
             completedVideos: [],
         }
-        console.log(userdata.challengesInProgress.find(c => c.challengeId === challengeProgress.challengeId))
         if(!userdata.challengesInProgress.find(c => c.challengeId === challengeProgress.challengeId)){
             userdata.challengesInProgress.push(challengeProgress);
             dispatch(updateUser(userdata))

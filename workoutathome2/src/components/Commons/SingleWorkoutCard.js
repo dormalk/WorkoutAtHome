@@ -12,7 +12,7 @@ export const SingleWorkoutCard = ({video, onClick}) => {
     return(
         <div className="panel panel-default" key={video.id}  onClick={() => onClick(video.id)} style={{cursor: 'pointer'}}>
             <div className="cover overlay hover cover-image-full" style={{height: 'unset'}}>
-                <img src={getVideoImage()} alt="music" />
+                <img src={getVideoImage()} alt="music" className="pull-left" style={{height: '200px', width:'auto'}}/>
                 <div className="overlay overlay-full overlay-hover overlay-bg-black">
                     <div className="v-center">
                         <a className="btn btn-lg btn-circle btn-white"><i className="fa fa-play"></i></a>

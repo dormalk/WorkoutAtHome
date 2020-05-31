@@ -14,7 +14,6 @@ const HeaderFoo = (props) => {
     const SignInWithGoogle = () => {
       props.startSignInWithGoogle()
       .then(({user}) => {
-        console.log(user)
         const updateUser = {
             displayName: user.displayName,
             email: user.email,
