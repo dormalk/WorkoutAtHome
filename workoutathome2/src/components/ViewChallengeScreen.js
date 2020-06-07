@@ -125,6 +125,7 @@ export const ViewChallengeScreen = connect(mapStateToProps,mapDispatchToProp)
             }
 
         } else {
+            if(window.innerWidth < 660) document.getElementById('main-nav-mobile').click();
             activeGlobalAlert({type: 'danger', message:'You have to sign-in first'})
         }
     }
@@ -148,7 +149,7 @@ export const ViewChallengeScreen = connect(mapStateToProps,mapDispatchToProp)
                                         <span className="text-grey-500">{convertDurationToString(challenge.avgDuration)}</span><br/>
                                         <hr/>
                                         <center>
-                                            <button className={`btn ${isLogin?'btn-indigo-500':'btn-danger'}`} disabled={!isLogin || isSignChallenge} onClick={() => takeChallenge(userdata, challenge)}>{isLogin? isSignChallenge? 'You are taked this challenge' : 'Take this challnege now!': 'You have to sign-in for taking this challenge'}</button>
+                                            <button className={`btn ${isLogin?'btn-indigo-500':'btn-danger'}`} disabled={!isLogin || isSignChallenge} onClick={() => takeChallenge(userdata, challenge)}>{isLogin? isSignChallenge? 'You are taked this challenge' : 'Take this challnege now!': 'SignIn for taking this challenge'}</button>
                                         </center>
                                     </div>
                                 </div>   

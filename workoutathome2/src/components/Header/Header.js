@@ -29,7 +29,7 @@ const HeaderFoo = (props) => {
       <div className="container-fluid" style={{margin: "0px"}}>
         <div className="navbar-header">
           <a className="toggle pull-left visible-xs" onClick={props.toggelLeftBar.bind(this)}><i className="fa fa-bars"></i></a>
-          <button type="button" className="navbar-toggle collapsed" data-toggle="collapse" data-target="#main-nav">
+          <button type="button" className="navbar-toggle collapsed" data-toggle="collapse" data-target="#main-nav" id="main-nav-mobile">
             <span className="sr-only">Toggle navigation</span>
             <span className="icon-bar"></span>
             <span className="icon-bar"></span>

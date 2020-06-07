@@ -51,6 +51,7 @@ section{
   .dropdown-toggle{
     font-weight: bolder;
     background-color: #2e2e2e;
+    line-height: unset;
     color: white !important;
     height: 100%;
   }
@@ -361,8 +362,38 @@ nav.close_2 #toggle-nav{
   to {opacity: 1; top: 50%;transform: scale(5);}
 }
 
+@media (orientation: portrait) {
+  .landscape {
+    display: inline-block;
+
+    img{
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%,-50%);    
+      height: 50%;
+      width: 50%;
+    }
+  }
 
 
+  .portrait{
+    display: none;
+  }
+}
+
+
+@media (orientation: landscape) {
+  .landscape {
+    display: none;
+
+  }
+
+  .portrait{
+    display: inline-block;
+  }
+
+}
 
 
 @keyframes audio1 {
@@ -435,5 +466,30 @@ nav.close_2 #toggle-nav{
       // transform: translate(-50%,0);
       bottom: 0%;
       opacity: 1;
+  }
+}
+
+
+
+@media (max-width: 750px){
+  #btns{
+    height: unset !important;
+
+    .navbar-nav{
+      margin: 0px;
+    }
+
+
+    .dropdown-toggle{
+      height: unset !important;
+      line-height: 35px;
+    }
+
+    .dropdown-menu{
+      background: white;
+      border-radius: 5px;
+      position: absolute;
+      left: -6.2vw;
+    }
   }
 }

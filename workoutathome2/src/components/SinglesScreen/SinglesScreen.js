@@ -33,7 +33,7 @@ const SinglesScreenFoo = ({videodata,showBar,userId,activeGlobalAlert}) => {
     
 
     const onOpenSession = (videoId) => {
-        if(!!userId){
+    if(!!userId){
             var session = new Session(generateUniqKey(10),userId);
             session.setCurrentVideoId(videoId)
             session.setReletedVideos([videos[0],videos[1],videos[2]])
@@ -41,7 +41,10 @@ const SinglesScreenFoo = ({videodata,showBar,userId,activeGlobalAlert}) => {
             .then(() => {
                 window.open(window.location.origin+'/workout?sessionid='+session.sessionid)
             })
-        } else activeGlobalAlert({type: 'danger', message:'You have to sign-in to create a session'});
+        } else {
+            if(window.innerWidth < 660) document.getElementById('main-nav-mobile').click();
+            activeGlobalAlert({type: 'danger', message:'You have to sign-in to create a session'});
+        }
     }
 
 

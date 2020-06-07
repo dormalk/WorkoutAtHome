@@ -55,9 +55,9 @@ export default (props) => {
                 <button id="video-button" className={`stream-control ${vidMuted? 'muted' : ''}`} onClick={() => toggelVideo()}>
                     <i className="fa  fa-video-camera"></i>
                 </button>
-                <ul className="nav navbar-nav navbar-right" style={{marginRight: "0px", cursor: 'pointer'}}>
+                <ul className="nav navbar-nav navbar-right" style={{marginRight: "0px", cursor: 'pointer',float:'right'}}>
                     <li className="dropdown user">
-                        <a className="dropdown-toggle" data-toggle="dropdown" style={{lineHeight: "unset"}}>
+                        <a className="dropdown-toggle" data-toggle="dropdown" >
                         <span className="caret"></span> Invite friends 
                         </a>
                         <ul className="dropdown-menu" role="menu">

@@ -399,11 +399,12 @@ export class WorkoutFoo extends React.Component {
 
     render(){
         var {session} = this.state;
-        return(
+        return (
             <React.Fragment>
                 {this.state.endOfVideo && session.reletedVideos && <SuggestOtherVideos videos={session.reletedVideos} onPick={(videoId) => this.onPickVideo(videoId)}/>}
                 <div style={{display: 'flex', height: "100%", width: "100vw"}}>
-                    <div id="main-page">
+                    <div className="landscape"> <img src="./assets/images/rotation.svg"/></div>
+                    <div className="portrait" id="main-page">
                         <ControlPannel toggelStreamConnection={(isOn,what) => this.toggelStreamConnection(isOn,what)}/>
                         <section>
                             {session && (this.state.showCover || (this.state.userId !== this.state.session.createBy)) && <div id="cover"></div>}
@@ -443,6 +444,7 @@ export class WorkoutFoo extends React.Component {
 
                 <div id="prais-message">
                 </div>
+
 
             </React.Fragment>
             )

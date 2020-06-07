@@ -3,11 +3,19 @@ import {Session} from '../../utils/session';
 import {createNewSession} from '../../actions/workout_session';
 import { generateUniqKey } from '../../helpers/fucntions';
 import {withRouter} from 'react-router-dom';
+import {activeGlobalAlert} from '../../actions/system';
+import { connect } from 'react-redux';
 
-export default withRouter(({activities,videos,userId,history}) => {
+const mapDispatchToProps = (dispatch) => ({
+    activeGlobalAlert: (alert) => dispatch(activeGlobalAlert(alert)),
+  
+  })
+
+export default connect(null,mapDispatchToProps)(withRouter(({activeGlobalAlert,activities,videos,userId,history}) => {
     const [limit ,setLimit] = React.useState(3);
 
     function openSession(videoId) {
+
         var session = new Session(generateUniqKey(10),userId);
         session.setCurrentVideoId(videoId)
         session.setReletedVideos([videos[Math.floor(Math.random()*videos.length)],videos[Math.floor(Math.random()*videos.length)],videos[Math.floor(Math.random()*videos.length)]])
@@ -85,4 +93,4 @@ export default withRouter(({activities,videos,userId,history}) => {
 
       </React.Fragment>  
     )
-})
+}))

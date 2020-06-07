@@ -3,7 +3,7 @@ import React from 'react';
 function handleMouseMove(event) {
     var eventDoc, doc, body;
 
-    event = event || window.event; // IE-ism
+    event = event.touches? event.touches[0]  : event || window.event; // IE-ism
     // If pageX/Y aren't available and clientX/Y are,
     // calculate pageX/Y - logic taken from jQuery.
     // (This is to support old IE)
@@ -32,7 +32,9 @@ export default ({children,id, initialPos}) => {
 
 
     const handleMove = (event) => {
+        console.log(event)
         var elem = document.getElementById(id);
+        console.log(isDrag)
         if(isDrag){
             const {pageX,pageY} = handleMouseMove(event)
             var {prevPageX,prevPageY} = prevPage;
@@ -49,6 +51,9 @@ export default ({children,id, initialPos}) => {
     return(
         <div    onMouseDown={() => setIsDrag(true)}
                 onMouseUp={() => setIsDrag(false)}
+                onTouchStart={() => setIsDrag(true)}
+                onTouchEnd={() => setIsDrag(false)}
+                onTouchMove={(event) => handleMove(event)}
                 onMouseMove={(event) => handleMove(event)}
                 onMouseLeave={() => setIsDrag(false)}
                 id={id || ''}
