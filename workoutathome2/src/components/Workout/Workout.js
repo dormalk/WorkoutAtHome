@@ -20,7 +20,7 @@ import ControlPannel from './ControlPannel';
 import { withRouter } from 'react-router-dom';
 import SuggestOtherVideos from './SuggestOtherVideos';
 import Dragable from '../Commons/Dragable';
-import parse  from 'html-react-parser';
+import PopupCopyLink from './PopupCopyLink';
 
 var globalSession = new Session();
 var globalUserId;
@@ -65,7 +65,8 @@ export class WorkoutFoo extends React.Component {
             session: null,
             showCover: false,
             endOfVideo: false,
-            rtcParticipents: []
+            rtcParticipents: [],
+            showFirstPopUp: true
         }
 
         this.updateDatabase(sessionid);
@@ -128,7 +129,12 @@ export class WorkoutFoo extends React.Component {
     }
 
     isAdmin() {
-        return this.state.session.createBy === this.state.userId
+        if(this.state.userId){
+            return this.state.session.createBy === this.state.userId
+        } else {
+            const uniqUserId = localStorage.getItem('uniqUserId');
+            return this.state.session.createBy === uniqUserId;
+        }
     }
 
     constructConnection(){
@@ -398,16 +404,23 @@ export class WorkoutFoo extends React.Component {
     }
 
     render(){
-        var {session} = this.state;
+        var {session,showFirstPopUp} = this.state;
         return (
             <React.Fragment>
+                {
+                    session && this.isAdmin() && showFirstPopUp &&
+                    <PopupCopyLink onStart={() => {
+                        player.playVideo();
+                        this.setState({showFirstPopUp: false})
+                    }}/>
+                }
                 {this.state.endOfVideo && session.reletedVideos && <SuggestOtherVideos videos={session.reletedVideos} onPick={(videoId) => this.onPickVideo(videoId)}/>}
                 <div style={{display: 'flex', height: "100%", width: "100vw"}}>
-                    <div className="landscape"> <img src="./assets/images/rotation.svg"/></div>
+                    <div className="landscape"> <img src="./assets/images/rotation.svg" alt="rotate"/></div>
                     <div className="portrait" id="main-page">
                         <ControlPannel toggelStreamConnection={(isOn,what) => this.toggelStreamConnection(isOn,what)}/>
                         <section>
-                            {session && (this.state.showCover || (this.state.userId !== this.state.session.createBy)) && <div id="cover"></div>}
+                            {session && (this.state.showCover || (this.isAdmin())) && <div id="cover"></div>}
                             {session && <YouTubeVideo    videoId={session.currentVideoId}
                                                                 status={session.status}
                                                                 time={session.currentDuration}
@@ -428,9 +441,9 @@ export class WorkoutFoo extends React.Component {
 
 
                         <Dragable   id='progressbar'
-                                    initialPos={{pageX: 250, pageY: 250}}>
+                                    initialPos={{pageX: 120, pageY: 120}}>
                             <div id="progress-bar">
-                                <h2 id="timeleft"></h2>
+                                <h2 id="timeleft">.</h2>
                             </div>
                         </Dragable>
 

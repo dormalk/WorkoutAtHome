@@ -8,7 +8,7 @@ import { Provider } from 'react-redux';
 import './styles/styles.scss';
 
 import App from './App';
-// import * as serviceWorker from './serviceWorker';
+import * as serviceWorker from './serviceWorker';
 import configureStore from './store/configureStore';
 import { login, logout } from './actions/auth'; 
 import { fetchAllVideos } from './actions/videos'; 
@@ -45,7 +45,7 @@ initializedFirebaseApp.auth().onAuthStateChanged(user => {
     else store.dispatch(logout())
 })
 
-
+serviceWorker.register();
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.

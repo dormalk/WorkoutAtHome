@@ -26,20 +26,36 @@ const mapStateToProps = (state) => ({
 })
 export const DiscoverScreen = connect(mapStateToProps,mapDispatchToProps)
     (({userdata,videos,userTypesPreference,activeGlobalAlert,startSignInWithGoogle,updateSinglesFilters,updateChallengesFilters}) => {
-  const onOpenSession = (videoId) => {
-  if(!!userdata.uid){
-        var session = new Session(generateUniqKey(10),userdata.uid);
-        session.setCurrentVideoId(videoId)
-        session.setReletedVideos([videos[0],videos[1],videos[2]])
-        createNewSession(session)
-        .then(() => {
-            window.open(window.location.origin+'/workout?sessionid='+session.sessionid)
-        })
-    } else {
-      if(window.innerWidth < 660)  document.getElementById('main-nav-mobile').click();
-      activeGlobalAlert({type: 'danger', message:'You have to sign-in to create a session'});
+//   const onOpenSession = (videoId) => {
+//   if(!!userdata.uid){
+//         var session = new Session(generateUniqKey(10),userdata.uid);
+//         session.setCurrentVideoId(videoId)
+//         session.setReletedVideos([videos[0],videos[1],videos[2]])
+//         createNewSession(session)
+//         .then(() => {
+//             window.open(window.location.origin+'/workout?sessionid='+session.sessionid)
+//         })
+//     } else {
+//       if(window.innerWidth < 660)  document.getElementById('main-nav-mobile').click();
+//       activeGlobalAlert({type: 'danger', message:'You have to sign-in to create a session'});
+//     }
+// }
+    const onOpenSession = (videoId) => {
+      var session = null;
+      if(!!userdata.uid){
+            session = new Session(generateUniqKey(10),userdata.uid);
+      }  else {
+        const uniqUserId = generateUniqKey(8);
+        localStorage.setItem('uniqUserId', uniqUserId);
+        session = new Session(generateUniqKey(10),uniqUserId);
+      }
+      session.setCurrentVideoId(videoId)
+      session.setReletedVideos([videos[0],videos[1],videos[2]])
+      createNewSession(session)
+      .then(() => {
+          window.open(window.location.origin+'/workout?sessionid='+session.sessionid)
+      })
     }
-}
 
   return(
         <div className="st-pusher">

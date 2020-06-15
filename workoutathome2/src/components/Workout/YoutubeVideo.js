@@ -26,12 +26,12 @@ export default class YouTubeVideo extends React.Component {
  
   _onReady(event) {
     // access to player in all event handlers via event.target
+        event.target.seekTo(this.props.time)
         if(this.props.status === 2){
             event.target.pauseVideo();
         } else if (this.props.status === 1){
           event.target.playVideo();
         }
-        event.target.seekTo(this.props.time)
         this.props.onPlayerReady(event);
   }
 
