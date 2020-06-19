@@ -40,7 +40,7 @@ export default ({children,id, initialPos}) => {
             var {prevPageX,prevPageY} = prevPage;
             if(prevPageX == null)  prevPageX = pageX
             if(prevPageY == null)  prevPageY = pageY
-            setPos({pageX:elem.offsetLeft + pageX - prevPageX ,pageY: elem.offsetTop + pageY - prevPageY})
+            setPos({pageX:elem.offsetLeft + pageX - (prevPageX) ,pageY: elem.offsetTop + pageY - prevPageY})
             localStorage.setItem(id,JSON.stringify(pos))
             setPrevPage({prevPageX: pageX,prevPageY: pageY})
         }
@@ -57,7 +57,7 @@ export default ({children,id, initialPos}) => {
                 onMouseMove={(event) => handleMove(event)}
                 onMouseLeave={() => setIsDrag(false)}
                 id={id || ''}
-                style={{position: "absolute", top: pos.pageY, left: pos.pageX, cursor: isDrag? 'grab':'context-menu'}}>
+                style={{position: "absolute", top: parseFloat(pos.pageY*100/window.innerHeight)+'%', left: parseFloat(pos.pageX*100/window.innerWidth)+'%', cursor: isDrag? 'grab':'context-menu'}}>
                     {children}            
         </div>
     )
