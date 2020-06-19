@@ -5,7 +5,14 @@ import { generateUniqKey } from '../../helpers/fucntions';
 
 export default ({workouts,videos,userId}) => {
     function openSession(videoId) {
-        var session = new Session(generateUniqKey(10),userId);
+        var session = null;
+        if(!!userId){
+            session = new Session(generateUniqKey(10),userId);
+        } else {
+            const uniqUserId = generateUniqKey(8);
+            localStorage.setItem('uniqUserId', uniqUserId);
+            session = new Session(generateUniqKey(10),uniqUserId);
+        }
         session.setCurrentVideoId(videoId)
         session.setReletedVideos([videos[Math.floor(Math.random()*videos.length)],videos[Math.floor(Math.random()*videos.length)],videos[Math.floor(Math.random()*videos.length)]])
         createNewSession(session)

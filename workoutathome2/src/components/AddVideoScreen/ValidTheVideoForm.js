@@ -2,8 +2,9 @@ import React from 'react';
 
 
 export default ({videoDetails,insertVideo,success}) => {
-    const [title, setTitle] = React.useState(videoDetails.title)
-    (videoDetails)
+    const [title, setTitle] = React.useState(videoDetails.title || '')
+
+
     const convertDuration = ({hours,minutes,seconds}) => {
         return `${("0" + hours).slice(-2)}:${("0" + minutes).slice(
             -2

@@ -32,21 +32,39 @@ const SinglesScreenFoo = ({videodata,showBar,userId,activeGlobalAlert}) => {
 
     
 
+    // const onOpenSession = (videoId) => {
+    // if(!!userId){
+    //         var session = new Session(generateUniqKey(10),userId);
+    //         session.setCurrentVideoId(videoId)
+    //         session.setReletedVideos([videos[0],videos[1],videos[2]])
+    //         createNewSession(session)
+    //         .then(() => {
+    //             window.open(window.location.origin+'/workout?sessionid='+session.sessionid)
+    //         })
+    //     } else {
+    //         if(window.innerWidth < 660) document.getElementById('main-nav-mobile').click();
+    //         activeGlobalAlert({type: 'danger', message:'You have to sign-in to create a session'});
+    //     }
+    // }
+
+
     const onOpenSession = (videoId) => {
-    if(!!userId){
-            var session = new Session(generateUniqKey(10),userId);
+            var session = null; 
+            if(!!userId){
+                session = new Session(generateUniqKey(10),userId);
+            } else {
+                const uniqUserId = generateUniqKey(8);
+                localStorage.setItem('uniqUserId', uniqUserId);
+                session = new Session(generateUniqKey(10),uniqUserId);
+            }
             session.setCurrentVideoId(videoId)
             session.setReletedVideos([videos[0],videos[1],videos[2]])
             createNewSession(session)
             .then(() => {
                 window.open(window.location.origin+'/workout?sessionid='+session.sessionid)
             })
-        } else {
-            if(window.innerWidth < 660) document.getElementById('main-nav-mobile').click();
-            activeGlobalAlert({type: 'danger', message:'You have to sign-in to create a session'});
-        }
-    }
 
+        }
 
     function mapDuraionFilter(duraions){
         return duraions.map((d) => {
