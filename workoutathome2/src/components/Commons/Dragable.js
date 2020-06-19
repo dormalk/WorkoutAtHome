@@ -55,6 +55,7 @@ export default ({children,id, initialPos}) => {
 
 
     function calcPosX(pos){
+        console.log(window.innerWidth)
         if(pos < 0) return 0
         else if(pos > (window.innerWidth-100)) return window.innerWidth - 100;
         else return pos;
@@ -69,19 +70,6 @@ export default ({children,id, initialPos}) => {
 
 
     return(
-<<<<<<< HEAD
-        <div    onMouseDown={() => setIsDrag(true)}
-                onMouseUp={() => setIsDrag(false)}
-                onTouchStart={() => setIsDrag(true)}
-                onTouchEnd={() => setIsDrag(false)}
-                onTouchMove={(event) => handleMove(event)}
-                onMouseMove={(event) => handleMove(event)}
-                onMouseLeave={() => setIsDrag(false)}
-                id={id || ''}
-                style={{position: "absolute", top: parseFloat(pos.pageY*100/window.innerHeight)+'%', left: parseFloat(pos.pageX*100/window.innerWidth)+'%', cursor: isDrag? 'grab':'context-menu'}}>
-                    {children}            
-        </div>
-=======
         <React.Fragment>
             <div    onMouseDown={() => setIsDrag(true)}
                     onMouseUp={() => {
@@ -105,7 +93,6 @@ export default ({children,id, initialPos}) => {
                         {children}            
             </div>
         </React.Fragment>
->>>>>>> 84b37243cc0fb4b5136cc767c3920de2b4fb63be
     )
 }
 

@@ -402,7 +402,10 @@ export class WorkoutFoo extends React.Component {
         this.setState({session: globalSession.toJson(),endOfVideo: false });
         sendEvent(this.state.sessionId, 'change', videoId);
     }
-
+    printMe(toPrint){
+        console.log(toPrint);
+        return true;
+    }
     render(){
         var {session,showFirstPopUp} = this.state;
         return (
@@ -420,7 +423,7 @@ export class WorkoutFoo extends React.Component {
                     <div className="portrait" id="main-page">
                         <ControlPannel toggelStreamConnection={(isOn,what) => this.toggelStreamConnection(isOn,what)}/>
                         <section>
-                            {session && (this.state.showCover || (this.isAdmin())) && <div id="cover"></div>}
+                            {session &&   (this.state.showCover || !this.isAdmin()) && <div id="cover"></div>}
                             {session && <YouTubeVideo    videoId={session.currentVideoId}
                                                                 status={session.status}
                                                                 time={session.currentDuration}
