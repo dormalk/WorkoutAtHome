@@ -101,25 +101,33 @@
 
 
 /* width */
-.nav-tabs::-webkit-scrollbar, .topcategories::-webkit-scrollbar {
+.nav-tabs::-webkit-scrollbar, 
+.topcategories::-webkit-scrollbar,
+#workouts::-webkit-scrollbar {
     width: 5px;
     height: 5px;
 
   }
   
   /* Track */
-  .nav-tabs::-webkit-scrollbar-track, .topcategories::-webkit-scrollbar-track {
+  .nav-tabs::-webkit-scrollbar-track, 
+  .topcategories::-webkit-scrollbar-track,
+  #workouts::-webkit-scrollbar-track {
     background: unset;
   }
   
   /* Handle */
-  .nav-tabs::-webkit-scrollbar-thumb, .topcategories::-webkit-scrollbar-thumb {
+  .nav-tabs::-webkit-scrollbar-thumb, 
+  .topcategories::-webkit-scrollbar-thumb, 
+  #workouts::-webkit-scrollbar-thumb {
     background: #FF7C2E;
     border-radius: 10px;
   }
   
   /* Handle on hover */
-  .nav-tabs::-webkit-scrollbar-thumb:hover, .topcategories::-webkit-scrollbar-thumb:hover {
+  .nav-tabs::-webkit-scrollbar-thumb:hover, 
+  .topcategories::-webkit-scrollbar-thumb:hover,
+  #workouts::-webkit-scrollbar-thumb:hover {
     background: #FF7C2E;
   }
   

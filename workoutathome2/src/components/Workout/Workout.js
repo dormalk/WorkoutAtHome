@@ -372,23 +372,11 @@ export class WorkoutFoo extends React.Component {
             timeString = `${seconds} Seconds`
         }
       
-        var precetage = this.calcPrecetage();
         if(Math.floor(player.getDuration() - player.getCurrentTime()) === 0){
           gamification = 'FINISH!'
           timeleft.innerText = `${gamification}`;
         }
-        else if(precetage < 25){
-          gamification = ', You Almost Done!'
-          timeleft.innerText = `${timeString} ${gamification}`;
-        }
-        else if(precetage < 50){
-          gamification = ', Half Way There!'
-          timeleft.innerText = `${timeString} ${gamification}`;
-        }
-        else if(precetage < 75){
-          gamification = ', Good Job!'
-          timeleft.innerText = `${timeString} ${gamification}`;
-        } else {
+        else {
           gamification = ' Left'
           timeleft.innerText = `${timeString} ${gamification}`;
         }
@@ -402,19 +390,18 @@ export class WorkoutFoo extends React.Component {
         this.setState({session: globalSession.toJson(),endOfVideo: false });
         sendEvent(this.state.sessionId, 'change', videoId);
     }
-    printMe(toPrint){
-        console.log(toPrint);
-        return true;
-    }
+
     render(){
         var {session,showFirstPopUp} = this.state;
         return (
             <React.Fragment>
                 {
-                    session && this.isAdmin() && showFirstPopUp &&
+                    session && this.isAdmin() && showFirstPopUp && !this.state.endOfVideo &&
                     <PopupCopyLink onStart={() => {
-                        player.playVideo();
-                        this.setState({showFirstPopUp: false})
+                        if(player){
+                            player.playVideo();
+                            this.setState({showFirstPopUp: false})
+                        }
                     }}/>
                 }
                 {this.state.endOfVideo && session.reletedVideos && <SuggestOtherVideos videos={session.reletedVideos} onPick={(videoId) => this.onPickVideo(videoId)}/>}

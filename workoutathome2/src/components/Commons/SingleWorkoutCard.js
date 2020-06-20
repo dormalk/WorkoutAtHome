@@ -22,7 +22,8 @@ export const SingleWorkoutCard = ({video, onClick, inline}) => {
             <div className="panel-body">
                 <h4 className="margin-none title"><a>{video.title}</a></h4>
                 <span className="text-grey-500">{video.type}</span><br/>
-                <span className="text-grey-500">{convertDurationToString(video.duration)}</span>
+                <span className="text-grey-500">{convertDurationToString(video.duration)}</span><br/>
+                <span className="text-grey-500">{video.clicks} views</span>
             </div>
         </div>
 
