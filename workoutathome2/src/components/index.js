@@ -9,3 +9,4 @@ export * from './Workout/Workout';
 export * from './GlobalAlert';
 export * from './AddChallengeScreen/AddChallengeScreen'
 export * from './ViewChallengeScreen';
+export * from './VideoEditor/VideoEditor';

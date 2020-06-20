@@ -1,4 +1,6 @@
 import React from 'react';
+import LeftController from './LeftController';
+import { VideoPlayer } from '../Commons';
 
 
 var editorConfigs = {
@@ -19,8 +21,31 @@ var component = {
     counterColor: ''
 }
 
+const INITIAL_VIDEO_STATE = {
+    timestemp: 0,
+    isPlaying: false
+}
+
 export const VideoEditor = () => {
+    const [videoState, setVideoState] = React.useState(INITIAL_VIDEO_STATE)
+
     return(
-        <div>Test</div>
+        <React.Fragment>
+            <LeftController showBar={true}/>
+            <div className="st-pusher">
+                <div className="st-content">
+                    <div className="st-content-inner" id="lists">
+                        <div className="container-fluid" style={{padding: '0px', margin: '0px'}}>
+                            <VideoPlayer    src="./assets/videos/test.mp4"
+                                            autoplay={false}
+                                            style={{width: '100%', height: '100%'}}
+                                            onSeeking={(event) => setVideoState({...videoState, timestemp: event.timestemp})}
+                                            onPlay={(event) => setVideoState({isPlaying: true, timestemp: event.timestemp})}
+                                            onPause={(event) => setVideoState({isPlaying: false, timestemp: event.timestemp})}/>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </React.Fragment>
     )
 }
