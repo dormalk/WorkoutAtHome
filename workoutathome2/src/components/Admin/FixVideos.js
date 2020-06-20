@@ -1,24 +1,27 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import {Page} from '../Commons/Page';
-import { updateVideoThumbnails } from '../../actions/videos';
+import { insertNewVideo } from '../../actions/videos';
 
 const mapStateToProps = (state) => ({
     videos: state.videodata.list
 })
 
-export const FixVideos =  connect(mapStateToProps)(({videos}) => {
+const mapDispatchToProps = (dispatch) => ({
+    startInsertNewVideo: (newVideo) => dispatch(insertNewVideo(newVideo)),
+})
+
+export const FixVideos =  connect(mapStateToProps,mapDispatchToProps)(({videos,startInsertNewVideo}) => {
     return(
         <Page>
             <ul>
                 {
                     videos&&videos
-                    .filter((video) => video.allThumbnails === undefined)
                     .map((video) => {
                         return (
                             <li key={video.videoId}>
                                 <h3>{video.title} / {video.videoId}</h3>
-                                <button onClick={() => updateVideoThumbnails(video.videoId)} className="btn btn-primary">
+                                <button onClick={() => startInsertNewVideo(video)} className="btn btn-primary">
                                     update
                                 </button>
                             </li>

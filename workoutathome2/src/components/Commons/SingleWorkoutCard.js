@@ -1,7 +1,7 @@
 import React from 'react';
 import {convertDurationToString} from '../../utils/video';
 
-export const SingleWorkoutCard = ({video, onClick}) => {
+export const SingleWorkoutCard = ({video, onClick, inline}) => {
     const getVideoImage = () => {
         if(!video.allThumbnails) return video.thumbnails; 
         if(video.allThumbnails.standard) return video.allThumbnails.standard.url;
@@ -10,7 +10,7 @@ export const SingleWorkoutCard = ({video, onClick}) => {
     }
 
     return(
-        <div className="panel panel-default" key={video.id}  onClick={() => onClick(video.id)} style={{cursor: 'pointer'}}>
+        <div className={`panel panel-default ${inline? 'inline': ''}`} key={video.id}  onClick={() => onClick(video.id)} style={{cursor: 'pointer'}}>
             <div className="cover overlay hover cover-image-full" style={{height: 'unset'}}>
                 <img src={getVideoImage()} alt="music" className="pull-left" style={{height: '200px', width:'auto'}}/>
                 <div className="overlay overlay-full overlay-hover overlay-bg-black">
@@ -24,7 +24,7 @@ export const SingleWorkoutCard = ({video, onClick}) => {
                 <span className="text-grey-500">{video.type}</span><br/>
                 <span className="text-grey-500">{convertDurationToString(video.duration)}</span>
             </div>
-    </div>
+        </div>
 
     )
 }

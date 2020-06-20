@@ -6,6 +6,7 @@ import {createNewSession} from '../../actions/workout_session';
 import { generateUniqKey } from '../../helpers/fucntions';
 import {Session} from '../../utils/session';
 import {activeGlobalAlert} from '../../actions/system';
+import {getVideosByCategories} from '../../actions/videos';
 
 const SinglesScreenFoo = ({videodata,showBar,userId,activeGlobalAlert}) => {
     const [videos,setVideos] = React.useState(videodata.list||[]);
@@ -31,23 +32,6 @@ const SinglesScreenFoo = ({videodata,showBar,userId,activeGlobalAlert}) => {
     },[videodata,forceUpdate])
 
     
-
-    // const onOpenSession = (videoId) => {
-    // if(!!userId){
-    //         var session = new Session(generateUniqKey(10),userId);
-    //         session.setCurrentVideoId(videoId)
-    //         session.setReletedVideos([videos[0],videos[1],videos[2]])
-    //         createNewSession(session)
-    //         .then(() => {
-    //             window.open(window.location.origin+'/workout?sessionid='+session.sessionid)
-    //         })
-    //     } else {
-    //         if(window.innerWidth < 660) document.getElementById('main-nav-mobile').click();
-    //         activeGlobalAlert({type: 'danger', message:'You have to sign-in to create a session'});
-    //     }
-    // }
-
-
     const onOpenSession = (videoId) => {
             var session = null; 
             if(!!userId){

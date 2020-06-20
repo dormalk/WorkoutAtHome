@@ -9,7 +9,8 @@ export default ({videoList,onOpenSession}) => {
                 {
                     videoList && videoList.map(video => 
                         <SingleWorkoutCard  onClick={(videoId) => onOpenSession(videoId)} 
-                                            key={video.id} 
+                                            key={video.id}
+                                            inline={true} 
                                             video={video}/>)
                 }
             </div>

@@ -1,3 +1,9 @@
+#workouts.topcategories{
+    display: flex;
+    overflow-x: auto;
+}
+
+
 #navigation_site .route{
     display: flex !important; 
     height: 70px;
@@ -95,25 +101,25 @@
 
 
 /* width */
-.nav-tabs::-webkit-scrollbar {
+.nav-tabs::-webkit-scrollbar, .topcategories::-webkit-scrollbar {
     width: 5px;
     height: 5px;
 
   }
   
   /* Track */
-  .nav-tabs::-webkit-scrollbar-track {
+  .nav-tabs::-webkit-scrollbar-track, .topcategories::-webkit-scrollbar-track {
     background: unset;
   }
   
   /* Handle */
-  .nav-tabs::-webkit-scrollbar-thumb {
+  .nav-tabs::-webkit-scrollbar-thumb, .topcategories::-webkit-scrollbar-thumb {
     background: #FF7C2E;
     border-radius: 10px;
   }
   
   /* Handle on hover */
-  .nav-tabs::-webkit-scrollbar-thumb:hover {
+  .nav-tabs::-webkit-scrollbar-thumb:hover, .topcategories::-webkit-scrollbar-thumb:hover {
     background: #FF7C2E;
   }
   
