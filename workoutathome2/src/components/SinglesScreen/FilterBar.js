@@ -3,21 +3,9 @@ import React from 'react';
 import {workoutTypes, workoutEquipment} from '../../configs/siteConfigs';
 import { connect } from 'react-redux';
 import { updateSinglesFilters } from '../../actions/videos';
+import {workoutDurations} from '../../configs/videoParams';
 
-const workoutDurations = [
-    {
-        label: 'Short',
-        duration: '< 30m'
-    },
-    {
-        label: 'Medium',
-        duration: '30m < 60m'
-    },
-    {
-        label: 'Long',
-        duration: '60m >'
-    },
-]
+
 const mapDispatchToProps = (dispatch) => ({
     updateSinglesFilters: (picked,param) => dispatch(updateSinglesFilters(picked,param))
 })

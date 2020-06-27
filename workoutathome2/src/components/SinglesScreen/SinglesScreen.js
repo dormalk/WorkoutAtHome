@@ -6,32 +6,68 @@ import {createNewSession} from '../../actions/workout_session';
 import { generateUniqKey } from '../../helpers/fucntions';
 import {Session} from '../../utils/session';
 import {activeGlobalAlert} from '../../actions/system';
-import {getVideosByCategories} from '../../actions/videos';
+import { getVideosCategories,getVideosCategoriesNext } from '../../actions/videos2.js';
 
-const SinglesScreenFoo = ({videodata,showBar,userId,activeGlobalAlert}) => {
-    const [videos,setVideos] = React.useState(videodata.list||[]);
+var locker = false;
+function timeoutLocker(callback){
+    if(!locker){
+        locker = !locker;
+        callback();
+        setTimeout(() => {
+            locker = !locker;
+        })
+    }
+}
+
+
+const SinglesScreenFoo = ({types,duration,showBar,userId,activeGlobalAlert}) => {
+    const [videos,setVideos] = React.useState([]);
     const [, updateState] = React.useState();
     const forceUpdate = React.useCallback(() => updateState({}), []);
+    var isListen = React.useRef(false);
 
 
     React.useEffect(() => {
-        var {filters,list} = videodata;
-        const {type,duration,equipment} = filters;
-        if(type.length > 0) list = list.filter(item => type.includes(item.type));
-        if(duration.length > 0) list = list.filter(item => mapDuraionFilter(duration).includes(item.length));
-        if(equipment.length > 0) list = list.filter(item => {
-            var found = false;
-            equipment.forEach(equip => {
-                found = item.equipments[equip].checked;
+        const onScrollList = (event) => {
+            timeoutLocker(() => {
+                const list = document.getElementById('lists');
+                const categories = types.length === 0? undefined : types;
+                if(list.scrollTop + window.innerHeight >= list.scrollHeight) {
+                    getVideosCategoriesNext(categories)
+                    .then(({data})=> {
+                        setVideos(videos => {
+                            let updateVideos = videos;
+                            data.forEach((video) => updateVideos.push(video));
+                            return videos;
+                        })
+                        forceUpdate()
+                    })
+                }
             })
-            return found;
-        })
-        list = list.sort((v1,v2) => v2.clicks-v1.clicks)
-        setVideos(list)
-        forceUpdate();
-    },[videodata,forceUpdate])
-
+        }
     
+        function fetchVideos(){
+            const categories = types.length === 0? undefined : types;
+            getVideosCategories(categories)
+            .then(({data}) => {
+                setVideos(videos => data)
+                console.log(data)
+                forceUpdate()
+            })
+        }
+
+        fetchVideos()
+        console.log(duration)
+        if(!isListen.current){
+            document.getElementById('lists').addEventListener('scroll',onScrollList.bind(this))
+            isListen.current = true;
+        }
+
+        return(() => {
+            document.getElementById('lists').removeEventListener('scroll',onScrollList.bind(this))
+        })
+    },[types,duration,forceUpdate])
+
     const onOpenSession = (videoId) => {
             var session = null; 
             if(!!userId){
@@ -48,16 +84,16 @@ const SinglesScreenFoo = ({videodata,showBar,userId,activeGlobalAlert}) => {
                 window.open(window.location.origin+'/workout?sessionid='+session.sessionid)
             })
 
-        }
-
-    function mapDuraionFilter(duraions){
-        return duraions.map((d) => {
-            if(d.label === "Short") return 'S';
-            else if(d.label === "Medium") return 'M';
-            else if(d.label === "Long") return 'L';
-            return 'S';
-        })
     }
+
+    // function mapDuraionFilter(duraions){
+    //     return duraions.map((d) => {
+    //         if(d.label === "Short") return 'S';
+    //         else if(d.label === "Medium") return 'M';
+    //         else if(d.label === "Long") return 'L';
+    //         return 'S';
+    //     })
+    // }
 
     return(
         <React.Fragment>
@@ -81,9 +117,13 @@ const mapDispatchToProps = (disptach) => ({
     activeGlobalAlert: (alert) => disptach(activeGlobalAlert(alert))
 })
 
-const mapStateToProp = (state) => ({
-    videodata: state.videodata,
-    showBar: state.system.leftFilter,
-    userId: state.userdata.uid
-})
+const mapStateToProp = (state) => {
+    console.log(state.videodata.filters)
+    return({
+        duration: state.videodata.filters.duration,
+        types: state.videodata.filters.type,
+        showBar: state.system.leftFilter,
+        userId: state.userdata.uid
+    })
+}
 export const SinglesScreen = connect(mapStateToProp,mapDispatchToProps)(SinglesScreenFoo)

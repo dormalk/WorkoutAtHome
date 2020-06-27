@@ -25,12 +25,16 @@
 
 #challenge_unit {
     margin-top: 75px;
-
+    overflow: scroll;
     .nav-tabs{
         max-height: 100vh;
         overflow-y: scroll;
     }
 }
+#challenge_unit::-webkit-scrollbar {
+    display: none;
+  }
+
 
 #challenge_unit .panel{
     display: flex;

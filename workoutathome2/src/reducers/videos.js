@@ -12,7 +12,7 @@ export default (state = INITIAL_STATE, action) => {
     switch(action.type){
         case 'INSERT_VIDEO': 
             var {list} = state
-            list.push(action.newVideo)
+            list.concat(action.newVideo)
             return {
                 ...state,
                 list,
@@ -32,8 +32,8 @@ export default (state = INITIAL_STATE, action) => {
             const {picked,param} = action;
             if(filters[param].includes(picked)) {
                 filters[param] = filters[param].filter(t => t !== picked);
-            } else {
-                filters[param].push(picked)
+            } else {  
+                filters[param] = [...filters[param], picked]
             }
             return {
                 ...state,

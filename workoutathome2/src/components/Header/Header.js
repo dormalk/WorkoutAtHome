@@ -1,7 +1,6 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React from 'react';
 import ProfileDropDown from './ProfileDropDown';
-import Search from './Search';
 import Nav from './Nav';
 import { connect } from 'react-redux';
 import { logout,startSignInWithGoogle,updateUser } from '../../actions/auth';
@@ -35,7 +34,7 @@ const HeaderFoo = (props) => {
             <span className="icon-bar"></span>
             <span className="icon-bar"></span>
           </button>
-          <Link className="navbar-brand" style={{padding: '5px 10px'}} to="/"><img style={{height: "100%"}} src="./assets/images/logo.png"/></Link>
+          <Link className="navbar-brand" style={{padding: '5px 10px'}} to="/"><img style={{height: "100%"}} src="./assets/images/logo.png" alt="logo"/></Link>
         </div>
         <div className="collapse navbar-collapse" id="main-nav">
           <Nav isLogin={props.isLoggedIn}/>

@@ -7,7 +7,7 @@ export default ({videos,onSubmit,challeges}) => {
     const [title,setTitle] = React.useState('');
     const [titleError, setTitleError] = React.useState(false)
     const [days,setDays] = React.useState(0);
-    const [daysError, setDaysError] = React.useState(false)
+    const [daysError, ] = React.useState(false)
     const [showButton, setShowButton] = React.useState(false);
     const [selectedVideos,setSelectedVideos] = React.useState([]);
     const [forceEffect, setForceEffect] = React.useState(false);
@@ -15,6 +15,7 @@ export default ({videos,onSubmit,challeges}) => {
 
 
     React.useEffect(() => {
+        // eslint-disable-next-line eqeqeq
         if(title.length > 0 && days > 0 && selectedVideos.length == days){
             let flag = true;
             for(let i = 0 ; i < selectedVideos.length; i++){

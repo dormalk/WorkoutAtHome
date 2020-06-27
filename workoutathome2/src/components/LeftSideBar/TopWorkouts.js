@@ -34,7 +34,11 @@ export default ({workouts,videos,userId}) => {
                                     <img src={workout.thumbnails} width="35" alt="cover" className="media-object"/>
                                 </div>
                                 <div className="media-body">
-                                    <h4 className="text-h5 media-heading margin-v-1-2"><a>{workout.title}</a></h4>
+                                    <h4 className="text-h5 media-heading margin-v-1-2">
+                                        {// eslint-disable-next-line jsx-a11y/anchor-is-valid
+                                        <a>{workout.title}</a>
+                                        }
+                                    </h4>
                                     <p className="text-grey-500">{workout.type}</p>
                                 </div>
                             </div>

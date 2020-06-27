@@ -128,6 +128,7 @@ export const Rewords = [
 
 
 const medal = (url, label,color) => {
+    // eslint-disable-next-line jsx-a11y/anchor-is-valid
     return(    <a style={{position:"relative", display: 'inline-block'}}>
                     <img src={url} alt="medal" width="45"  className="media-object" />
                     <span style={{position: "absolute",color, bottom: "0px", fontWeight: 'bolder', backgroundColor: 'white', borderRadius: "5px", padding: '1px 2px'}}>{label}</span>

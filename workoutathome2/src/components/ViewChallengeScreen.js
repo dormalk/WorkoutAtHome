@@ -35,6 +35,26 @@ export const ViewChallengeScreen = connect(mapStateToProps,mapDispatchToProp)
 
 
     React.useEffect(() => {
+        function checkCompleteDays() {
+            var completedDaysArr = [];
+            if(challenge === null) return;
+            if(!challenge.days) return;
+            if(!challengeProgress || !challengeProgress.completedVideos) return;
+            for(let day in challenge.days){
+                let completed = true;
+                challenge.days[day].forEach(video => {
+                    let i = findInArr(challengeProgress.completedVideos, video.id)
+                    if(i) challengeProgress.completedVideos.splice(i,1);
+                    else completed = false;
+                })
+    
+                if(completed) {
+                    completedDaysArr.push(parseInt(day))
+                }
+            }
+            if(completedDaysArr.length > 0) setCompletedDays(completedDaysArr)
+        }
+
         const {id} = deparam(window.location.search)
         if(challenge && id !== challenge.id) forceUpdate();
         var challenge2 = challenges.find((c => c.id === id))
@@ -53,28 +73,10 @@ export const ViewChallengeScreen = connect(mapStateToProps,mapDispatchToProp)
             checkCompleteDays();
         }
 
-    },[challenges,uid,isLogin,userdata,window.location.search])
+    },[challenges,uid,isLogin,userdata,challenge,forceUpdate,challengeProgress])
     
 
-    function checkCompleteDays() {
-        var completedDaysArr = [];
-        if(challenge === null) return;
-        if(!challenge.days) return;
-        if(!challengeProgress || !challengeProgress.completedVideos) return;
-        for(let day in challenge.days){
-            let completed = true;
-            challenge.days[day].forEach(video => {
-                let i = findInArr(challengeProgress.completedVideos, video.id)
-                if(i) challengeProgress.completedVideos.splice(i,1);
-                else completed = false;
-            })
 
-            if(completed) {
-                completedDaysArr.push(parseInt(day))
-            }
-        }
-        if(completedDaysArr.length > 0) setCompletedDays(completedDaysArr)
-    }
 
     function findInArr(arr,elemnt){
         let i = 0;

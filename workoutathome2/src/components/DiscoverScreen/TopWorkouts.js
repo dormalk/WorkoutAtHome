@@ -25,7 +25,7 @@ export default ({videos,userTypesPreference,onOpenSession}) => {
         setTopThree(top)
         setPickedWorkout(top[0]);
     
-    },[userTypesPreference])
+    },[userTypesPreference,videos])
 
     function getThumbnail(video){
         if(video.allThumbnails && video.allThumbnails.maxres) return video.allThumbnails.maxres.url
@@ -44,9 +44,14 @@ export default ({videos,userTypesPreference,onOpenSession}) => {
                     <li className={pickedWorkout.videoId === video.videoId? 'active' : '' } 
                         key={index}
                         onClick={() => setPickedWorkout(video)}>
+                        {                   
+                         // eslint-disable-next-line jsx-a11y/anchor-is-valid
                         <a data-toggle="tab">
                         <i className="fa fa-fw icon-music-note-2"></i> 
-                        {video.title.substring(0, 10)}...</a></li>
+                        {video.title.substring(0, 10)}...</a>
+                        }
+                        
+                        </li>
                 )
             })
         }

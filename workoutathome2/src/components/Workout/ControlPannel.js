@@ -35,18 +35,18 @@ export default (props) => {
         },2000)
       }
 
-      function shareFacebook() {
-        var text = window.location.href;
-        var url = 'https://www.facebook.com/sharer/sharer.php?u='+text;
-        var win = window.open(url, '_blank');
-        win.focus();
-      }
+    //   function shareFacebook() {
+    //     var text = window.location.href;
+    //     var url = 'https://www.facebook.com/sharer/sharer.php?u='+text;
+    //     var win = window.open(url, '_blank');
+    //     win.focus();
+    //   }
         
 
     return(
         <nav id="btns">
                 <ul className="nav navbar-nav" style={{marginRight: "0px", cursor: 'pointer',width: '50%'}}>
-                    <a className="navbar-brand" style={{padding: '5px 10px', height: '100%'}} href="/"><img style={{height: "100%"}} src="./assets/images/logo.png"/></a>
+                    <a className="navbar-brand" style={{padding: '5px 10px', height: '100%'}} href="/"><img style={{height: "100%"}} src="./assets/images/logo.png" alt="logo"/></a>
                 </ul>
                 <div style={{width: "50%"}}>
                 <button id="audio-button" className={`stream-control ${micMuted? 'muted' : ''}`} onClick={() => toggelMic()}>

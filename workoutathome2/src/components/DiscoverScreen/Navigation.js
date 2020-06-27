@@ -1,40 +1,9 @@
 import React from 'react';
 import { withRouter } from 'react-router-dom';
 import ShowTopInCategory from './ShowTopInCategory';
+import {categories} from '../../configs/videoParams';
 
-const categories = [
-    {
-        label: 'Yoga',
-        image: './assets/images/1.png'
-    },
-    {
-        label: 'Hiit',
-        image: './assets/images/2.png'
-    },
-    {
-        label: 'Pilates',
-        image: './assets/images/3.png'
-    },
-    {
-        label: 'Cardio',
-        image: './assets/images/4.png'
-    },
-    {
-        label: 'Strength',
-        image: './assets/images/5.png'
-    },
-    {
-        label: 'Toning',
-        image: './assets/images/6.png'
-    },
-    {
-        label: 'Challenges',
-        image: './assets/images/7.png'
-    }
-
-]
-export default withRouter(({history,pickFilterVideo,pickFilterChallenge, videos}) => {
-    console.log(videos)
+export default withRouter(({history,pickFilterVideo, videos}) => {
     function redirect(type){
         if(type !== 'Challenges'){
             pickFilterVideo(type,'type');

@@ -3,9 +3,6 @@ import YouTube from 'react-youtube';
  
 export default class YouTubeVideo extends React.Component {
 
-    constructor(){
-        super();
-    }
 
   render() {
     const opts = {
