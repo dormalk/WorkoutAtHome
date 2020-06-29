@@ -1,0 +1,29 @@
+@import './settings.scss';
+#virtualRoomEditor{
+
+    text-align: center;
+    .pickOptionBox{
+        width: 15rem;
+        padding: $small;
+        margin: $large;
+        color: 'black';
+        transition: color 0.2s;
+        cursor: pointer;
+    }
+    
+    .pickOptionBox:hover{
+        color: $yellow-reng
+    }
+}
+
+
+
+@media (max-width: 480px){
+    #virtualRoomEditor{
+        .pickOptionBox{
+            width: 75vw;
+            margin: $small auto;
+        }
+    
+    }
+}

@@ -1,0 +1,71 @@
+@import './settings.scss';
+
+body{
+    font-family: 'Roboto', sans-serif;
+    margin: 0px;
+}
+
+.container{
+    margin: $small 10vw; 
+}
+
+.row{
+    display: flex;
+    width: 100%;
+    justify-content: space-around;
+    flex-direction: row;
+}
+
+.fixed-center{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+}
+
+
+.form-control{
+    width: 100%;
+    padding: $small;
+    font-size: medium;
+    border-radius: 0.2rem;
+    border: 0.5px solid grey;
+    color: $dark;
+}
+
+.form-control:focus{
+    outline: $yellow-reng solid 2px;
+    border-radius: 0.2rem;
+    box-shadow: 0px 0px 5px $yellow-reng;
+
+
+}
+
+
+.form-group{
+    margin: $large auto;
+    position: relative;
+    .form-control{
+        margin-top: 0.2rem;
+    }
+
+    .fa-eye,.fa-eye-slash{
+        position: absolute;
+        right:0px;
+        top: 2.1rem;
+        cursor: pointer;
+    }
+
+    
+}
+
+
+@media (max-width: 480px){
+    .container{
+        margin: $small 5vw; 
+    }
+    
+    .mobile-column{
+        flex-direction: column !important;
+    }
+}

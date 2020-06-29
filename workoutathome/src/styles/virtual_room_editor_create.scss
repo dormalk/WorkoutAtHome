@@ -1,0 +1,92 @@
+#virtualRoomEditorCreate{
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    height: 100vh;
+    .container{
+        width: 75%;
+    }
+    nav{
+        background-color: $dark;
+        color: white;
+        width: 20rem;
+        transition: width 0.5s;
+        overflow: hidden;
+
+        h3{
+            margin: $small;
+            padding: $x-small;
+            margin-top: $medium;
+            border-bottom: 1px dotted white;
+        }
+        ul{
+            list-style-type: none;
+            padding: 0px;
+            a{
+                padding: $small*1.2 $medium;
+                cursor: pointer;
+                text-decoration: none;
+                display: block;
+                color: white;
+            }
+
+            a.is-active{
+                background-color: $yellow-reng;
+                font-weight: bold;
+            }
+        }
+
+        button{
+            background: none;
+            color: white;
+            float: right;
+            border: 0px;
+            outline: none;
+            padding: $small;
+            cursor: pointer;
+            font-size: medium;
+            .fa-arrow-left{
+                transition: all 0.5s;
+            }
+        }
+    }
+
+    nav.close{
+        width: 3.5rem;
+
+
+        button{
+            .fa-arrow-left.close{
+                transform: rotate(180deg) translateX(0.8rem);
+            }
+        }
+
+        h3{
+            display: none;
+        }
+
+        ul{
+            margin-top: $x-large;
+            span{
+                display: none;
+            }
+        }
+    }
+
+}
+
+
+@media (max-width: 480px){
+    #virtualRoomEditorCreate{
+        nav{
+            position: absolute;
+            left: 0px;
+            height: 100vh;
+            width: 15rem;
+        }
+        .container{
+            margin-left: 5rem !important;
+            margin-right: 2.5rem;
+        }
+    }
+}
