@@ -372,23 +372,11 @@ export class WorkoutFoo extends React.Component {
             timeString = `${seconds} Seconds`
         }
       
-        var precetage = this.calcPrecetage();
         if(Math.floor(player.getDuration() - player.getCurrentTime()) === 0){
           gamification = 'FINISH!'
           timeleft.innerText = `${gamification}`;
         }
-        else if(precetage < 25){
-          gamification = ', You Almost Done!'
-          timeleft.innerText = `${timeString} ${gamification}`;
-        }
-        else if(precetage < 50){
-          gamification = ', Half Way There!'
-          timeleft.innerText = `${timeString} ${gamification}`;
-        }
-        else if(precetage < 75){
-          gamification = ', Good Job!'
-          timeleft.innerText = `${timeString} ${gamification}`;
-        } else {
+        else {
           gamification = ' Left'
           timeleft.innerText = `${timeString} ${gamification}`;
         }
@@ -408,10 +396,12 @@ export class WorkoutFoo extends React.Component {
         return (
             <React.Fragment>
                 {
-                    session && this.isAdmin() && showFirstPopUp &&
+                    session && this.isAdmin() && showFirstPopUp && !this.state.endOfVideo &&
                     <PopupCopyLink onStart={() => {
-                        player.playVideo();
-                        this.setState({showFirstPopUp: false})
+                        if(player){
+                            player.playVideo();
+                            this.setState({showFirstPopUp: false})
+                        }
                     }}/>
                 }
                 {this.state.endOfVideo && session.reletedVideos && <SuggestOtherVideos videos={session.reletedVideos} onPick={(videoId) => this.onPickVideo(videoId)}/>}
@@ -420,7 +410,7 @@ export class WorkoutFoo extends React.Component {
                     <div className="portrait" id="main-page">
                         <ControlPannel toggelStreamConnection={(isOn,what) => this.toggelStreamConnection(isOn,what)}/>
                         <section>
-                            {session && (this.state.showCover || (this.isAdmin())) && <div id="cover"></div>}
+                            {session &&   (this.state.showCover || !this.isAdmin()) && <div id="cover"></div>}
                             {session && <YouTubeVideo    videoId={session.currentVideoId}
                                                                 status={session.status}
                                                                 time={session.currentDuration}

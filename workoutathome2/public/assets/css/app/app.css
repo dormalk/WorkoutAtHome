@@ -6395,7 +6395,7 @@ ul.icon-list.icon-list-block li:not(:last-of-type) {
 }
 .label-primary[href]:hover,
 .label-primary[href]:focus {
-  background-color: #1c7d74;
+  background-color: #e06d28;
 }
 .label-grey-300 {
   background-color: #e0e0e0;
@@ -33458,7 +33458,7 @@ html.app-mobile #content .container-fluid {
   height: 1px;
   left: 0;
   right: 0;
-  background: #1c7d74;
+  background: #e06d28;
 }
 @media (min-width: 768px) {
   .navbar-toggle-demo > .container .navbar-brand,
@@ -34043,7 +34043,7 @@ html.app-mobile #content .container-fluid {
 .navbar-primary .btn-default.active,
 .open > .dropdown-toggle.navbar-primary .btn-default {
   color: #ffffff;
-  background-color: #1c7d74;
+  background-color: #e06d28;
   border-color: #13534d;
 }
 .navbar-primary .btn-default:active,
@@ -42356,7 +42356,7 @@ html.st-layout .st-content {
 .sidebar .datepicker table thead tr th.next:hover,
 .sidebar .datepicker table thead tr th.prev:hover {
   color: #fff;
-  background: #1c7d74;
+  background: #e06d28;
 }
 .sidebar .datepicker table tr td.day,
 .sidebar .datepicker table tr td .month,
@@ -42574,8 +42574,8 @@ html.st-layout .st-content {
 .sidebar.sidebar-skin-dark .btn-default.active,
 .open > .dropdown-toggle.sidebar.sidebar-skin-dark .btn-default {
   color: #ffffff;
-  background-color: #1c7d74;
-  border-color: #1b746c;
+  background-color: #e06d28;
+  border-color: #b04709;
 }
 .sidebar.sidebar-skin-dark .btn-default:active,
 .sidebar.sidebar-skin-dark .btn-default.active,
@@ -43003,7 +43003,7 @@ fieldset[disabled] .sidebar.sidebar-skin-dark .btn-default.active {
 .sidebar.sidebar-skin-white .datepicker table thead tr th.datepicker-switch:hover,
 .sidebar.sidebar-skin-white .datepicker table thead tr th.next:hover,
 .sidebar.sidebar-skin-white .datepicker table thead tr th.prev:hover {
-  background: #1c7d74;
+  background: #e06d28;
 }
 .sidebar.sidebar-skin-white .datepicker table tr td.day,
 .sidebar.sidebar-skin-white .datepicker table tr td .month,
@@ -46288,7 +46288,7 @@ fieldset[disabled] .owl-preview .owl-controls .owl-nav > div {
   right: 0;
 }
 .player.state-looped .repeat {
-  background-color: #1c7d74;
+  background-color: #e06d28;
 }
 .player.playlist .next:before {
   font-family: "picto-foundry-multimedia";

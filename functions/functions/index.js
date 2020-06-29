@@ -19,13 +19,8 @@ exports.updateAnalitics = functions.https.onRequest((request, response) => {
     response.status(200).send('OK');
 
 })
-exports.backupvideos = functions.https.onRequest((request,response) => {
-    admin.database().ref('videos')
-    .once('value', snapshot => {
-        admin.database().ref('videos_backup').set(snapshot.val())
-        response.status(200).send('Ok')
+exports.migrateVideosToFirestore = functions.https.onRequest((request,response) => {
 
-    })
 })
 
 exports.updateVideoDetails = functions.https.onRequest((request,response) => {

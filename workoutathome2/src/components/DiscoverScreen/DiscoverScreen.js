@@ -69,7 +69,7 @@ export const DiscoverScreen = connect(mapStateToProps,mapDispatchToProps)
                   <div className="col-lg-8 col-md-7">
                   {
                     videos.length > 0 &&
-                    <TopWorkouts videos={videos}
+                    <TopWorkouts    videos={videos}
                                     onOpenSession={(videoid) => onOpenSession(videoid)}
                                     userTypesPreference={userTypesPreference}/>
                   }  
@@ -80,6 +80,7 @@ export const DiscoverScreen = connect(mapStateToProps,mapDispatchToProps)
                 </div>
                 <hr/>
                 <Navigation pickFilterVideo={updateSinglesFilters.bind(this)}
+                            videos={videos}
                             pickFilterChallenge={updateChallengesFilters.bind(this)}/>
                   
               </div>

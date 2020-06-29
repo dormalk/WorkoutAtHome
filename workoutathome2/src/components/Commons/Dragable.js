@@ -47,7 +47,7 @@ export default ({children,id, initialPos}) => {
             var {prevPageX,prevPageY} = prevPage;
             if(prevPageX == null)  prevPageX = pageX
             if(prevPageY == null)  prevPageY = pageY
-            setPos({pageX:elem.offsetLeft + pageX - prevPageX ,pageY: elem.offsetTop + pageY - prevPageY})
+            setPos({pageX:elem.offsetLeft + pageX - (prevPageX) ,pageY: elem.offsetTop + pageY - prevPageY})
             localStorage.setItem(id,JSON.stringify(pos))
             setPrevPage({prevPageX: pageX,prevPageY: pageY})
         }
@@ -55,6 +55,7 @@ export default ({children,id, initialPos}) => {
 
 
     function calcPosX(pos){
+        console.log(window.innerWidth)
         if(pos < 0) return 0
         else if(pos > (window.innerWidth-100)) return window.innerWidth - 100;
         else return pos;

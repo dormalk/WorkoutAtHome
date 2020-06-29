@@ -20,9 +20,7 @@ export default ({onStart}) => {
             <div className="panel panel-default">
                 <h4 className="page-section-heading">Before you start - </h4>
                 <p>
-                    This platform develops to be social and provide you unique  workout experience with friends<br/>
-                    Copy the link below and send it to your friends before starting the workout!
-                </p>
+                For a unique fitness experience -- Copy the link below and send it to your friends before strarting.                </p>
  
                     {
                         message &&

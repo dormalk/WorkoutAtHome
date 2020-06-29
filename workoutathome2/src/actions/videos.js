@@ -28,6 +28,23 @@ export const insertNewVideo = (newVideo) => {
 }
 
 
+
+// export const insertNewVideo = (newVideo) => {
+//     return (dispatch) => {
+//         const userId = firebase.auth().currentUser.uid
+//         newVideo.createBy = userId || null;
+//         return firebase.firestore().collection('videos').doc(newVideo.videoId).set(newVideo)
+//         .then(() => {
+//             console.log('set')
+//             dispatch({type: 'INSERT_VIDEO', newVideo})
+//             analytics('AddVideos',{videoId: newVideo.videoId, title: newVideo.title})
+//             increaseCounter('addVideosCount',1);
+//         })
+//         .catch((err) => console.error(err))
+//     }
+// }
+
+
 export const fetchAllVideos = () => {
     return(dispatch) => {
         return firebase.database().ref('videos')
@@ -40,6 +57,37 @@ export const fetchAllVideos = () => {
     }
 }
 
+
+// export const fetchAllVideos = () => {
+//     return(dispatch) => {
+//         return firebase.firestore().collection('videos').get()
+//         .then((snapshot) => {
+//             let videos = [];
+//             snapshot.forEach((video) => {
+//                 videos.push(video.data())
+//             })
+//             dispatch({type: 'FETCH_ALL', videos})
+//         })
+//         // .once('value',snapshot => {
+//         //     const data = snapshot.val();
+
+//         //     // firebase.firestore().collection('videos').add(data);
+//         // })
+//     }
+// }
+
+
+export const getVideosByCategories = (category) => new Promise((resolve, reject) => {
+    firebase.firestore().collection('videos').orderBy('clicks').where('type','==',category).get()
+    .then((snapshot) => {
+        let videos = [];
+        snapshot.forEach((video) => {
+            videos.push(video.data())
+        })
+
+        resolve(videos);
+    })
+})
 
 export const updateSinglesFilters = (picked,param) => {
     return(dispatch) => {
