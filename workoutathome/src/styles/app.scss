@@ -77,13 +77,12 @@ button{
     padding: $small $medium;
     cursor: pointer;
     font-size: 0.95rem;
-
+    border-radius: 0.3rem;
 }
 
 .btn.btn-primary{
     background-color: $yellow-reng;
     border:0px !important;
-    border-radius: 0.3rem;
     color: $dark;
     outline: none;
 }
@@ -91,8 +90,55 @@ button{
 .btn.btn-primary:active{
     box-shadow: -1px 1px 4px $yellow-reng;
     background-color: darken($color: $yellow-reng, $amount: 5);
-
 }
+
+
+.btn.btn-danger{
+    background-color: $red2;
+    border:0px !important;
+    color: $dark;
+    outline: none;
+}
+
+.btn.btn-danger:active{
+    box-shadow: -1px 1px 4px $red2;
+    background-color: darken($color: $red2, $amount: 5);
+}
+
+.btn.btn-green{
+    background-color: $greeny;
+    border:0px !important;
+    color: $dark;
+    outline: none;
+}
+
+.btn.btn-green:active{
+    box-shadow: -1px 1px 4px $greeny;
+    background-color: darken($color: $greeny, $amount: 5);
+}
+
+
+.button-box{
+    .btn{
+        color:white;
+        margin: 0px 0.5px;
+        border-radius: 0px;
+        font-size: 14px;
+    }
+    .btn:active{
+        box-shadow: -1px 1px 2px;
+    }
+    .btn:first-of-type{
+        border-top-left-radius: 0.3rem !important;
+        border-bottom-left-radius: 0.3rem !important;
+    }
+    .btn:last-of-type{
+        border-top-right-radius: 0.3rem !important;
+        border-bottom-right-radius: 0.3rem !important;
+    }
+        
+}
+
 
 
 .light-box_container{
@@ -159,5 +205,16 @@ ul{
     
     .mobile-column{
         flex-direction: column !important;
+    }
+
+    .light-box_container{
+        overflow-y: hidden;
+        width: 100%;
+
+        .light-box_body{
+            overflow-y: hidden;
+            width: 100%;
+            margin-top: 0.5rem !important;
+        }
     }
 }
