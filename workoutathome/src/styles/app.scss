@@ -6,7 +6,7 @@ body{
 }
 
 .container{
-    margin: $small 10vw; 
+    margin: $small 7vw; 
 }
 
 button{
@@ -22,7 +22,9 @@ button{
     justify-content: space-around;
     flex-direction: row;
 }
-
+.space-between{
+    justify-content: space-between !important;
+}
 .fixed-center{
     position: absolute;
     top: 50%;
@@ -92,6 +94,18 @@ button{
     background-color: darken($color: $yellow-reng, $amount: 5);
 }
 
+.btn.btn-primary-lite{
+    background-color: white;
+    border: 2px solid $yellow-reng !important;
+    color: $dark;
+    outline: none;
+}
+
+.btn.btn-primary-lite:active{
+    @extend .btn.btn-primary:active;
+}
+
+
 
 .btn.btn-danger{
     background-color: $red2;
@@ -115,6 +129,25 @@ button{
 .btn.btn-green:active{
     box-shadow: -1px 1px 4px $greeny;
     background-color: darken($color: $greeny, $amount: 5);
+}
+
+
+
+.btn.btn-navy{
+    background-color: $navy;
+    border:0px !important;
+    color: white;
+    outline: none;
+}
+
+.btn.btn-navy:active{
+    box-shadow: -1px 1px 4px $navy;
+    background-color: darken($color: $navy, $amount: 5);
+}
+
+.btn.lrg{
+    font-size: $medium*1.2;
+    padding: $small $large;
 }
 
 
@@ -148,7 +181,7 @@ button{
     top: 0;
     left: 0;
     background-color: rgba($color: $dark, $alpha: 0.5);
-
+    z-index: 9999;
     .light-box{
         background-color: white;
         width: 80vw;
@@ -198,6 +231,72 @@ ul{
     margin: 0px;
 }
 
+
+.file-element{
+    margin: $small;
+    iframe,video,img{
+        display: block;
+        width: 250px;
+        height: auto;
+    }
+
+    .fa-trash{
+        cursor: pointer;
+    }
+}
+
+
+.center{
+    display: flex;
+    justify-content: center;
+}
+
+
+.options-box{
+    .option{
+        cursor: pointer;
+        i{
+            border: 0.5px solid lightgray;
+            border-radius: 50%;
+            width: 10px;
+            height: 10px;
+            display: inline-flex;
+            justify-content: center;
+            padding: 2px;
+        }
+        i.active:after{
+            content: '';
+            background-color: $yellow-reng;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+
+        }
+    }
+}
+
+.checkbox{
+        cursor: pointer;
+        i{
+            border: 0.5px solid lightgray;
+            width: 10px;
+            height: 10px;
+            display: inline-flex;
+            justify-content: center;
+            padding: 2px;
+        }
+        i.active:after{
+            content: '';
+            background-color: $yellow-reng;
+            width: 10px;
+            height: 10px;
+
+        }
+}
+
+
+
+
 @media (max-width: 480px){
     .container{
         margin: $small 5vw; 
@@ -208,13 +307,26 @@ ul{
     }
 
     .light-box_container{
-        overflow-y: hidden;
         width: 100%;
 
+
         .light-box_body{
-            overflow-y: hidden;
             width: 100%;
             margin-top: 0.5rem !important;
         }
     }
+
+    .hide-mobile{
+        display: none;
+    }
+
+    .file-element{
+        iframe,video,img{
+            width: 100% !important;
+            height: auto;
+        }
+    }
+    
+    
+    
 }

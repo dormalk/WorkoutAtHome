@@ -16,7 +16,13 @@
     }
 }
 
-
+#overview-page{
+    .fa-trash{
+        cursor: pointer;
+        font-size: 14px;
+        margin-left: 5rem;
+    }
+}
 
 @media (max-width: 480px){
     #virtualRoomEditor{

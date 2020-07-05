@@ -1,11 +1,24 @@
 #virtualRoomEditorCreate{
     display: flex;
     flex-direction: row;
-    justify-content: flex-start;
+    justify-content: space-between;
     height: 100vh;
     .container{
-        width: 75%;
+        width: 88%;
+        margin:0px;
+        padding: 0.5rem 5vw;
+        overflow-y: auto;
+        overflow-x: hidden;
     }
+    .container::-webkit-scrollbar-track,
+    .container::-webkit-scrollbar-track,
+    .container::-webkit-scrollbar,
+    .container::-webkit-scrollbar-thumb,
+    .container::-webkit-scrollbar-thumb
+    {
+        display: none;
+    }
+
     nav{
         background-color: $dark;
         color: white;
@@ -54,10 +67,9 @@
     nav.close{
         width: 3.5rem;
 
-
         button{
             .fa-arrow-left.close{
-                transform: rotate(180deg) translateX(0.9rem);
+                transform: rotate(180deg) translateX(0.75rem);
             }
         }
 
@@ -83,10 +95,17 @@
             left: 0px;
             height: 100vh;
             width: 15rem;
+            z-index: 1001;
         }
         .container{
-            margin-left: 5rem !important;
-            margin-right: 2.5rem;
+            margin-left: 4rem !important;
+            margin-right: 1.5rem;
+        }
+
+        
+        .btn.lrg{
+            font-size:0.8rem !important;
+            padding: 0.5rem 1rem !important;
         }
     }
 }

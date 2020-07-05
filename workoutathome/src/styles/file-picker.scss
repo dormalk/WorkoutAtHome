@@ -24,10 +24,11 @@
     .youtube-picker{
         @extend .flex-column;
         height: 100%;
-        justify-content: space-around;
+        justify-content: flex-start;
         .recently-view{
-            height: 100%;
-            margin: 0.2rem;
+            height: 40vh;
+            overflow-y: auto;
+            overflow-x: hidden;
             position: relative;
 
             p{
@@ -40,7 +41,7 @@
         }
         .recently-view::after{
             background-image: url('/assets/svg/youtube.svg');
-            background-position: top 30px center;
+            background-position: top 18px center;
             background-size: 50% 50%;
             background-repeat: no-repeat;
             opacity: 1;
@@ -55,6 +56,8 @@
 
         .recently-view.hide-background::after{
             opacity: 0.3;
+            background-position: center center;
+
         }
         .container-picker{
             margin: 0.5rem;
@@ -72,7 +75,7 @@
 
             iframe{
                 width:100%;
-                height: 100%;
+                height: 40vh;
             }
         }
 
@@ -97,7 +100,8 @@
         margin: $x-small;
         .img-cover{
             width: 100%;
-
+            height: 90px;
+            overflow: hidden;
             img{
                 width: 100%;
             }
@@ -116,13 +120,13 @@
     .video-picker{
         @extend .youtube-picker;
         .recently-view::after{
-            background-image: url('/assets/svg/video-player.svg');
+            background-image: url('/assets/svg/video-camera.svg');
         }
 
         .container-picker.row-layout > div {
             video,img{
                 width: 40vw;
-                height: 45vh;
+                height: 40vh;
             }
         }
 
@@ -145,12 +149,23 @@
     }
 }
 
+@media (max-width: $medium-device){
+    .container-picker.row-layout{
+        .file-picker_card{
+            width: 100% !important;
+            .img-cover{    
+                width: 100%;
+                height: 200px !important;
+                video,img{
+                    width: 100% !important;
+                    height: 200px !important;
+                }
+            }
+        }
+    }
+}
 @media (max-width: $mobile-size){
     .file-picker{
-
-        div:last-of-type{
-            overflow: auto;
-        }
 
         .file-picker_tabs{
             overflow-x: auto;
@@ -167,31 +182,65 @@
             }
         }
         .container-picker {
-            clear: both;
-            display: inline-block;
-            white-space: nowrap;
             margin: 0px !important;
+            height: 45vh !important;
+            overflow: hidden;
             margin-bottom: $small !important;
             .recently-view {
-                display: flex;
                 margin:0px;
                 overflow-x: hidden;
                 overflow-y: auto;
                 
                 flex-direction: column;
-    
+                overflow-y: auto;
+                overflow-x: hidden;
+                height: unset;
+                max-height: 100%;
+                display: flex;
+                
+                
+
                 .file-picker_card{
                     width: 100%;
+                    overflow: none;
                     margin: $x-small 0px;
+                    .img-cover{
+                        height: 30vh;
+                        overflow: hidden;
+                        width: 100%;
+                        video,img{
+                            height: 100% !important;
+                            width: 100% !important;
+                        }
+                    }
+                    .card-label{
+                        font-size: 1.2rem;
+                    }
                 }
+
 
                 p{
                     margin: 0px $medium;
                 }
             }
+
+            .video-show video, iframe, .img-show img{
+                width: 100% !important;
+                height: 100% !important;
+            }
         }
 
+        .row-layout .recently-view{
+            display: none;
+        }
 
+        .button-box{
+            margin: 0.3rem 0px;
+        }
+        div[inner-picker="true"]{
+            justify-content: space-between;
+        }
     }
+
 }
 

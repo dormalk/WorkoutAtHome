@@ -46,10 +46,15 @@ export const getFilesFromStorage = (dir:string) => {
     if(dir === 'images') type = 'image';
 
     return lib.listAll()
-    .then(snapshot => snapshot.items.map((item:any) => {
+    .then((snapshot:any) => snapshot.items.map((item:any) => {
         item.type=type;
         return item;
     }))
 }
 
+
+export const deleteFileFromStorage = (fullPath: String) => {
+    const lib = storage.child(`${fullPath}`);
+    return lib.delete(); 
+}
 export const generateUrlFromStoreate = (path:string) => `https://firebasestorage.googleapis.com/v0/b/${firebaseConfigs.storageBucket}/o/${path.split('/').join('%2F')}?alt=media&token=d18c738a-ce45-42d2-9b0c-908805d8e3d4`

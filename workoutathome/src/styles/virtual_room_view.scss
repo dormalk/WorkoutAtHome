@@ -1,0 +1,28 @@
+.virtual-room-on{
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    
+    .control-pannel{
+        height: 80px;
+        width: 100vw;
+        border: 1px solid red;
+    }
+
+    .main-window{
+        display: flex;
+        flex-direction: row; 
+        height: 100%;  
+        .participents-list{
+            flex: 1;
+        }
+        
+        .main-view{
+            flex: 5;
+        }
+    }
+
+
+
+}

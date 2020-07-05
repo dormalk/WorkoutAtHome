@@ -1,5 +1,4 @@
 import React from 'react'
-// import VirtualRoomEditorRouter from '../../routers/VirtualRoomEditorRouter'
 import { PickOptionBox } from './VirtualRoomEditorComponents/PickOptionBox'
 import {useRouter} from '../../routers/useRouter';
 
