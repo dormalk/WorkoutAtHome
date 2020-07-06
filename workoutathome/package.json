@@ -14,6 +14,7 @@
     "@types/react-dom": "^16.9.0",
     "@types/react-redux": "^7.1.9",
     "@types/react-router-dom": "^5.1.5",
+    "@types/webrtc": "^0.0.26",
     "axios": "^0.19.2",
     "crypto-js": "^4.0.0",
     "firebase": "^7.15.5",
@@ -29,7 +30,8 @@
     "redux-thunk": "^2.3.0",
     "rtcmulticonnection": "^3.7.0",
     "socket.io-client": "^2.3.0",
-    "typescript": "~3.7.2"
+    "typescript": "~3.7.2",
+    "webrtc": "^1.14.1"
   },
   "scripts": {
     "start": "react-scripts start",

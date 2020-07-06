@@ -1,22 +1,15 @@
 import React from 'react';
-import { SessionRoom, SessionStatus, ISessionRoom } from '../../types/session';
+import { SessionRoom, SessionStatus } from '../../types/session';
 import { initializedFirebase } from '../../configs/firebase';
 import { participentMock } from '../../mocks/particepent';
+import VirtualRoomOn from './VirtualRoomView/VirtualRoomOn';
+import { VirtualRoomController } from './VirtualRoomView/VirtualRoomController';
 
 
-interface SessionState{
-    sessionRoom?: SessionRoom;
-    loading: Boolean;
-}
 
-export default class VirtualRoomView extends React.Component<any,SessionState>{
-    constructor(props:any){
-        super(props)
-        this.state = {
-            sessionRoom: undefined,
-            loading: true
-        }
-    }
+
+
+export default class VirtualRoomView extends VirtualRoomController{
 
     useQuery() {
         return new URLSearchParams(window.location.search);
@@ -61,25 +54,6 @@ export default class VirtualRoomView extends React.Component<any,SessionState>{
         this.updateFirebaseSession(sessionRoom);
     }
 
-    updateFirebaseSession(sessionRoom: SessionRoom){
-        let updatedSession : ISessionRoom = {
-            virtualRoom: sessionRoom.virtualRoom
-        };
-
-        initializedFirebase.database().ref('sessions/'+sessionRoom.virtualRoom?.roomId)
-        .set(updatedSession)
-        .then(() => {
-            this.setState({sessionRoom: sessionRoom, loading: false})
-        })
-    }
-
-    activeListenerOnFirebase(roomId:string){
-        initializedFirebase.database().ref('sessions/'+roomId)
-        .on('value', (snapshot) =>{
-            
-        })
-    }
-
     render(){
         const { sessionRoom,loading } = this.state; 
         return(
@@ -88,7 +62,9 @@ export default class VirtualRoomView extends React.Component<any,SessionState>{
                     loading?
                     <Loading/>:
                     sessionRoom?.status === SessionStatus.wrong_password?
-                    <PasswordInput onSubmit={(password:string) => this.validationLimits(sessionRoom,password)}/>:sessionRoom?.status
+                    <PasswordInput onSubmit={(password:string) => this.validationLimits(sessionRoom,password)}/>:
+                    <VirtualRoomOn  sessionRoom={sessionRoom}
+                                    updateFirebaseSession={(sessionRoom: SessionRoom)=>this.updateFirebaseSession(sessionRoom)}/>
 
                 }
             </div>

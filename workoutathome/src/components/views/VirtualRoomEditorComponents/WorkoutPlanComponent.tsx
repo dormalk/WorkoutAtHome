@@ -33,14 +33,12 @@ export default connect(mapStateToProps)((props: Props) => {
     const router = useRouter();
     React.useEffect(() => {
         var fetchedComponent:VirtualRoom = fetchChangesFromLocalStorage();
-        console.log(props.components)
 
         if(!init.current){
             if(fetchedComponent != null) dispatch({type: SET_WORKOUT_COMPONENTS, payload:fetchedComponent.workoutPlan})
             init.current = true;
 
         } else {
-            fetchedComponent.workoutPlan.components = props.components;
             setComponents(props.components)
         }
 

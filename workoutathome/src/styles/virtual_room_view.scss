@@ -3,23 +3,27 @@
     height: 100vh;
     display: flex;
     flex-direction: column;
-    
+    background-color: red;
     .control-pannel{
         height: 80px;
         width: 100vw;
         border: 1px solid red;
+        background-color: black;
     }
 
     .main-window{
         display: flex;
         flex-direction: row; 
         height: 100%;  
+        background-color: blue;
         .participents-list{
             flex: 1;
+            background-color: green;
         }
         
         .main-view{
             flex: 5;
+            background-color: yellow;
         }
     }
 
